@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vinInquiryRequest xmlns="http://localhost/laservice">
+    <inquiryType>VM</inquiryType>
+    <vin>1A323JET2CC152905</vin>
+</vinInquiryRequest>
