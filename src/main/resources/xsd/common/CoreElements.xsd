@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/CoreElements"
+	targetNamespace="http://rts.dt.com/ladmv/services/CoreElements">
+
+	<xsd:complexType name="AuthHeaderType">
+		<xsd:sequence>
+			<xsd:element name="OfficeCode">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OperatorCode" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- <xsd:complexType name="TransactionRequestType"> <xsd:sequence> <xsd:element 
+		name="TranId" type="xsd:string"/> <xsd:element name="TranType" type="xsd:string"/> 
+		</xsd:sequence> </xsd:complexType> -->
+	<!-- <xsd:complexType name="FlagType"> <xsd:sequence> <xsd:element name="Code"> 
+		<xsd:simpleType> <xsd:restriction base="xsd:string"> <xsd:pattern value="[A-Z0-9]{2}"></xsd:pattern> 
+		</xsd:restriction> </xsd:simpleType> </xsd:element> </xsd:sequence> </xsd:complexType> -->
+	<xsd:complexType name="FlagListType">
+		<xsd:sequence>
+			<xsd:element name="Flag" type="xsd:string" minOccurs="0"
+				maxOccurs="10" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RegistrationType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="PlateSurrenderDate" minOccurs="0"
+					maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="NonUseAffadvtBeginDate" minOccurs="0"
+					maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice>
+				<xsd:element name="SaleOrTradeinDate" minOccurs="0"
+					maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="NonUseAffadvtEndDate" minOccurs="0"
+					maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="FlagSetDate" minOccurs="0" maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="StopNum" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CurrentPlateNum">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="8"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CurrentPlateExpDate">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Sticker" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="8"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PrevPlateNum" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="PrevPlateExpDate" minOccurs="0"
+				maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DomicileCode">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TitleType">
+		<xsd:sequence>
+			<xsd:element name="CurrentTitleNum">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="7"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PrevTitleNum" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="PrevTitleTransTypeCode" minOccurs="0"
+				maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PrevTitleTransDate" minOccurs="0"
+				maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PrevTitleState" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="MicroFilmNum" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="TransVehicleType">
+		<xsd:sequence>
+			<xsd:element name="Vin">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="17"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Make">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Body">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PrimaryColor">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SecondaryColor">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Year">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:pattern value="[0-9]{4}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OdometerReading">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="6"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:choice>
+				<xsd:element name="Model">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="6"></xsd:maxLength>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Weight">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="6"></xsd:maxLength>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="IsNew">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="N" />
+						<xsd:enumeration value="U" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Flags" type="common:FlagListType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OwnerType">
+		<xsd:sequence>
+			<xsd:element name="Name">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<xsd:element name="Type">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:enumeration value="1" />
+						<xsd:enumeration value="2" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Address" type="common:PartyAddressType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OwnerListType">
+		<xsd:sequence>
+			<xsd:element name="PrimaryOwner" type="common:PrimaryOwnerType" />
+			<xsd:element name="SecondaryOwner" type="common:SecondaryOwnerType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PrimaryOwnerType">
+		<xsd:complexContent>
+			<xsd:extension base="common:OwnerType">
+				<xsd:sequence>
+					<xsd:element name="DriverLicenseNum">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="7"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="EmpIdentificationNum" minOccurs="0"
+						maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="9"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="JointOwnerName">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="26"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SecondaryOwnerType">
+		<xsd:complexContent>
+			<xsd:extension base="common:OwnerType">
+				<xsd:sequence>
+					<xsd:element name="OwnerStatus">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="8"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PartyAddressType">
+		<xsd:sequence>
+			<xsd:element name="Street">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="City">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="17"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="State">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Zip">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LienHolderType">
+		<xsd:sequence>
+			<xsd:element name="Name">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="28"></xsd:length>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ELTCode" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="3"></xsd:length>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="LienAmount" type="xsd:decimal"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="LienDate">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Address" type="common:PartyAddressType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ErrorsListType">
+		<xsd:sequence>
+			<xsd:element name="ErrorFields" type="common:ErrorFieldsType"
+				minOccurs="0"></xsd:element>
+			<xsd:element name="ErrorMessage" type="xsd:string"
+				minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ErrorFieldsType">
+		<xsd:sequence>
+			<xsd:element name="FieldName" type="xsd:string"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

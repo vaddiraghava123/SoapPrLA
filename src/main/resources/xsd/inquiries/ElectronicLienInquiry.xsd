@@ -2,8 +2,9 @@
 <xsd:schema xmlns="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" 
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1" 
-  xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" 
-  xmlns:core="http://rts.dt.com/ladmv/services/inquiries/CoreElements"
+  xmlns:eltinquiry="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" 
+  xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+  xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
   targetNamespace="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" >
   
   <!--  This annotation helps us in creating proper element type (as defined) in Stubs from JAXB -->
@@ -12,23 +13,19 @@
 	        <jaxb:globalBindings generateElementProperty="false"/>
 	    </xsd:appinfo>
 	</xsd:annotation>
-  
-  <xsd:import namespace="http://rts.dt.com/ladmv/services/inquiries/CoreElements" schemaLocation="CoreElements.xsd"/>
+
+  <xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"	schemaLocation="../common/CoreElements.xsd"/> 
+  <xsd:import namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" schemaLocation="CommonInquiryElements.xsd"/>
 	
-	<!-- <xsd:element name="eltAddorModifyRequest" type="tns:AddorModifyRequest" />
-	<xsd:element name="eltAddorModifyResponse" type="tns:AddorModifyResponse" /> -->
-	
-  
 	 <xsd:element name="EltInquiryRequest">
 		<xsd:complexType>
 		  <xsd:sequence>
-				<xsd:element name="InquiryHeader" type="tns:InquiryHeaderType"/>
-		  
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
 				<xsd:element name="Inquiry">
 				  <xsd:complexType>
 					<xsd:sequence>
-					  <xsd:element name="InquiryType" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
-					  <xsd:element  name="EltType" type="xsd:string"    minOccurs="0" maxOccurs="1" nillable="true"/>
+					  <xsd:element name="InquiryType" type="xsd:string"/>
+					  <xsd:element  name="EltType" type="xsd:string" minOccurs="0" maxOccurs="1"/>
 					</xsd:sequence>
 				  </xsd:complexType>
 				</xsd:element>
@@ -42,10 +39,10 @@
 				<xsd:element name="Inquiry">
 					<xsd:complexType>
 						<xsd:sequence>
-							<xsd:element name="InquiryHeader" type="tns:InquiryHeaderType" minOccurs="0" maxOccurs="1" nillable="true"/>
-							<xsd:element name="EltType" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
-							<xsd:element name="Liens" type="tns:LienType"  minOccurs="0" maxOccurs="1" nillable="true"/>
-							<xsd:element name="PublicTagAgents" type="tns:PTAs" minOccurs="0" maxOccurs="2" nillable="true"/>
+							<xsd:element name="AuthHeader" type="core:AuthHeaderType" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="EltType" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="LienHolder" type="core:OwnerType"  minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="PublicTagAgents" type="eltinquiry:PTAs" minOccurs="0" maxOccurs="2"/>
 							<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
 						</xsd:sequence>
 					</xsd:complexType>
@@ -53,18 +50,6 @@
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
-	
-	<xsd:complexType name="InquiryHeaderType">
-		<xsd:sequence>
-			<xsd:element name="Header" type="core:AuthHeaderType"/>
-	  	</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="LienType">
-		<xsd:sequence>
-			<xsd:element name="LienHolder" type="core:LienHolder"/>
-	  	</xsd:sequence>
-	</xsd:complexType>
 	
 	<xsd:complexType name="PTAs">
 		<xsd:sequence>

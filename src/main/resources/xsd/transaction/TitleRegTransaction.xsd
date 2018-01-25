@@ -3,18 +3,21 @@
 	xmlns="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
 	xmlns:titleregtrans="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
 	targetNamespace="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction">
 	<xsd:import
 		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 		schemaLocation="CommonElements.xsd" />
-
+	<xsd:import
+	namespace="http://rts.dt.com/ladmv/services/CoreElements"
+	schemaLocation="../common/CoreElements.xsd" />
 	<xsd:element name="TitleRegResponse">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="AuthHeader" type="common:AuthHeaderType" />
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
 				<xsd:element name="Transaction" type="titleregtrans:TitleRegResponseType" minOccurs="0" maxOccurs="1"/>
-				<xsd:element name="Errors" type="common:ErrorsListType" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -22,7 +25,7 @@
 	<xsd:element name="TitleRegRequest">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="AuthHeader" type="common:AuthHeaderType" />
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
 				<xsd:element name="Transaction" type="titleregtrans:TitleRegTransactionType" />
 			</xsd:sequence>
 		</xsd:complexType>
@@ -37,10 +40,10 @@
 						<xsd:element name="PrinterSequenceNum" type="xsd:string" minOccurs="0" maxOccurs="1"/>
 						<xsd:element name="PID" type="xsd:string" minOccurs="0" maxOccurs="1"/>
 						<xsd:element name="Registration" type="common:RegistrationForTitleRegTransResponseType"/>
-						<xsd:element name="Title" type="common:TitleType"/>
+						<xsd:element name="Title" type="core:TitleType"/>
 						<xsd:element name="Vehicle" type="common:VehicleForTitleRegTransResponseType"/>
-						<xsd:element name="Owners" type="common:OwnerListType" />
-						<xsd:element name="Sale" type="common:SaleResponseType" />
+						<xsd:element name="Owners" type="core:OwnerListType" />
+						<xsd:element name="Sale" type="common:SaleTitleRegTranResponseType" />
 						<xsd:element name="LienHolder" type="common:LienHolderWithCodesType"/>
 						
 		</xsd:sequence>
@@ -80,7 +83,7 @@
 			<xsd:element name="Registration" type="titleregtrans:RegistrationForTitleRegTransRequestType" />
 			<xsd:element name="Title" type="titleregtrans:TitleForTitleRegTransRequestType" />
 			<xsd:element name="Vehicle" type="titleregtrans:VehicleForTitleRegTransRequestType" />
-			<xsd:element name="Owners" type="common:OwnerListType" />
+			<xsd:element name="Owners" type="core:OwnerListType" />
 			<xsd:element name="Sale" type="titleregtrans:SaleForTitleRegTransRequestType" />
 			<xsd:element name="LienHolder" type="common:LienHolderWithCodesType"/>
 		</xsd:sequence>
@@ -88,7 +91,7 @@
 
 	<xsd:complexType name="RegistrationForTitleRegTransRequestType">
 		<xsd:complexContent>
-			<xsd:extension base="common:RegistrationType">
+			<xsd:extension base="core:RegistrationType">
 				<xsd:sequence>
 					<xsd:element name="IsRenewMailToOwner"  minOccurs="0" maxOccurs="1">
 						<xsd:simpleType>
@@ -134,7 +137,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="TitleForTitleRegTransRequestType">
 		<xsd:complexContent>
-			<xsd:extension base="common:TitleType">
+			<xsd:extension base="core:TitleType">
 				<xsd:sequence>
 					<xsd:element name="OOSTitleToSurrender" minOccurs="0">
 						<xsd:simpleType>
@@ -171,7 +174,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="VehicleForTitleRegTransRequestType">
 		<xsd:complexContent>
-			<xsd:extension base="common:TransVehicleType">
+			<xsd:extension base="core:TransVehicleType">
 				<xsd:sequence>
 					<xsd:element name="NumOfPassengers" type="xsd:int" />
 					<xsd:element name="ClassCode" >
