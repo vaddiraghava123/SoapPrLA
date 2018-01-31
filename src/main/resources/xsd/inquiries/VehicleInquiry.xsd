@@ -149,4 +149,155 @@
 			<xsd:element name="SpecialFeesCode" type="xsd:string" />
 		</xsd:sequence>
 	</xsd:complexType>
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://rts.dt.com/ladmv/services/inquiries/VehicleInquiry"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/VehicleInquiry"
+	targetNamespace="http://rts.dt.com/ladmv/services/inquiries/VehicleInquiry">
+
+	<!-- This annotation helps us in creating proper element type in Stubs (To 
+		remove JaxBElementType<String>) -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:globalBindings generateElementProperty="false" />
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
+		schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+		schemaLocation="CommonInquiryElements.xsd" />
+
+	<xsd:element name="VehicleInquiryRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
+				<xsd:element name="Inquiry" type="tns:InquiryRequest"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="VehicleInquiryResponse">
+		<xsd:complexType>
+
+			<xsd:sequence>
+				<xsd:element name="AuthHeader"  type="core:AuthHeaderType"/>
+				<xsd:element name="Inquiry" type="tns:InquiryResponse"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="InquiryRequest">
+		<xsd:sequence>
+			<xsd:element name="InquiryType" type="xsd:string"/>
+			<xsd:element name="Vin" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="PlateNum" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="RegExpYear" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:pattern value="[0-9][0-9]" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InquiryResponse">
+		<xsd:sequence>
+			<xsd:element name="BatchNum" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SequenceNum" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="5"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PrivacyActCompliance" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:pattern value="[0-9]" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Vehicle" type="tns:InqVehicleType" />
+			<xsd:element name="Owners" type="tns:InqOwnerListType"/>
+			<xsd:element name="Registration" type="commoninquiry:InquiryRegistrationType"/>
+			<xsd:element name="Title" type="commoninquiry:InqTitleType" />
+			<xsd:element name="LienHolder" type="core:LienHolderType"/>
+			<xsd:element name="Sales" type="tns:InqSalesType"/>
+			<xsd:element name="Comments" type="commoninquiry:DealComments"/>
+			<xsd:element name="Errors" type="core:ErrorsListType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InqVehicleType">
+		<xsd:complexContent>
+			<xsd:extension base="core:TransVehicleType">
+				<xsd:sequence>
+					<xsd:element name="ClassCode" >
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="4"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="InqOwnerListType">
+		<xsd:sequence>
+			<xsd:element name="PrimaryOwner" type="tns:InqPrimaryOwnerType" />
+			<xsd:element name="SecondaryOwner" type="tns:InqSecondaryOwnerType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InqPrimaryOwnerType">
+		<xsd:complexContent>
+			<xsd:extension base="core:PrimaryOwnerType">
+				<xsd:sequence>
+					<xsd:element name="CustomerNum" type="xsd:string"
+						minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="InqSecondaryOwnerType">
+		<xsd:complexContent>
+			<xsd:extension base="core:SecondaryOwnerType">
+				<xsd:sequence>
+					<xsd:element name="CustomerNum" type="xsd:string"
+						minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="InqSalesType">
+		<xsd:sequence>
+			<xsd:element name="DateAcquired">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SalePrice">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:fractionDigits value="2" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SpecialFeesCode" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
 </xsd:schema>

@@ -80,7 +80,8 @@
 					</xsd:element>
 					<xsd:element name="Vehicle" type="InqVehicleType" />
 					<xsd:element name="Owners" type="InqOwnerListType" />
-					<xsd:element name="Registration" type="core:RegistrationType" />
+					<xsd:element name="Registration"
+						type="commoninquiry:InquiryRegistrationType" />
 					<xsd:element name="Title" type="commoninquiry:InqTitleType" />
 					<xsd:element name="LienHolder" type="core:LienHolderType" />
 					<xsd:element name="Sales" type="InqSalesType" />
@@ -105,8 +106,8 @@
 			</xsd:complexType>
 			<xsd:complexType name="InqOwnerListType">
 				<xsd:sequence>
-					<xsd:element name="InquiryPrimaryOwner" type="InqPrimaryOwnerType" />
-					<xsd:element name="InquirySecondaryOwner" type="InqSecondaryOwnerType" />
+					<xsd:element name="PrimaryOwner" type="InqPrimaryOwnerType" />
+					<xsd:element name="SecondaryOwner" type="InqSecondaryOwnerType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="InqPrimaryOwnerType">
@@ -252,7 +253,7 @@
 							</xsd:restriction>
 						</xsd:simpleType>
 					</xsd:element>
-					<xsd:element name="DomicileCode">
+					<xsd:element minOccurs="0" name="DomicileCode">
 						<xsd:simpleType>
 							<xsd:restriction base="xsd:string">
 								<xsd:maxLength value="4" />
@@ -356,7 +357,7 @@
 							</xsd:simpleType>
 						</xsd:element>
 					</xsd:choice>
-					<xsd:element name="IsNew">
+					<xsd:element name="VehicleType">
 						<xsd:simpleType>
 							<xsd:restriction base="xsd:string">
 								<xsd:enumeration value="N" />
@@ -367,7 +368,7 @@
 					<xsd:element name="Flags" type="FlagListType" />
 				</xsd:sequence>
 			</xsd:complexType>
-			<xsd:complexType name="OwnerType">
+			<xsd:complexType name="PartyType">
 				<xsd:sequence>
 					<xsd:element name="Name">
 						<xsd:simpleType>
@@ -376,7 +377,7 @@
 							</xsd:restriction>
 						</xsd:simpleType>
 					</xsd:element>
-					<xsd:element name="Type">
+					<xsd:element name="OwnerType">
 						<xsd:simpleType>
 							<xsd:restriction base="xsd:int">
 								<xsd:enumeration value="1" />
@@ -395,7 +396,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="PrimaryOwnerType">
 				<xsd:complexContent>
-					<xsd:extension base="OwnerType">
+					<xsd:extension base="PartyType">
 						<xsd:sequence>
 							<xsd:element name="DriverLicenseNum">
 								<xsd:simpleType>
@@ -424,7 +425,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="SecondaryOwnerType">
 				<xsd:complexContent>
-					<xsd:extension base="OwnerType">
+					<xsd:extension base="PartyType">
 						<xsd:sequence>
 							<xsd:element name="OwnerStatus">
 								<xsd:simpleType>
@@ -486,7 +487,7 @@
 						</xsd:simpleType>
 					</xsd:element>
 					<xsd:element minOccurs="0" name="LienAmount" type="xsd:decimal" />
-					<xsd:element name="LienDate">
+					<xsd:element minOccurs="0" name="LienDate">
 						<xsd:simpleType>
 							<xsd:restriction base="xsd:string">
 								<xsd:pattern value="[0-9]{6}" />
@@ -540,11 +541,20 @@
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
+			<xsd:complexType name="InquiryRegistrationType">
+				<xsd:complexContent>
+					<xsd:extension base="core:RegistrationType">
+						<xsd:sequence>
+							<xsd:element name="HandicappedStatus" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
 			<xsd:complexType name="DealComments">
 				<xsd:sequence>
 					<xsd:element minOccurs="0" name="Comments" type="xsd:string" />
-					<xsd:element minOccurs="0" name="ComOri" type="xsd:string" />
-					<xsd:element minOccurs="0" name="ComOca" type="xsd:string" />
+					<xsd:element minOccurs="0" name="CommentsOri" type="xsd:string" />
+					<xsd:element minOccurs="0" name="CommentsOca" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
 		</xsd:schema>
@@ -589,7 +599,7 @@
 									<xsd:element minOccurs="0" name="AuthHeader"
 										type="core:AuthHeaderType" />
 									<xsd:element minOccurs="0" name="EltType" type="xsd:string" />
-									<xsd:element minOccurs="0" name="LienHolder" type="core:OwnerType" />
+									<xsd:element minOccurs="0" name="LienHolder" type="core:PartyType" />
 									<xsd:element maxOccurs="2" minOccurs="0"
 										name="PublicTagAgents" type="PTAs" />
 									<xsd:element minOccurs="0" name="Errors"
@@ -974,28 +984,28 @@
 							<xsd:element name="TradeInValue" type="xsd:decimal" />
 							<xsd:element name="RebateAmount" type="xsd:decimal" />
 							<xsd:element name="LicensePlateFee" type="xsd:decimal" />
-							<xsd:element name="PlateTransferFees" type="xsd:decimal" />
+							<xsd:element name="PlateTransferFee" type="xsd:decimal" />
 							<xsd:element name="SpecialPlateFirstTimeFee" type="xsd:decimal" />
 							<xsd:element name="RoyaltyFee" type="xsd:decimal" />
 							<xsd:element name="LicenseCredit" type="xsd:decimal" />
-							<xsd:element name="LicensePenalityCredit" type="xsd:decimal" />
+							<xsd:element name="LicensePenaltyCredit" type="xsd:decimal" />
 							<xsd:element name="StateTaxesAndFees" type="StateTaxesAndFeesType" />
-							<xsd:element name="PMTaxesAndFeesType" type="PMTaxesAndFeesType" />
-							<xsd:element name="TotalFees" type="xsd:decimal" />
+							<xsd:element name="PMTaxesAndFees" type="PMTaxesAndFeesType" />
+							<xsd:element name="TotalFee" type="xsd:decimal" />
 							<xsd:element name="TotalTax" type="xsd:decimal" />
-							<xsd:element name="GrandTotalFees" type="xsd:decimal" />
+							<xsd:element name="GrandTotalFee" type="xsd:decimal" />
 						</xsd:sequence>
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
 			<xsd:complexType name="StateTaxesAndFeesType">
 				<xsd:sequence>
-					<xsd:element name="LienFees" type="xsd:decimal" />
-					<xsd:element name="TitleFees" type="xsd:decimal" />
+					<xsd:element name="LienFee" type="xsd:decimal" />
+					<xsd:element name="TitleFee" type="xsd:decimal" />
 					<xsd:element name="MiscFee" type="xsd:decimal" />
 					<xsd:element name="TitleServiceHandlingFee" type="xsd:decimal" />
-					<xsd:element name="TourismFees" type="xsd:decimal" />
-					<xsd:element name="ExpeditedTitleFees" type="xsd:decimal" />
+					<xsd:element name="TourismFee" type="xsd:decimal" />
+					<xsd:element name="ExpeditedTitleFee" type="xsd:decimal" />
 					<xsd:element name="StateSalesTax" type="xsd:decimal" />
 					<xsd:element name="StateTaxCredit" type="xsd:decimal" />
 					<xsd:element name="StateTaxPenalty" type="xsd:decimal" />
