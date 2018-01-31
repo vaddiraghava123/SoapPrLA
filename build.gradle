@@ -42,10 +42,12 @@ task genJaxb {
             mkdir(dir: classesDir)
 
             xjc(destdir: sourcesDir, removeOldOutput:'yes') {
-            	schema(dir: schema, includes: 'inquiries/*.xsd')
-            	schema(dir: schema, includes: 'transaction/*.xsd')
-	    		binding(dir: schema, includes: 'inquiries/*.xjb')
-	    		binding(dir: schema, includes: 'transaction/*.xjb')
+                schema(dir: schema, includes: 'common/CoreElements.xsd')
+            	schema(dir: schema, includes: 'inquiries/CommonInquiryElements.xsd')
+            	schema(dir: schema, includes: 'inquiries/VehicleInquiry.xsd')
+            	schema(dir: schema, includes: 'inquiries/ElectronicLienInquiry.xsd')
+            	schema(dir: schema, includes: 'transaction/CommonElements.xsd')
+            	schema(dir: schema, includes: 'transaction/TitleRegTransaction.xsd')
                 produces(dir: sourcesDir, includes: "**/*.java")
             }
 

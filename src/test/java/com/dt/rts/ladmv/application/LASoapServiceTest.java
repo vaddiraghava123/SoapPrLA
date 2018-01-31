@@ -26,10 +26,6 @@ import org.springframework.util.ClassUtils;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.context.MessageContext;
 
-import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest.Inquiry;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -45,15 +41,15 @@ public class LASoapServiceTest {
 	@LocalServerPort
 	private int port = 8888;
 
-	@Before
+	/*@Before
 	public void init() throws Exception {
 		marshaller.setPackagesToScan(ClassUtils.getPackageName(VehicleInquiryRequest.class));
 		marshaller.afterPropertiesSet();
-	}
+	}*/
 
 	@Test 
 	@Ignore
-	public void vinTestService() throws IOException {
+	public void vinTestService() throws IOException {/*
 		WebServiceTemplate ws = new WebServiceTemplate(marshaller);
 		
 		
@@ -63,12 +59,12 @@ public class LASoapServiceTest {
 		Inquiry inq = new Inquiry();
 		inq.setVin("1C3CDZAB7DN529738");
 		
-		/*InquiryHeader inqHeader = new InquiryHeader();
+		InquiryHeader inqHeader = new InquiryHeader();
 		
 		
 		request.setInquiryHeader(inqHeader);
 		request.setInquiry(inq);
-		*/
+		
 		
 
 		System.out.println("value is "+ws.marshalSendAndReceive("http://localhost:"
@@ -104,5 +100,5 @@ public class LASoapServiceTest {
 		  
 	     
 
-	}
+	*/}
 }
