@@ -5,11 +5,9 @@
 
 package com.dt.rts.ladmv.application;
 
-import java.io.IOException;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -25,6 +23,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ClassUtils;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.context.MessageContext;
+
+
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.InquiryRequest;
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 
 
 @RunWith(SpringRunner.class)
@@ -49,6 +52,18 @@ public class LASoapServiceTest {
 
 	@Test 
 	@Ignore
+
+	public void vinTestService() throws IOException {WebServiceTemplate ws = new WebServiceTemplate(marshaller);
+	    VehicleInquiryRequest request = new VehicleInquiryRequest();
+	    InquiryRequest inquiry = new InquiryRequest();
+	    inquiry.setInquiryType("VM");
+	    inquiry.setVin("12345678901234567");
+	    request.setInquiry(inquiry);
+	    VehicleInquiryResponse response = (VehicleInquiryResponse) ws.marshalSendAndReceive("http://localhost:"+ port + "/la", request);
+	
+	    assertThat(response).isNotNull();
+    }
+
 	public void vinTestService() throws IOException {/*
 		WebServiceTemplate ws = new WebServiceTemplate(marshaller);
 		
@@ -101,4 +116,5 @@ public class LASoapServiceTest {
 	     
 
 	*/}
+
 }

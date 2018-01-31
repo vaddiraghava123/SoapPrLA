@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN"
+	targetNamespace="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN">
+
+	<!-- This annotation helps us in creating proper element type in Stubs (To 
+		remove JaxBElementType<String>) -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:globalBindings generateElementProperty="false" />
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
+		schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+		schemaLocation="CommonInquiryElements.xsd" />
+
+	<xsd:element name="VehiclesListInquiryByDLOrEINRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
+				<xsd:element name="Inquiry" type="tns:InquiryRequest"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="VehiclesListInquiryByDLOrEINResponse">
+		<xsd:complexType>
+
+			<xsd:sequence>
+				<xsd:element name="AuthHeader"  type="core:AuthHeaderType"/>
+				<xsd:element name="Inquiry" type="tns:InquiryResponse"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="InquiryRequest">
+		<xsd:sequence>
+			<xsd:element name="InquiryType" type="xsd:string"/>
+			<xsd:element name="DLOrEINNum" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InquiryResponse">
+		<xsd:sequence>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>
