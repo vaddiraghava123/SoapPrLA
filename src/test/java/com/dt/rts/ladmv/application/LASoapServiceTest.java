@@ -5,11 +5,9 @@
 
 package com.dt.rts.ladmv.application;
 
-import java.io.IOException;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -26,9 +24,8 @@ import org.springframework.util.ClassUtils;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.context.MessageContext;
 
-import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.InquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest.Inquiry;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 
 @RunWith(SpringRunner.class)
@@ -53,56 +50,14 @@ public class LASoapServiceTest {
 
 	@Test 
 	@Ignore
-	public void vinTestService() throws IOException {
-		WebServiceTemplate ws = new WebServiceTemplate(marshaller);
-		
-		
-		VehicleInquiryRequest request = new VehicleInquiryRequest();
-		VehicleInquiryResponse response = new VehicleInquiryResponse();
-		
-		Inquiry inq = new Inquiry();
-		inq.setVin("1C3CDZAB7DN529738");
-		
-		/*InquiryHeader inqHeader = new InquiryHeader();
-		
-		
-		request.setInquiryHeader(inqHeader);
-		request.setInquiry(inq);
-		*/
-		
-
-		System.out.println("value is "+ws.marshalSendAndReceive("http://localhost:"
-				+ port + "/la", request));
-		
-		JAXBContext contextObj;
-		try {
-			contextObj = JAXBContext.newInstance(VehicleInquiryRequest.class);
-			Marshaller marshallerObj = contextObj.createMarshaller(); 
-			marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); 
-			
-			System.out.println("Soap XML Request  - VM" );
-			System.out.println("----------------------------------------------" );
-			marshallerObj.marshal(request, System.out);
-			
-			contextObj = JAXBContext.newInstance(VehicleInquiryResponse.class);
-			marshallerObj = contextObj.createMarshaller(); 
-			
-			VehicleInquiryRepository repository = new VehicleInquiryRepository();
-			com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse.Inquiry inquiryInfo = repository.findVin(request.getInquiry().getVin());
-			response.setInquiry(inquiryInfo);
-			marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
-			
-			System.out.println("Soap XML Response  - VM" );
-			System.out.println("===================================================" );
-			marshallerObj.marshal(response, System.out);
-			
-			
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-		  
-	     
-
-	}
+	public void vinTestService() throws IOException {WebServiceTemplate ws = new WebServiceTemplate(marshaller);
+	    VehicleInquiryRequest request = new VehicleInquiryRequest();
+	    InquiryRequest inquiry = new InquiryRequest();
+	    inquiry.setInquiryType("VM");
+	    inquiry.setVin("12345678901234567");
+	    request.setInquiry(inquiry);
+	    VehicleInquiryResponse response = (VehicleInquiryResponse) ws.marshalSendAndReceive("http://localhost:"+ port + "/la", request);
+	
+	    assertThat(response).isNotNull();
+    }
 }

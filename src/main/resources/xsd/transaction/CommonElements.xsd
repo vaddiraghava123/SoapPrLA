@@ -75,28 +75,28 @@
 					<xsd:element name="TradeInValue" type="xsd:decimal" />
 					<xsd:element name="RebateAmount" type="xsd:decimal" />
 					<xsd:element name="LicensePlateFee" type="xsd:decimal" />
-					<xsd:element name="PlateTransferFees" type="xsd:decimal" />
+					<xsd:element name="PlateTransferFee" type="xsd:decimal" />
 					<xsd:element name="SpecialPlateFirstTimeFee" type="xsd:decimal" />
 					<xsd:element name="RoyaltyFee" type="xsd:decimal" />
 					<xsd:element name="LicenseCredit" type="xsd:decimal" />
-					<xsd:element name="LicensePenalityCredit" type="xsd:decimal" />
+					<xsd:element name="LicensePenaltyCredit" type="xsd:decimal" />
 					<xsd:element name="StateTaxesAndFees" type="common:StateTaxesAndFeesType" />
-					<xsd:element name="PMTaxesAndFeesType" type="common:PMTaxesAndFeesType" />
-					<xsd:element name="TotalFees" type="xsd:decimal" />
+					<xsd:element name="PMTaxesAndFees" type="common:PMTaxesAndFeesType" />
+					<xsd:element name="TotalFee" type="xsd:decimal" />
 					<xsd:element name="TotalTax" type="xsd:decimal" />
-					<xsd:element name="GrandTotalFees" type="xsd:decimal" />
+					<xsd:element name="GrandTotalFee" type="xsd:decimal" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 	<xsd:complexType name="StateTaxesAndFeesType">
 		<xsd:sequence>
-			<xsd:element name="LienFees" type="xsd:decimal" />
-			<xsd:element name="TitleFees" type="xsd:decimal" />
+			<xsd:element name="LienFee" type="xsd:decimal" />
+			<xsd:element name="TitleFee" type="xsd:decimal" />
 			<xsd:element name="MiscFee" type="xsd:decimal" />
 			<xsd:element name="TitleServiceHandlingFee" type="xsd:decimal" />
-			<xsd:element name="TourismFees" type="xsd:decimal" />
-			<xsd:element name="ExpeditedTitleFees" type="xsd:decimal" />
+			<xsd:element name="TourismFee" type="xsd:decimal" />
+			<xsd:element name="ExpeditedTitleFee" type="xsd:decimal" />
 			<xsd:element name="StateSalesTax" type="xsd:decimal" />
 			<xsd:element name="StateTaxCredit" type="xsd:decimal" />
 			<xsd:element name="StateTaxPenalty" type="xsd:decimal" />

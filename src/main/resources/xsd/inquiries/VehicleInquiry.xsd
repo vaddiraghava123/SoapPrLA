@@ -78,7 +78,7 @@
 			</xsd:element>
 			<xsd:element name="Vehicle" type="tns:InqVehicleType" />
 			<xsd:element name="Owners" type="tns:InqOwnerListType"/>
-			<xsd:element name="Registration" type="core:RegistrationType"/>
+			<xsd:element name="Registration" type="commoninquiry:InquiryRegistrationType"/>
 			<xsd:element name="Title" type="commoninquiry:InqTitleType" />
 			<xsd:element name="LienHolder" type="core:LienHolderType"/>
 			<xsd:element name="Sales" type="tns:InqSalesType"/>
@@ -105,8 +105,8 @@
 
 	<xsd:complexType name="InqOwnerListType">
 		<xsd:sequence>
-			<xsd:element name="InquiryPrimaryOwner" type="tns:InqPrimaryOwnerType" />
-			<xsd:element name="InquirySecondaryOwner" type="tns:InqSecondaryOwnerType" />
+			<xsd:element name="PrimaryOwner" type="tns:InqPrimaryOwnerType" />
+			<xsd:element name="SecondaryOwner" type="tns:InqSecondaryOwnerType" />
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="InqPrimaryOwnerType">

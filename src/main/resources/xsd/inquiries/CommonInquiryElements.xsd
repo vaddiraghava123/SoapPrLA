@@ -15,14 +15,7 @@
 	<xsd:import
 	namespace="http://rts.dt.com/ladmv/services/CoreElements"
 	schemaLocation="../common/CoreElements.xsd" />
-	
-	<!-- <xsd:complexType name="Party">
-		<xsd:sequence>
-			<xsd:element name="Name" type="xsd:string"/>
-          	<xsd:element name="InqAddress" type="tns:Address" minOccurs="0"/>
-		</xsd:sequence>
-	</xsd:complexType> -->
-	
+
 	<xsd:complexType name="InqTitleType">
 		<xsd:complexContent>
 				<xsd:extension base="core:TitleType">
@@ -41,27 +34,22 @@
 			</xsd:complexContent>
 	</xsd:complexType>
 	
-	<!-- <xsd:complexType name="Address">
-      <xsd:sequence>
-        <xsd:element name="Street" type="xsd:string"/>
-		<xsd:element name="City" type="xsd:string"/>
-		<xsd:element name="State" type="xsd:string"/>
-		<xsd:element name="Zip" type="xsd:int"/>
-      </xsd:sequence>
-	</xsd:complexType> -->
-	
+	<xsd:complexType name="InquiryRegistrationType">
+		<xsd:complexContent>
+			<xsd:extension base="core:RegistrationType">
+				<xsd:sequence>
+					<xsd:element name="HandicappedStatus" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
 	<xsd:complexType name="DealComments">
       <xsd:sequence>
         <xsd:element name="Comments" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
-		<xsd:element name="ComOri" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-		<xsd:element name="ComOca" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="CommentsOri" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="CommentsOca" type="xsd:string" minOccurs="0" maxOccurs="1"/>
       </xsd:sequence>
 	</xsd:complexType>
-	
-	<!-- <xsd:complexType name="InqLienHolder">
-		<xsd:complexContent>
-				<xsd:extension base="tns:Party"/>
-		</xsd:complexContent>
-	</xsd:complexType> -->
 	
 </xsd:schema>

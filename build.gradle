@@ -5,106 +5,125 @@
  * For more details take a look at the Java Libraries chapter in the Gradle
  * user guide available at https://docs.gradle.org/4.3/userguide/java_library_plugin.html
  */
-buildscript {
+ 
+ buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
     }
 }
+
 // Apply the java-library plugin to add support for Java Library
+//apply plugin: 'java-library'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-// In this section you declare where to find the dependencies of your project
-repositories {
-    mavenCentral()
-}
-
-// tag::xsd[]
 task genJaxb {
-    ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+    ext.targetDir = "${buildDir}/generated-sources/jaxb"
     ext.classesDir = "${buildDir}/classes/jaxb"
-    ext.schema = "${projectDir}/src/main/resources/xsd"
+    ext.schemaDir = "${projectDir}/src/main/resources/xsd"
 
     outputs.dir classesDir
-
-    doLast() {
+	
+	doLast() {
         project.ant {
             taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
                     classpath: configurations.xsdCompile.asPath
-            mkdir(dir: sourcesDir)
+            mkdir(dir: targetDir)
             mkdir(dir: classesDir)
 
-            xjc(destdir: sourcesDir, removeOldOutput:'yes') {
-            	schema(dir: schema, includes: 'inquiries/*.xsd')
-            	schema(dir: schema, includes: 'transaction/*.xsd')
-	    		binding(dir: schema, includes: 'inquiries/*.xjb')
-	    		binding(dir: schema, includes: 'transaction/*.xjb')
-                produces(dir: sourcesDir, includes: "**/*.java")
+            xjc(destdir: targetDir, removeOldOutput: 'yes') {
+            	schema(dir: schemaDir, includes: "common/*.xsd")
+                schema(dir: schemaDir, includes: "inquiries/*.xsd")
+                schema(dir: schemaDir, includes: "transaction/*.xsd")
+                produces(dir: targetDir, includes: "**/*.java")
             }
 
             javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
                     debugLevel: "lines,vars,source",
-                    classpath: configurations.xsdCompile.asPath) {
-                src(path: sourcesDir)
+                    classpath: configurations.xsdCompile.asPath,
+                    includeantruntime: "false") {
+                src(path: targetDir)
                 include(name: "**/*.java")
                 include(name: "*.java")
             }
 
             copy(todir: classesDir) {
-                fileset(dir: sourcesDir, erroronmissingdir: false) {
+                fileset(dir: targetDir, erroronmissingdir: false) {
                     exclude(name: "**/*.java")
                 }
             }
+            
+		      
         }
     }
-}
-// end::xsd[]
-
-
-
-task afterEclipseImport {
-	dependsOn "genJaxb"
-}
-
-// tag::jaxb[]
-configurations {
-    xsdCompile
 }
 
 jar {
     baseName = 'LASoapService'
-    version =  '0.1.0'
+    version = '0.0.1'
     from genJaxb.classesDir
 }
 
-// tag::dependencies[]
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    //jcenter()
+    mavenCentral()
+}
+
+configurations {
+    xsdCompile
+}
 
 dependencies {
+    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    //api 'org.apache.commons:commons-math3:3.6.1'
+
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    //implementation 'com.google.guava:guava:23.0'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+    compile("com.google.code.gson:gson:2.3",
+            "commons-lang:commons-lang:2.6",
+            "commons-collections:commons-collections:3.2.1",
+            "commons-codec:commons-codec:1.10",
+            "commons-io:commons-io:2.4",
+            "org.springframework.ws:spring-ws-core:2.2.1.RELEASE"
+            )
+    compile("org.apache.ws.xmlschema:xmlschema-core:2.1.0")
+    //compile("org.apache.maven.plugins:maven-dependency-plugin:2.5.1")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-web-services")
     testCompile("org.springframework.boot:spring-boot-starter-test")
     compile("wsdl4j:wsdl4j:1.6.1")
-    compile("org.apache.ws.xmlschema:xmlschema-core:2.1.0") 
     //jaxb("org.glassfish.jaxb:jaxb-xjc:2.2.11")
-    
+	// code-generation dependencies for xsd
     xsdCompile("com.sun.xml.bind:jaxb-xjc:2.2.11")
     xsdCompile("com.sun.xml.bind:jaxb-impl:2.2.11")
     xsdCompile("com.sun.xml.bind:jaxb-core:2.2.11")
     xsdCompile("javax.xml.bind:jaxb-api:2.2.11")
     xsdCompile("javax.xml.stream:stax-api:1.0-2")
     xsdCompile("javax.activation:activation:1.1.1")
-    xsdCompile( "ant:ant:1.7.0")
-    
+    xsdCompile("ant:ant:1.7.0")
+	
     compile(files(genJaxb.classesDir).builtBy(genJaxb))
-    compile("com.googlecode.json-simple:json-simple:1.1")
-    
+    testCompile("junit:junit",
+                "org.powermock:powermock-api-mockito:1.6.2",
+                "org.powermock:powermock-module-junit4:1.6.2",
+                )
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
 }
 

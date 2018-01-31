@@ -13,7 +13,6 @@ import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegRequest;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegResponse;
-import com.dt.rts.ladmv.services.transaction.titleregtransaction.VehicleForTitleRegTransRequestType;
 
 
 @Endpoint
@@ -21,18 +20,22 @@ public class ServiceEndPoint {
 	private static final String VM_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/VehicleInquiry";
 	private static final String ELT_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry";
 	private static final String TITLEREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction";
+	public static final String VehicleInquiryType = "VM";
 
 	@Autowired
-	private ApplicationContext  ctx;
+	private ApplicationContext  appContext;
 
 	@PayloadRoot(localPart = "VehicleInquiryRequest", namespace = VM_NAMESPACE_URI)
 	@ResponsePayload
 	public VehicleInquiryResponse getVin(@RequestPayload VehicleInquiryRequest request) {
-		VehicleInquiryResponse response = ctx.getBean(VehicleInquiryResponse.class);
-		System.out.println("VehicleResponse Starts");
-		VehicleInquiryRepository vehicleInqRepository = ctx.getBean(VehicleInquiryRepository.class);
-		response.setInquiry(vehicleInqRepository.findVin(request.getInquiry().getVin()));
-		return response;
+		VehicleInquiryResponse vehicleInquiryResponse = appContext.getBean(VehicleInquiryResponse.class);
+		VehicleInquiryRepository vehicleInquiryRepository = appContext.getBean(VehicleInquiryRepository.class);
+		if(VehicleInquiryType.equalsIgnoreCase(request.getInquiry().getInquiryType())){
+			vehicleInquiryResponse.setInquiry(vehicleInquiryRepository.findVMInquirResponse(request.getInquiry().getVin()));
+		} else {
+			vehicleInquiryResponse.setInquiry(vehicleInquiryRepository.findLMInquirResponse(request.getInquiry().getPlateNum(), request.getInquiry().getRegExpYear().toString()));
+		}
+		return vehicleInquiryResponse;
 	}
 	
 	/*
@@ -51,9 +54,9 @@ public class ServiceEndPoint {
 	@PayloadRoot(localPart = "TitleRegRequest", namespace = TITLEREG_NAMESPACE_URI)
 	@ResponsePayload
 	public TitleRegResponse getVin(@RequestPayload TitleRegRequest request) {
-		TitleRegResponse response = ctx.getBean(TitleRegResponse.class);
+		TitleRegResponse response = appContext.getBean(TitleRegResponse.class);
 		System.out.println("TitleRegResponse Starts");
-		TitleRegRepository titleRegRepository = ctx.getBean(TitleRegRepository.class);
+		TitleRegRepository titleRegRepository = appContext.getBean(TitleRegRepository.class);
 		
 //		response.setInquiry(titleRegRepository.receiveTitleReg(request.getTransaction().getVehicle().getVin());
 		return response;
