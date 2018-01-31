@@ -13,7 +13,6 @@ import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegRequest;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegResponse;
-import com.dt.rts.ladmv.services.transaction.titleregtransaction.VehicleForTitleRegTransRequestType;
 
 
 @Endpoint

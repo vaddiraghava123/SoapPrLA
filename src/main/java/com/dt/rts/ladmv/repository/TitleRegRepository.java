@@ -14,18 +14,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import com.dt.rts.ladmv.services.inquiries.coreelements.Address;
-import com.dt.rts.ladmv.services.inquiries.coreelements.FlagListType;
-import com.dt.rts.ladmv.services.inquiries.coreelements.FlagType;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.OwnersType;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.PrimaryOwnerType;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse.Inquiry;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleType;
-
-
 @Component
 public class TitleRegRepository {
-	private static final Map<String, Inquiry> inquiryResponse = new TreeMap();
+//	private static final Map<String, Inquiry> inquiryResponse = new TreeMap();
 
 	@PostConstruct
 	public void initData() throws ParseException {
@@ -155,9 +146,9 @@ public class TitleRegRepository {
 		inquiryResponse.put(v1.getVin(), in1);*/
 	}
 
-	public Inquiry findVin(String vin) {
+	/*public Inquiry findVin(String vin) {
 		Assert.notNull(vin, "VIN is not null");
 		System.out.println("Testing the VIN " + vin);
 		return (Inquiry) inquiryResponse.get(vin);
-	}
+	}*/
 }

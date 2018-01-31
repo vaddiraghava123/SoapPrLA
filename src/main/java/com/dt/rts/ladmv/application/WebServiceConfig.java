@@ -3,6 +3,7 @@ package com.dt.rts.ladmv.application;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ws.commons.schema.resolver.DefaultURIResolver;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -14,9 +15,10 @@ import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
-import org.apache.ws.commons.schema.resolver.DefaultURIResolver;
 
+import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
+import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegResponse;
 
 @EnableWs
 @Configuration
@@ -24,10 +26,20 @@ import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse
 public class WebServiceConfig extends WsConfigurerAdapter {
 	
 	
-	/*@Bean
+	@Bean
 	public VehicleInquiryResponse VehicleInquiryResponse(){
 		return new VehicleInquiryResponse();
-	}*/
+	}
+	
+	@Bean
+    public EltInquiryResponse eltInquiryResponse() {
+        return new EltInquiryResponse();
+    }
+	
+	@Bean
+    public TitleRegResponse titleRegResponse() {
+        return new TitleRegResponse();
+    }
 	
 	// Changes not required in this function.
 	@Bean
