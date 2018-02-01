@@ -30,7 +30,7 @@ repositories {
 task genJaxb {
     ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
     ext.classesDir = "${buildDir}/classes/jaxb"
-    ext.schema = "${projectDir}/src/main/resources/xsd"
+    ext.schemaDir = "${projectDir}/src/main/resources/xsd"
 
     outputs.dir classesDir
 
@@ -42,12 +42,9 @@ task genJaxb {
             mkdir(dir: classesDir)
 
             xjc(destdir: sourcesDir, removeOldOutput:'yes') {
-                schema(dir: schema, includes: 'common/CoreElements.xsd')
-            	schema(dir: schema, includes: 'inquiries/CommonInquiryElements.xsd')
-            	schema(dir: schema, includes: 'inquiries/VehicleInquiry.xsd')
-            	schema(dir: schema, includes: 'inquiries/ElectronicLienInquiry.xsd')
-            	schema(dir: schema, includes: 'transaction/CommonElements.xsd')
-            	schema(dir: schema, includes: 'transaction/TitleRegTransaction.xsd')
+                schema(dir: schemaDir, includes: "common/*.xsd")
+                schema(dir: schemaDir, includes: "inquiries/*.xsd")
+                schema(dir: schemaDir, includes: "transaction/*.xsd")
                 produces(dir: sourcesDir, includes: "**/*.java")
             }
 
