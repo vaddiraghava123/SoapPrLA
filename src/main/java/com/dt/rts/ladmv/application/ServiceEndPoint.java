@@ -3,19 +3,6 @@ package com.dt.rts.ladmv.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
-import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
-import org.springframework.ws.server.endpoint.annotation.RequestPayload;
-import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-
-import com.dt.rts.ladmv.repository.DailyMoniesInquiryRepository;
-import com.dt.rts.ladmv.repository.TitleRegRepository;
-import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
-import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryRequest;
-import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryResponse;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
-import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
-import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegRequest;
-import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegResponse;
 
 
 @Endpoint
@@ -29,7 +16,7 @@ public class ServiceEndPoint {
 	@Autowired
 	private ApplicationContext  appContext;
 
-	@PayloadRoot(localPart = "VehicleInquiryRequest", namespace = VM_NAMESPACE_URI)
+	/*@PayloadRoot(localPart = "VehicleInquiryRequest", namespace = VM_NAMESPACE_URI)
 	@ResponsePayload
 	public VehicleInquiryResponse getVin(@RequestPayload VehicleInquiryRequest request) {
 		VehicleInquiryResponse vehicleInquiryResponse = appContext.getBean(VehicleInquiryResponse.class);
@@ -40,7 +27,7 @@ public class ServiceEndPoint {
 			vehicleInquiryResponse.setInquiry(vehicleInquiryRepository.findLMInquirResponse(request.getInquiry().getPlateNum(), request.getInquiry().getRegExpYear().toString()));
 		}
 		return vehicleInquiryResponse;
-	}
+	}*/
 	
 	/*
 	 * Kept Hold 
@@ -55,7 +42,7 @@ public class ServiceEndPoint {
 		return response;
 	}*/
 	
-	@PayloadRoot(localPart = "TitleRegRequest", namespace = TITLEREG_NAMESPACE_URI)
+	/*@PayloadRoot(localPart = "TitleRegRequest", namespace = TITLEREG_NAMESPACE_URI)
 	@ResponsePayload
 	public TitleRegResponse getVin(@RequestPayload TitleRegRequest request) {
 		TitleRegResponse response = appContext.getBean(TitleRegResponse.class);
@@ -64,15 +51,15 @@ public class ServiceEndPoint {
 		
 //		response.setInquiry(titleRegRepository.receiveTitleReg(request.getTransaction().getVehicle().getVin());
 		return response;
-	}
+	}*/
 	
-	@PayloadRoot(localPart = "DailyMoniesSummaryInquiryRequest", namespace = AR74_NAMESPACE_URI)
+	/*@PayloadRoot(localPart = "DailyMoniesSummaryInquiryRequest", namespace = AR74_NAMESPACE_URI)
 	@ResponsePayload
 	public DailyMoniesSummaryInquiryResponse getDailyMonies(@RequestPayload DailyMoniesSummaryInquiryRequest request) {
 		DailyMoniesSummaryInquiryResponse response = appContext.getBean(DailyMoniesSummaryInquiryResponse.class);
 		DailyMoniesInquiryRepository dailyMoniesInquiryRepository = appContext.getBean(DailyMoniesInquiryRepository.class);
 		return response;
 		
-	}
+	}*/
 	
 }
