@@ -1,4 +1,4 @@
-#   Develop XSDs and Generate stubs and WSDL file.
+###  Develop XSDs and Generate WSDL file.
 - ######  Clean and build. To generate stub classes.
 
     >   gradlew clean build
@@ -21,8 +21,9 @@
     >   server.port=8888
 
 - ###### Finally how to get WSDL file ?
-    
-            http://localhost:*server.port*/la/LADMVService.wsdl
+
+    >   http://localhost:[*server.port*]/la/LADMVService.wsdl
+
   *Example*
     >   http://localhost:8888/la/LADMVService.wsdl
         
