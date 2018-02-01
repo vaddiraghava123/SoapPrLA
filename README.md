@@ -1,4 +1,4 @@
-###  Develop XSDs and Generate WSDL file.
+###  Develop XSDs 
 - ######  Clean and build. To generate stub classes.
 
     >   gradlew clean build
@@ -7,10 +7,10 @@
  
     *Source files* :  
      
-    >  [ProjectFolder]\build\generated-sources\jaxb\com\dt\rts\ladmv\services\*.java
+    >  [ProjectFolder]\build\generated-sources\jaxb\com\dt\rts\ladmv\services\\*.java
      
     *Class files* :
-    >   [ProjectFolder]\build\classes\jaxb\com\dt\rts\ladmv\services\*.class
+    >   [ProjectFolder]\build\classes\jaxb\com\dt\rts\ladmv\services\\*.class
   
 - ###### Command To generate WSDL file.
     >   gradlew bootrun
@@ -25,5 +25,4 @@
     >   http://localhost:[*server.port*]/la/LADMVService.wsdl
 
   *Example*
-    >   http://localhost:8888/la/LADMVService.wsdl
-        
+    >   http://localhost:8888/la/LADMVService.wsdl        
