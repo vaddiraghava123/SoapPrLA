@@ -20,6 +20,10 @@ public class ServiceEndPoint {
 	private static final String VM_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/VehicleInquiry";
 	private static final String ELT_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry";
 	private static final String TITLEREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction";
+	
+	
+	//Constants
+	public static final String VehicleInquiryType = "VM";
 
 	@Autowired
 	private ApplicationContext  ctx;
@@ -30,7 +34,11 @@ public class ServiceEndPoint {
 		VehicleInquiryResponse response = ctx.getBean(VehicleInquiryResponse.class);
 		System.out.println("VehicleResponse Starts");
 		VehicleInquiryRepository vehicleInqRepository = ctx.getBean(VehicleInquiryRepository.class);
-		response.setInquiry(vehicleInqRepository.findVin(request.getInquiry().getVin()));
+		if(VehicleInquiryType.equalsIgnoreCase(request.getInquiry().getInquiryType())){
+			response.setInquiry(vehicleInqRepository.findVMInquirResponse(request.getInquiry().getVin()));
+		} else {
+			response.setInquiry(vehicleInqRepository.findLMInquirResponse(request.getInquiry().getPlateNum(), request.getInquiry().getRegExpYear().toString()));
+		}
 		return response;
 	}
 	
@@ -53,7 +61,6 @@ public class ServiceEndPoint {
 		TitleRegResponse response = ctx.getBean(TitleRegResponse.class);
 		System.out.println("TitleRegResponse Starts");
 		TitleRegRepository titleRegRepository = ctx.getBean(TitleRegRepository.class);
-		
 //		response.setInquiry(titleRegRepository.receiveTitleReg(request.getTransaction().getVehicle().getVin());
 		return response;
 	}

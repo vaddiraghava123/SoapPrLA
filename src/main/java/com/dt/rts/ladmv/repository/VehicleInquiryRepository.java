@@ -1,19 +1,14 @@
 package com.dt.rts.ladmv.repository;
 
-import java.awt.Toolkit;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
-import java.util.TreeMap;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
+
+import com.dt.rts.ladmv.services.coreelements.RegistrationType;
+import com.dt.rts.ladmv.services.coreelements.TransVehicleType;
+import com.dt.rts.ladmv.services.inquiries.commoninquiryelements.InquiryRegistrationType;
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.InqVehicleType;
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.InquiryResponse;
 
 
 
@@ -21,8 +16,8 @@ import org.springframework.util.Assert;
 public class VehicleInquiryRepository {
 	//private static final Map<String, Inquiry> inquiryResponse = new TreeMap();
 
-	@PostConstruct
-	public void initData() throws ParseException {
+//	@PostConstruct
+//	public void initData() throws ParseException {
 		
 		/*Long batchNo = new Long(232322);
 		BigDecimal sale = new BigDecimal(3232.902D);
@@ -147,12 +142,33 @@ public class VehicleInquiryRepository {
 		
 	
 		inquiryResponse.put(v1.getVin(), in1);*/
-	}
+//	}
 
-	/*public Inquiry findVin(String vin) {
-		Assert.notNull(vin, "VIN is not null");
-		System.out.println("Testing the VIN " + vin);
-		Toolkit.getDefaultToolkit().beep();
-		return (Inquiry) inquiryResponse.get(vin);
+	/*private TransVehicleType veh = null;
+
+	@PostConstruct
+	public void initData() {
+		this.veh = new InqVehicleType();
+		this.veh.setVin("12345678901234567");
+		
 	}*/
+
+	public InquiryResponse findVMInquirResponse(String vin) {
+		
+		InquiryResponse inquiryResponse = new InquiryResponse();
+		InqVehicleType inqVeh = new InqVehicleType();
+		inqVeh.setVin(vin);
+		inquiryResponse.setTitle(null);
+		inquiryResponse.setVehicle(inqVeh);
+		return inquiryResponse;
+	}
+	
+	public InquiryResponse findLMInquirResponse(String plateNumber, String expirationyear) {
+		InquiryResponse inquiryResponse = new InquiryResponse();
+		InquiryRegistrationType reg = new InquiryRegistrationType();
+		reg.setCurrentPlateNum(plateNumber);
+		reg.setCurrentPlateExpDate(expirationyear);
+		inquiryResponse.setRegistration((InquiryRegistrationType) reg);
+		return inquiryResponse;
+	}
 }

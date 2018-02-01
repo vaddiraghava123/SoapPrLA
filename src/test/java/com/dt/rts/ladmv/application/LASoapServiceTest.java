@@ -12,7 +12,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.embedded.LocalServerPort;
@@ -25,6 +24,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ClassUtils;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.context.MessageContext;
+
+import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.InquiryRequest;
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.InquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
+import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 
 
 @RunWith(SpringRunner.class)
@@ -41,34 +46,30 @@ public class LASoapServiceTest {
 	@LocalServerPort
 	private int port = 8888;
 
-	/*@Before
+	@Before
 	public void init() throws Exception {
 		marshaller.setPackagesToScan(ClassUtils.getPackageName(VehicleInquiryRequest.class));
 		marshaller.afterPropertiesSet();
-	}*/
+	}
 
 	@Test 
-	@Ignore
-	public void vinTestService() throws IOException {/*
+	public void VMTestService() throws IOException {
 		WebServiceTemplate ws = new WebServiceTemplate(marshaller);
 		
 		
 		VehicleInquiryRequest request = new VehicleInquiryRequest();
 		VehicleInquiryResponse response = new VehicleInquiryResponse();
+		InquiryResponse inqResponse = new InquiryResponse();
 		
-		Inquiry inq = new Inquiry();
+		InquiryRequest inq = new InquiryRequest();
 		inq.setVin("1C3CDZAB7DN529738");
-		
-		InquiryHeader inqHeader = new InquiryHeader();
-		
-		
-		request.setInquiryHeader(inqHeader);
+		inq.setInquiryType("VM");
 		request.setInquiry(inq);
+		request.setAuthHeader(null);
 		
 		
-
-		System.out.println("value is "+ws.marshalSendAndReceive("http://localhost:"
-				+ port + "/la", request));
+		/*System.out.println("value is "+ws.marshalSendAndReceive("http://localhost:"
+				+ port + "/la", request));*/
 		
 		JAXBContext contextObj;
 		try {
@@ -77,28 +78,80 @@ public class LASoapServiceTest {
 			marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); 
 			
 			System.out.println("Soap XML Request  - VM" );
-			System.out.println("----------------------------------------------" );
+			System.out.println("----------------------------------------------" + request );
 			marshallerObj.marshal(request, System.out);
 			
 			contextObj = JAXBContext.newInstance(VehicleInquiryResponse.class);
 			marshallerObj = contextObj.createMarshaller(); 
 			
 			VehicleInquiryRepository repository = new VehicleInquiryRepository();
-			com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse.Inquiry inquiryInfo = repository.findVin(request.getInquiry().getVin());
-			response.setInquiry(inquiryInfo);
-			marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
+			if("VM".equalsIgnoreCase(request.getInquiry().getInquiryType().toString())){
+				response.setInquiry(repository.findVMInquirResponse(request.getInquiry().getVin().toString()));
+			} else {
+				response.setInquiry(repository.findLMInquirResponse(request.getInquiry().getPlateNum().toString(), request.getInquiry().getRegExpYear().toString()));
+			}
+			marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);  
 			
 			System.out.println("Soap XML Response  - VM" );
-			System.out.println("===================================================" );
+			System.out.println("===================================================" + response);
 			marshallerObj.marshal(response, System.out);
 			
 			
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+	@Test 
+	public void LMTestService() throws IOException {
+		WebServiceTemplate ws = new WebServiceTemplate(marshaller);
+		
+		VehicleInquiryRequest request = new VehicleInquiryRequest();
+		VehicleInquiryResponse response = new VehicleInquiryResponse();
+		InquiryResponse inqResponse = new InquiryResponse();
+		
+		InquiryRequest inq = new InquiryRequest();
+		inq.setInquiryType("LM");
+		inq.setPlateNum("ABC1234");
+		inq.setRegExpYear(Integer.parseInt("0219"));
+		request.setInquiry(inq);
+		
+		
+		/*System.out.println("value is "+ws.marshalSendAndReceive("http://localhost:"
+				+ port + "/la", request));*/
+		
+		JAXBContext contextObj;
+		try {
+			contextObj = JAXBContext.newInstance(VehicleInquiryRequest.class);
+			Marshaller marshallerObj = contextObj.createMarshaller(); 
+			marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); 
+			
+			System.out.println("Soap XML Request  - LM" );
+			System.out.println("----------------------------------------------" + request);
+			marshallerObj.marshal(request, System.out);
+			
+			contextObj = JAXBContext.newInstance(VehicleInquiryResponse.class);
+			marshallerObj = contextObj.createMarshaller(); 
+			
+			VehicleInquiryRepository repository = new VehicleInquiryRepository();
+			if("VM".equalsIgnoreCase(request.getInquiry().getInquiryType().toString())){
+				response.setInquiry(repository.findVMInquirResponse(request.getInquiry().getVin().toString()));
+			} else {
+				response.setInquiry(repository.findLMInquirResponse(request.getInquiry().getPlateNum().toString(), request.getInquiry().getRegExpYear().toString()));
+			}
+//			response.setInquiry(inqResponse);
+			marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
+			
+			System.out.println("Soap XML Response  - LM" );
+			System.out.println("===================================================" + response );
+			marshallerObj.marshal(response, System.out);
+			
+			
+		} catch (JAXBException e) {
 			e.printStackTrace();
 		}  
 		  
 	     
 
-	*/}
+	}
 }
