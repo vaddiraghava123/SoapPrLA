@@ -3,8 +3,9 @@
 	xmlns:sch1="http://rts.dt.com/ladmv/services/CoreElements"
 	xmlns:sch2="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
 	xmlns:sch3="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry"
-	xmlns:sch4="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
-	xmlns:sch5="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:sch4="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry"
+	xmlns:sch5="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
+	xmlns:sch6="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://rts.dt.com/ladmv"
 	targetNamespace="http://rts.dt.com/ladmv">
 	<wsdl:types>
@@ -634,6 +635,100 @@
 			</xsd:complexType>
 		</xsd:schema>
 		<xsd:schema
+			xmlns="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry"
+			xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+			xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified" jaxb:version="2.1"
+			targetNamespace="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<jaxb:globalBindings generateElementProperty="false" />
+				</xsd:appinfo>
+			</xsd:annotation>
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
+			<xsd:element name="DailyMoniesSummaryInquiryRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="DailyMoniesSummaryInquiry" type="InquiryRequest" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DailyMoniesSummaryInquiryResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="DailyMoniesSummaryInquiry" type="InquiryResponse" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="InquiryRequest">
+				<xsd:sequence>
+					<xsd:element name="InquiryHeader" type="InquiryHeader" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="InquiryResponse">
+				<xsd:sequence>
+					<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+					<xsd:element name="InquiryHeader" type="InquiryHeader" />
+					<xsd:element name="TotalMonies" type="xsd:decimal" />
+					<xsd:element name="TotalReceipts" type="xsd:decimal" />
+					<xsd:element name="DepositDate">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{6}" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="AdjacenOverride" type="xsd:decimal" />
+					<xsd:element name="PIVNum" type="xsd:long" />
+					<xsd:element name="JVNum" type="xsd:long" />
+					<xsd:element name="RemittanceAmount" type="xsd:decimal" />
+					<xsd:element name="ListingNum" type="xsd:long" />
+					<xsd:element name="ManualsAndMonies" type="ManualAndMonies" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ManualAndMonies">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0"
+						name="PlateTypesAndFees" type="PlateTypesAndFees" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="PlateTypesAndFees">
+				<xsd:sequence>
+					<xsd:element name="PlateType" type="xsd:string" />
+					<xsd:element name="PlateTypeFee" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="InquiryHeader">
+				<xsd:sequence>
+					<xsd:element name="InquiryType" type="xsd:string" />
+					<xsd:element name="PaymentMode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="OL" />
+								<xsd:enumeration value="EL" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="Date">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{6}" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element minOccurs="0" name="ElectronicFundTransfCode"
+						type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema
 			xmlns="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
 			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
@@ -1040,6 +1135,10 @@
 			</xsd:complexType>
 		</xsd:schema>
 	</wsdl:types>
+	<wsdl:message name="DailyMoniesSummaryInquiryRequest">
+		<wsdl:part element="sch4:DailyMoniesSummaryInquiryRequest"
+			name="DailyMoniesSummaryInquiryRequest"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="EltInquiryRequest">
 		<wsdl:part element="sch3:EltInquiryRequest" name="EltInquiryRequest"></wsdl:part>
 	</wsdl:message>
@@ -1049,16 +1148,26 @@
 	<wsdl:message name="VehicleInquiryRequest">
 		<wsdl:part element="sch0:VehicleInquiryRequest" name="VehicleInquiryRequest"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="DailyMoniesSummaryInquiryResponse">
+		<wsdl:part element="sch4:DailyMoniesSummaryInquiryResponse"
+			name="DailyMoniesSummaryInquiryResponse"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="VehicleInquiryResponse">
 		<wsdl:part element="sch0:VehicleInquiryResponse" name="VehicleInquiryResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="TitleRegRequest">
-		<wsdl:part element="sch4:TitleRegRequest" name="TitleRegRequest"></wsdl:part>
+		<wsdl:part element="sch5:TitleRegRequest" name="TitleRegRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="TitleRegResponse">
-		<wsdl:part element="sch4:TitleRegResponse" name="TitleRegResponse"></wsdl:part>
+		<wsdl:part element="sch5:TitleRegResponse" name="TitleRegResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:portType name="LADMVPort">
+		<wsdl:operation name="DailyMoniesSummaryInquiry">
+			<wsdl:input message="tns:DailyMoniesSummaryInquiryRequest"
+				name="DailyMoniesSummaryInquiryRequest"></wsdl:input>
+			<wsdl:output message="tns:DailyMoniesSummaryInquiryResponse"
+				name="DailyMoniesSummaryInquiryResponse"></wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="EltInquiry">
 			<wsdl:input message="tns:EltInquiryRequest" name="EltInquiryRequest"></wsdl:input>
 			<wsdl:output message="tns:EltInquiryResponse" name="EltInquiryResponse"></wsdl:output>
@@ -1075,6 +1184,15 @@
 	<wsdl:binding name="LADMVPortSoap11" type="tns:LADMVPort">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="DailyMoniesSummaryInquiry">
+			<soap:operation soapAction="" />
+			<wsdl:input name="DailyMoniesSummaryInquiryRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DailyMoniesSummaryInquiryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="EltInquiry">
 			<soap:operation soapAction="" />
 			<wsdl:input name="EltInquiryRequest">
