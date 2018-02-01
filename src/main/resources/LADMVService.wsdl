@@ -655,7 +655,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-						<xsd:element name="DailyMoniesSummaryInquiry" type="InquiryRequest" />
+						<xsd:element name="AR74InquiryRequest" type="AR74InquiryRequest" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -663,18 +663,17 @@
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-						<xsd:element name="DailyMoniesSummaryInquiry" type="InquiryResponse" />
+						<xsd:element name="AR74InquiryResponse" type="AR74InquiryResponse" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:complexType name="InquiryRequest">
+			<xsd:complexType name="AR74InquiryRequest">
 				<xsd:sequence>
 					<xsd:element name="InquiryHeader" type="InquiryHeader" />
 				</xsd:sequence>
 			</xsd:complexType>
-			<xsd:complexType name="InquiryResponse">
+			<xsd:complexType name="AR74InquiryResponse">
 				<xsd:sequence>
-					<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
 					<xsd:element name="InquiryHeader" type="InquiryHeader" />
 					<xsd:element name="TotalMonies" type="xsd:decimal" />
 					<xsd:element name="TotalReceipts" type="xsd:decimal" />

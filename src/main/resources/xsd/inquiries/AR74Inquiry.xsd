@@ -23,7 +23,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
-				<xsd:element name="AR74InquiryRequest" type="tns:InquiryRequest"/>
+				<xsd:element name="AR74InquiryRequest" type="tns:AR74InquiryRequest"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -33,18 +33,18 @@
 
 			<xsd:sequence>
 				<xsd:element name="AuthHeader"  type="core:AuthHeaderType"/>
-				<xsd:element name="AR74InquiryResponse" type="tns:InquiryResponse"/>
+				<xsd:element name="AR74InquiryResponse" type="tns:AR74InquiryResponse"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
 
-	<xsd:complexType name="InquiryRequest">
+	<xsd:complexType name="AR74InquiryRequest">
 		<xsd:sequence>
 			<xsd:element name="InquiryHeader" type="tns:InquiryHeader"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="InquiryResponse">
+	<xsd:complexType name="AR74InquiryResponse">
 		<xsd:sequence>
 			<xsd:element name="InquiryHeader" type="tns:InquiryHeader"/>
 			<xsd:element name="TotalMonies" type="xsd:decimal"/>
