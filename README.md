@@ -1,12 +1,21 @@
-# Develop XSDs and generate stubs and WSDL file.
-#clean and build. To generate stub classes.
+# Develop XSDs and Generate stubs and WSDL file.
+-  Clean and build. To generate stub classes.
+>
+        gradlew clean build
 
-  gradlew clean build
-
-
-#Command To generate WSDL file.
-
-  gradlew bootrun
+# Generated Stubs under below folder
+ >
+ Source files :  
+ 
+ >  [ProjectFolder]\build\generated-sources\jaxb\com\dt\rts\ladmv\services
+ 
+ 	Class files :
+ 
+ >   [ProjectFolder]\build\classes\jaxb\com\dt\rts\ladmv\services
   
-  
-#Tomcat port change : go to src/resources/application.properties file and change the port as server.port=8888
+# Command To generate WSDL file.
+>   gradlew bootrun
+    
+# Tomcat port change:   
+	Go to [ProjectFolder]/src/resources/application.properties file and change the port as  
+>   server.port=8888
