@@ -1,21 +1,28 @@
-# Develop XSDs and Generate stubs and WSDL file.
--  Clean and build. To generate stub classes.
->
-        gradlew clean build
+#   Develop XSDs and Generate stubs and WSDL file.
+- ######  Clean and build. To generate stub classes.
 
-# Generated Stubs under below folder
- >
- Source files :  
+    >   gradlew clean build
+
+- ###### Generated Stubs on below folders:  
  
- >  [ProjectFolder]\build\generated-sources\jaxb\com\dt\rts\ladmv\services
- 
- 	Class files :
- 
- >   [ProjectFolder]\build\classes\jaxb\com\dt\rts\ladmv\services
+    *Source files* :  
+     
+    >  [ProjectFolder]\build\generated-sources\jaxb\com\dt\rts\ladmv\services\*.java
+     
+    *Class files* :
+    >   [ProjectFolder]\build\classes\jaxb\com\dt\rts\ladmv\services\*.class
   
-# Command To generate WSDL file.
->   gradlew bootrun
+- ###### Command To generate WSDL file.
+    >   gradlew bootrun
     
-# Tomcat port change:   
-	Go to [ProjectFolder]/src/resources/application.properties file and change the port as  
->   server.port=8888
+- ###### Tomcat port change:  
+
+	Go to [*Project Folder*]/src/resources/application.properties file and change the port as  
+    >   server.port=8888
+
+- ###### Finally how to get WSDL file ?
+    
+            http://localhost:*server.port*/la/LADMVService.wsdl
+  *Example*
+    >   http://localhost:8888/la/LADMVService.wsdl
+        
