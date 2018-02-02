@@ -40,7 +40,16 @@
 
 	<xsd:complexType name="AR74InquiryRequest">
 		<xsd:sequence>
-			<xsd:element name="InquiryHeader" type="tns:InquiryHeader"/>
+			<xsd:element name="InquiryType" type="tns:AR74InquiryTypeEnum"/>
+			<xsd:element name="PaymentMode" type="commoninquiry:PaymentModeEnum"/>
+			<xsd:element name="Date">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ElectronicFundTransfCode" type="xsd:string" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -75,21 +84,6 @@
 		<xsd:sequence>
 			<xsd:element name="PlateType" type="xsd:string"/>
 			<xsd:element name="PlateTypeFee" type="xsd:string"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="InquiryHeader">
-		<xsd:sequence>
-			<xsd:element name="InquiryType" type="tns:AR74InquiryTypeEnum"/>
-			<xsd:element name="PaymentMode" type="commoninquiry:PaymentModeEnum"/>
-			<xsd:element name="Date">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="ElectronicFundTransfCode" type="xsd:string" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
