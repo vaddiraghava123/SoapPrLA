@@ -80,7 +80,7 @@
 	
 	<xsd:complexType name="InquiryHeader">
 		<xsd:sequence>
-			<xsd:element name="InquiryType" type="AR74InquiryTypeEnum"/>
+			<xsd:element name="InquiryType" type="tns:AR74InquiryTypeEnum"/>
 			<xsd:element name="PaymentMode" type="commoninquiry:PaymentModeEnum"/>
 			<xsd:element name="Date">
 				<xsd:simpleType>
