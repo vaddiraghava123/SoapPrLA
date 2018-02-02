@@ -80,15 +80,8 @@
 	
 	<xsd:complexType name="InquiryHeader">
 		<xsd:sequence>
-			<xsd:element name="InquiryType" type="xsd:string"/>
-			<xsd:element name="PaymentMode">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:enumeration value="OL" />
-						<xsd:enumeration value="EL" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
+			<xsd:element name="InquiryType" type="tns:AR74InquiryTypeEnum"/>
+			<xsd:element name="PaymentMode" type="commoninquiry:PaymentModeEnum"/>
 			<xsd:element name="Date">
 				<xsd:simpleType>
 					<xsd:restriction base="xsd:string">
@@ -99,5 +92,11 @@
 			<xsd:element name="ElectronicFundTransfCode" type="xsd:string" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
+	
+	<xsd:simpleType name="AR74InquiryTypeEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AR74" />
+		</xsd:restriction>
+	</xsd:simpleType>
 	
 </xsd:schema>

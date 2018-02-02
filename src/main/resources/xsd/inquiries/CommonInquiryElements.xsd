@@ -52,4 +52,11 @@
       </xsd:sequence>
 	</xsd:complexType>
 	
+	<xsd:simpleType name="PaymentModeEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="OL" />
+			<xsd:enumeration value="EL" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
 </xsd:schema>
