@@ -60,6 +60,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         res.add(new ClassPathResource("/xsd/inquiries/ElectronicLienInquiry.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/AR74Inquiry.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TitleRegTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/transaction/RenewalRegTransaction.xsd"));
         
 		CommonsXsdSchemaCollection collection = new CommonsXsdSchemaCollection(res.toArray(new ClassPathResource[0]));
 		collection.setInline(true);

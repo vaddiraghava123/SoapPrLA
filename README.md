@@ -22,7 +22,7 @@
 
 - ###### Finally how to get WSDL file ?
 
-    >   http://localhost:[*server.port*]/la/LADMVService.wsdl
+    >   'http://localhost:[*server.port*]/la/ladmvproxy.wsdl
 
   *Example*
-    >   http://localhost:8888/la/LADMVService.wsdl        
+    >   http://localhost:8888/la/ladmvproxy.wsdl        
