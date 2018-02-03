@@ -4,7 +4,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltInquiryResponse.Inquiry;
+//import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltInquiryResponse.Inquiry;
 
 
 @Component
@@ -19,9 +19,9 @@ public class ELTRRepository {
 	}
 
 	//TODO Build response here and return it.
-	public Inquiry findELTInquirResponse(String vin) {
+	/*public Inquiry findELTInquirResponse(String vin) {
 		Inquiry inquiryResponse = new Inquiry();
 		return inquiryResponse;
-	}
+	}*/
 
 }

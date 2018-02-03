@@ -9,7 +9,7 @@
 	        <jaxb:globalBindings generateElementProperty="false" />
 	    </xsd:appinfo>
     </xsd:annotation>
-    <xsd:element name="EltInquiryRequest">
+    <xsd:element name="EltrInquiryRequest">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
@@ -17,11 +17,11 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="EltInquiryResponse">
+    <xsd:element name="EltrInquiryResponse">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-                <xsd:element name="ELTRInquiry" type="eltinquiry:ELTInquiryResponse"/>
+                <xsd:element name="ELTRInquiryResp" type="eltinquiry:ELTInquiryResponse"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
