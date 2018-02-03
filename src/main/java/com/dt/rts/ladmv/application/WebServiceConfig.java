@@ -58,6 +58,8 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		List<ClassPathResource> res = new ArrayList<>();
         res.add(new ClassPathResource("/xsd/inquiries/VehicleInquiry.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/ElectronicLienInquiry.xsd"));
+		res.add(new ClassPathResource("/xsd/inquiries/ElectronicLienAddModify.xsd"));
+		res.add(new ClassPathResource("/xsd/inquiries/DMEM.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/AR74Inquiry.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TitleRegTransaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/RenewalRegTransaction.xsd"));
