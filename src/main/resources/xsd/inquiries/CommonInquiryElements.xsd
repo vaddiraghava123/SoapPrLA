@@ -1,4 +1,4 @@
-<xsd:schema 
+﻿<xsd:schema 
 	xmlns="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
@@ -58,5 +58,56 @@
 			<xsd:enumeration value="EL" />
 		</xsd:restriction>
 	</xsd:simpleType>
+
+    <xsd:simpleType name="AR74InquiryTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="AR74" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ELTInquiryTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ELTR" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ELTTypesEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="I"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="M"/>
+            <xsd:enumeration value="D"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MMDDYYDateFormat">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{6}"></xsd:pattern>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MMDDYYYYDateFormat">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{8}" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="DriversLicenseType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="7" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="EmployeeIdentificationType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="9" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="CurrentPlateNumberType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8" />
+        </xsd:restriction>
+    </xsd:simpleType>
 	
 </xsd:schema>

@@ -1,157 +1,117 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN"
-	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
-	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
-	xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN"
-	targetNamespace="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN">
-
-	<!-- This annotation helps us in creating proper element type in Stubs (To 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid Studio 2017 - Developer Bundle Edition (Trial) 15.1.17.7979 (https://www.liquid-technologies.com)-->
+<xsd:schema xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:core="http://rts.dt.com/ladmv/services/CoreElements" xmlns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN" targetNamespace="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN" jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import schemaLocation="../common/CoreElements.xsd" namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+    <xsd:import schemaLocation="CommonInquiryElements.xsd" namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
+    <!-- This annotation helps us in creating proper element type in Stubs (To 
 		remove JaxBElementType<String>) -->
-	<xsd:annotation>
-		<xsd:appinfo>
+    <xsd:annotation>
+        <xsd:appinfo>
 			<jaxb:globalBindings generateElementProperty="false" />
 		</xsd:appinfo>
-	</xsd:annotation>
-
-	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
-		schemaLocation="../common/CoreElements.xsd" />
-	<xsd:import namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
-		schemaLocation="CommonInquiryElements.xsd" />
-
-	<xsd:element name="VehiclesListInquiryByDLOrEINRequest">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
-				<xsd:element name="DMEMInquiryRequest" type="tns:DMEMInquiryRequest"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="VehiclesListInquiryByDLOrEINResponse">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="AuthHeader"  type="core:AuthHeaderType"/>
-				<xsd:element name="DMEMInquiryResponse" type="tns:DMEMInquiryResponse"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:complexType name="DMEMInquiryRequest">
-		<xsd:sequence>
-			<xsd:element name="InquiryType" type="DMInquiryTypeEnum"/>
-			<xsd:element name="DLOrEINNum" type="xsd:string"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="DMEMInquiryResponse">
-		<xsd:sequence>
-			<xsd:element name="InquiryType" type="DMInquiryTypeEnum"/>
-			<xsd:element name="OwnerName" type="xsd:string"/>
-			<xsd:element name="Action" type="xsd:string" minOccurs="0"/>
-			<xsd:choice minOccurs="0">
-				<xsd:element name="LADriversLicense">
-					<xsd:simpleType>
-						<xsd:restriction base="xsd:string"/>
-					</xsd:simpleType>
-				</xsd:element>
-				<xsd:element name="IDCard">
-					<xsd:simpleType>
-						<xsd:restriction base="xsd:string"/>
-					</xsd:simpleType>
-				</xsd:element>
-			</xsd:choice>
-			<xsd:choice minOccurs="0">
-				<xsd:element name="TAXId">
-					<xsd:simpleType>
-						<xsd:restriction base="xsd:string"/>
-					</xsd:simpleType>
-				</xsd:element>
-				<xsd:element name="OOSDRLicense">
-					<xsd:simpleType>
-						<xsd:restriction base="xsd:string"/>
-					</xsd:simpleType>
-				</xsd:element>
-			</xsd:choice>
-			<xsd:element name="OwnerVehicleType" type="tns:OwnerVehicleList"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:simpleType name="DMInquiryTypeEnum">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="DM" />
-			<xsd:enumeration value="EM" />
-		</xsd:restriction>
-	</xsd:simpleType>
-	
-	<xsd:complexType name="OwnerVehicleList">
-		<xsd:sequence>
-			<xsd:element name="OwnerVehicle" type="tns:OwnerVehilceType" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="OwnerVehilceType">
-		<xsd:sequence>
-			<xsd:element name="DMEMOwner" type="tns:DMEMInquiryPartyType"/>
-			<xsd:element name="DMEMVehicle" type="tns:DMEMInquiryVehicleType"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="DMEMInquiryPartyType">
-		<xsd:complexContent>
-			<xsd:extension base="core:PartyType">
-				<xsd:sequence>
-					<xsd:element name="JointOwnerName">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:string">
-								<xsd:maxLength value="26"></xsd:maxLength>
-							</xsd:restriction>
-						</xsd:simpleType>
-					</xsd:element>
-					<xsd:choice>
-						<xsd:element name="DriverLicenseNum">
-							<xsd:simpleType>
-								<xsd:restriction base="xsd:string">
-									<xsd:maxLength value="7"></xsd:maxLength>
-								</xsd:restriction>
-							</xsd:simpleType>
-						</xsd:element>
-						<xsd:element name="EmpIdentificationNum" minOccurs="0"
-							maxOccurs="1">
-							<xsd:simpleType>
-								<xsd:restriction base="xsd:string">
-									<xsd:maxLength value="9"></xsd:maxLength>
-								</xsd:restriction>
-							</xsd:simpleType>
-						</xsd:element>
-					</xsd:choice>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-	
-	<xsd:complexType name="DMEMInquiryVehicleType">
-		<xsd:complexContent>
-			<xsd:extension base="core:TransVehicleType">
-				<xsd:sequence>
-					<xsd:element name="MicroFilmNum" type="xsd:string" minOccurs="0" maxOccurs="1" />
-					<xsd:element name="CurrentPlateNum">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:string">
-								<xsd:maxLength value="8"></xsd:maxLength>
-							</xsd:restriction>
-						</xsd:simpleType>
-					</xsd:element>
-					<xsd:element name="CurrentPlateExpDate">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:string">
-								<xsd:pattern value="[0-9]{6}"></xsd:pattern>
-							</xsd:restriction>
-						</xsd:simpleType>
-					</xsd:element>
-				</xsd:sequence>
-			</xsd:extension>		
-		</xsd:complexContent>
-	</xsd:complexType>
-
+    </xsd:annotation>
+    <xsd:element name="VehiclesListInquiryByDLOrEINRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+                <xsd:element name="DMEMInquiryRequest" type="DMEMInquiryRequest" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="VehiclesListInquiryByDLOrEINResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+                <xsd:element name="DMEMInquiryResponse" type="DMEMInquiryResponse" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="DMEMInquiryRequest">
+        <xsd:sequence>
+            <xsd:element name="InquiryType" type="DMInquiryTypeEnum" />
+            <xsd:choice>
+                <xsd:element name="DriverLicenseNum" type="xsd:string" />
+                <xsd:element name="EmployeeIdentificationNum" type="xsd:string" />
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DMEMInquiryResponse">
+        <xsd:sequence>
+            <xsd:element name="InquiryType" type="DMInquiryTypeEnum" />
+            <xsd:element name="OwnerName" type="xsd:string" />
+            <xsd:element name="Action" type="xsd:string" minOccurs="0" />
+            <xsd:choice minOccurs="0">
+                <xsd:element name="LADriversLicense">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string" />
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="IDCard">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string" />
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:choice minOccurs="0">
+                <xsd:element name="TAXId">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string" />
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="OOSDRLicense">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string" />
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:element name="OwnerVehicleType" type="OwnerVehicleList" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="DMInquiryTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="DM" />
+            <xsd:enumeration value="EM" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="OwnerVehicleList">
+        <xsd:sequence>
+            <xsd:element name="OwnerVehicle" type="OwnerVehilceType" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OwnerVehilceType">
+        <xsd:sequence>
+            <xsd:element name="Owner" type="DMEMInquiryPartyType" />
+            <xsd:element name="Vehicle" type="DMEMInquiryVehicleType" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DMEMInquiryPartyType">
+        <xsd:complexContent>
+            <xsd:extension base="core:PartyType">
+                <xsd:sequence>
+                    <xsd:element name="JointOwnerName">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="26" />
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:choice>
+                        <xsd:element name="DriverLicenseNum" type="commoninquiry:DriversLicenseType" />
+                        <xsd:element name="EmpIdentificationNum" type="commoninquiry:EmployeeIdentificationType" />
+                    </xsd:choice>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DMEMInquiryVehicleType">
+        <xsd:complexContent>
+            <xsd:extension base="core:TransVehicleType">
+                <xsd:sequence>
+                    <xsd:element name="MicroFilmNum" type="xsd:string" minOccurs="0" maxOccurs="1" />
+                    <xsd:element name="CurrentPlateNum" type="commoninquiry:CurrentPlateNumberType" />
+                    <xsd:element name="CurrentPlateExpDate" type="commoninquiry:MMDDYYDateFormat" />
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
 </xsd:schema>
