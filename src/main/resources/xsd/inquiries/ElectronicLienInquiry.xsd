@@ -1,75 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" 
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1" 
-  xmlns:eltinquiry="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" 
-  xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
-  xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
-  targetNamespace="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" >
-  
-  <!--  This annotation helps us in creating proper element type (as defined) in Stubs from JAXB -->
-  <xsd:annotation>
-	    <xsd:appinfo>
-	        <jaxb:globalBindings generateElementProperty="false"/>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid Studio 2017 - Developer Bundle Edition (Trial) 15.1.17.7979 (https://www.liquid-technologies.com)-->
+<xsd:schema xmlns:core="http://rts.dt.com/ladmv/services/CoreElements" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" xmlns:eltinquiry="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" targetNamespace="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import schemaLocation="../common/CoreElements.xsd" namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+    <xsd:import schemaLocation="CommonInquiryElements.xsd" namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
+    <!--  This annotation helps us in creating proper element type (as defined) in Stubs from JAXB -->
+    <xsd:annotation>
+        <xsd:appinfo>
+	        <jaxb:globalBindings generateElementProperty="false" />
 	    </xsd:appinfo>
-	</xsd:annotation>
-
-  <xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"	schemaLocation="../common/CoreElements.xsd"/> 
-  <xsd:import namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" schemaLocation="CommonInquiryElements.xsd"/>
-	
-	 <xsd:element name="EltInquiryRequest">
-		<xsd:complexType>
-		  <xsd:sequence>
-				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
-				<xsd:element name="Inquiry">
-				  <xsd:complexType>
-					<xsd:sequence>
-					  <xsd:element name="InquiryType" type="xsd:string"/>
-					  <xsd:element  name="EltType" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-					</xsd:sequence>
-				  </xsd:complexType>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="EltInquiryResponse">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="Inquiry">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="AuthHeader" type="core:AuthHeaderType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="EltType" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="LienHolder" type="core:PartyType"  minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="PublicTagAgents" type="eltinquiry:PTAs" minOccurs="0" maxOccurs="2"/>
-							<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:complexType name="PTAs">
-		<xsd:sequence>
-			<xsd:element name="publicTagAgent" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
-			<xsd:element name="BeginDate" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:pattern value="[0-9]{8}"></xsd:pattern>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="EndDate" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:pattern value="[0-9]{8}"></xsd:pattern>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element  name="officeCode"    type="xsd:string"    minOccurs="0" maxOccurs="1"   nillable="true"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
+    </xsd:annotation>
+    <xsd:element name="EltInquiryRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+                <xsd:element name="ELTRInquiry" type="eltinquiry:ELTInquiry" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="EltInquiryResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+                <xsd:element name="ELTRInquiry" type="eltinquiry:ELTInquiryResponse"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ELTInquiry">
+        <xsd:sequence>
+            <xsd:element name="ELTInquiryType" type="commoninquiry:ELTInquiryTypeEnum" />
+            <xsd:element name="ELTType" type="commoninquiry:ELTTypesEnum"/>
+            <xsd:element name="ELTCode" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ELTInquiryResponse">
+        <xsd:sequence>
+            <xsd:element name="ELTInquiryType" type="commoninquiry:ELTInquiryTypeEnum" />
+            <xsd:element name="ELTType" type="commoninquiry:ELTTypesEnum"/>
+            <xsd:element name="LienHolder" type="core:PartyType"/>
+            <xsd:element name="PublicTagAgents" type="eltinquiry:PTAsList" minOccurs="0" />
+            <xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PTAsList">
+        <xsd:sequence>
+            <xsd:element name="PublicTagAgent" type="eltinquiry:PTAgent" minOccurs="0" maxOccurs="2"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PTAgent">
+        <xsd:sequence>
+            <xsd:element name="Agent" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="BeginDate" type="commoninquiry:MMDDYYYYDateFormat" minOccurs="0"/>
+            <xsd:element name="EndDate" type="commoninquiry:MMDDYYYYDateFormat" minOccurs="0"/>
+            <xsd:element name="OfficeNumber" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
 </xsd:schema>

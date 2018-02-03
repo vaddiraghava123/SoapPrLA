@@ -1,96 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry"
-	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
-	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
-	xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry"
-	targetNamespace="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry">
-
-	<!-- This annotation helps us in creating proper element type in Stubs (To 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid Studio 2017 - Developer Bundle Edition (Trial) 15.1.17.7979 (https://www.liquid-technologies.com)-->
+<xsd:schema xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:core="http://rts.dt.com/ladmv/services/CoreElements" xmlns="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry" targetNamespace="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry" jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import schemaLocation="../common/CoreElements.xsd" namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+    <xsd:import schemaLocation="CommonInquiryElements.xsd" namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
+    <!-- This annotation helps us in creating proper element type in Stubs (To 
 		remove JaxBElementType<String>) -->
-	<xsd:annotation>
-		<xsd:appinfo>
+    <xsd:annotation>
+        <xsd:appinfo>
 			<jaxb:globalBindings generateElementProperty="false" />
 		</xsd:appinfo>
-	</xsd:annotation>
-
-	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
-		schemaLocation="../common/CoreElements.xsd" />
-	<xsd:import namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
-		schemaLocation="CommonInquiryElements.xsd" />
-
-	<xsd:element name="DailyMoniesSummaryInquiryRequest">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
-				<xsd:element name="AR74InquiryRequest" type="tns:AR74InquiryRequest"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="DailyMoniesSummaryInquiryResponse">
-		<xsd:complexType>
-
-			<xsd:sequence>
-				<xsd:element name="AuthHeader"  type="core:AuthHeaderType"/>
-				<xsd:element name="AR74InquiryResponse" type="tns:AR74InquiryResponse"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:complexType name="AR74InquiryRequest">
-		<xsd:sequence>
-			<xsd:element name="InquiryType" type="tns:AR74InquiryTypeEnum"/>
-			<xsd:element name="PaymentMode" type="commoninquiry:PaymentModeEnum"/>
-			<xsd:element name="Date">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="ElectronicFundTransfCode" type="xsd:string" minOccurs="0"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="AR74InquiryResponse">
-		<xsd:sequence>
-			<xsd:element name="InquiryHeader" type="tns:InquiryHeader"/>
-			<xsd:element name="TotalMonies" type="xsd:decimal"/>
-			<xsd:element name="TotalReceipts" type="xsd:decimal"/>
-			<xsd:element name="DepositDate">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="AdjacenOverride" type="xsd:decimal"/>
-			<xsd:element name="PIVNum" type="xsd:long"/>
-			<xsd:element name="JVNum" type="xsd:long"/>
-			<xsd:element name="RemittanceAmount" type="xsd:decimal"/>
-			<xsd:element name="ListingNum" type="xsd:long"/>
-			<xsd:element name="ManualsAndMonies" type="tns:ManualAndMonies"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="ManualAndMonies">
-		<xsd:sequence>
-			<xsd:element name="PlateTypesAndFees" type="tns:PlateTypesAndFees" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="PlateTypesAndFees">
-		<xsd:sequence>
-			<xsd:element name="PlateType" type="xsd:string"/>
-			<xsd:element name="PlateTypeFee" type="xsd:string"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:simpleType name="AR74InquiryTypeEnum">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="AR74" />
-		</xsd:restriction>
-	</xsd:simpleType>
-	
+    </xsd:annotation>
+    <xsd:element name="DailyMoniesSummaryInquiryRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+                <xsd:element name="AR74InquiryRequest" type="AR74InquiryRequest" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="AR74InquiryRequest">
+        <xsd:sequence>
+            <xsd:element name="InquiryType" type="commoninquiry:AR74InquiryTypeEnum" />
+            <xsd:element name="PaymentMode" type="commoninquiry:PaymentModeEnum" />
+            <xsd:element name="InquiryDate" type="commoninquiry:MMDDYYDateFormat" />
+            <xsd:element name="ElectronicFundTranCode" type="xsd:string" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="DailyMoniesSummaryInquiryResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+                <xsd:element name="AR74InquiryResponse" type="AR74InquiryResponse" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="AR74InquiryResponse">
+        <xsd:sequence>
+            <xsd:element name="InquiryType" type="commoninquiry:AR74InquiryTypeEnum" />
+            <xsd:element name="TotalMonies" type="xsd:decimal" />
+            <xsd:element name="TotalReceipts" type="xsd:decimal" />
+            <xsd:element name="DepositDate" type="commoninquiry:MMDDYYDateFormat" />
+            <xsd:element name="AdjacenOverride" type="xsd:decimal" />
+            <xsd:element name="PIVNum" type="xsd:long" />
+            <xsd:element name="JVNum" type="xsd:long" />
+            <xsd:element name="RemittanceAmount" type="xsd:decimal" />
+            <xsd:element name="ListingNum" type="xsd:long" />
+            <xsd:element name="ManualsAndMonies" type="ManualAndMonies" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ManualAndMonies">
+        <xsd:sequence>
+            <xsd:element name="PlateTypesAndFees" type="PlateTypesAndFees" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PlateTypesAndFees">
+        <xsd:sequence>
+            <xsd:element name="PlateType" type="xsd:string" />
+            <xsd:element name="PlateTypeFee" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
 </xsd:schema>
