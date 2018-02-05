@@ -26,6 +26,7 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.context.MessageContext;
 
 import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
+import com.dt.rts.ladmv.services.inquiries.commoninquiryelements.VMInquiryTypeEnum;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.InquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
@@ -63,7 +64,7 @@ public class LASoapServiceTest {
 		
 		InquiryRequest inq = new InquiryRequest();
 		inq.setVin("1C3CDZAB7DN529738");
-		inq.setInquiryType("VM");
+		inq.setInquiryType(VMInquiryTypeEnum.valueOf("VM"));
 		request.setInquiry(inq);
 		request.setAuthHeader(null);
 		
@@ -111,7 +112,7 @@ public class LASoapServiceTest {
 		InquiryResponse inqResponse = new InquiryResponse();
 		
 		InquiryRequest inq = new InquiryRequest();
-		inq.setInquiryType("LM");
+		inq.setInquiryType(VMInquiryTypeEnum.fromValue("LM"));
 		inq.setPlateNum("ABC1234");
 		inq.setRegExpYear(Integer.parseInt("0219"));
 		request.setInquiry(inq);
