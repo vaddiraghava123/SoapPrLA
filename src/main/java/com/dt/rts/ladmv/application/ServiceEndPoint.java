@@ -9,6 +9,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.dt.rts.ladmv.repository.DailyMoniesInquiryRepository;
 import com.dt.rts.ladmv.repository.ELTRRepository;
+import com.dt.rts.ladmv.repository.MVRI01Repository;
 import com.dt.rts.ladmv.repository.TitleRegRepository;
 import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryRequest;
@@ -17,6 +18,8 @@ import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModif
 import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModifyResponse;
 import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryRequest;
+import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegRequest;
@@ -29,6 +32,7 @@ public class ServiceEndPoint {
 	private static final String ELT_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry";
 	private static final String ELT_ADD_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify";
 	private static final String AR74_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry";
+	private static final String MVRI01_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/MVRI01Inquiry";
 	private static final String TITLEREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction";
 	public static final String VehicleInquiryType = "VM";
 
@@ -64,6 +68,15 @@ public class ServiceEndPoint {
 		EltrInquiryResponse response = appContext.getBean(EltrInquiryResponse.class);
 		System.out.println("EltInquiryResponse Starts");
 		ELTRRepository eltInqRepository = appContext.getBean(ELTRRepository.class);
+		return response;
+	}
+	
+	@PayloadRoot(localPart = "MVRI01InquiryRequest", namespace = MVRI01_INQ_NAMESPACE_URI)
+	@ResponsePayload
+	public MVRI01InquiryResponse getVin(@RequestPayload MVRI01InquiryRequest request) {
+		MVRI01InquiryResponse response = appContext.getBean(MVRI01InquiryResponse.class);
+		System.out.println("MVRI01InquiryResponse Starts");
+		MVRI01Repository mvri01InqRepository = appContext.getBean(MVRI01Repository.class);
 		return response;
 	}
 	

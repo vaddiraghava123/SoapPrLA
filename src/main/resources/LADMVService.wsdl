@@ -1,14 +1,15 @@
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:sch0="http://rts.dt.com/ladmv/services/inquiries/VehicleInquiry"
 	xmlns:sch1="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:sch10="http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction"
 	xmlns:sch2="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
 	xmlns:sch3="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry"
 	xmlns:sch4="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify"
 	xmlns:sch5="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN"
 	xmlns:sch6="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry"
-	xmlns:sch7="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
-	xmlns:sch8="http://rts.dt.com/ladmv/services/transaction/CommonElements"
-	xmlns:sch9="http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction"
+	xmlns:sch7="http://rts.dt.com/ladmv/services/inquiries/MVRI01Inquiry"
+	xmlns:sch8="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
+	xmlns:sch9="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://rts.dt.com/ladmv"
 	targetNamespace="http://rts.dt.com/ladmv">
 	<wsdl:types>
@@ -563,6 +564,11 @@
 					<xsd:enumeration value="AR74" />
 				</xsd:restriction>
 			</xsd:simpleType>
+			<xsd:simpleType name="MVRIInquiryType">
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="MVRI01" />
+				</xsd:restriction>
+			</xsd:simpleType>
 			<xsd:simpleType name="ELTInquiryTypeEnum">
 				<xsd:restriction base="xsd:token">
 					<xsd:enumeration value="ELTR" />
@@ -639,13 +645,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="ELTInquiryResponse">
 				<xsd:sequence>
-					<xsd:element name="ELTInquiryType">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:string">
-								<xsd:enumeration value="ELTR" />
-							</xsd:restriction>
-						</xsd:simpleType>
-					</xsd:element>
+					<xsd:element name="ELTInquiryType" type="commoninquiry:ELTInquiryTypeEnum" />
 					<xsd:element name="ELTType" type="commoninquiry:ELTTypesEnum" />
 					<xsd:element name="LienHolder" type="core:PartyType" />
 					<xsd:element minOccurs="0" name="PublicTagAgents" type="PTAsList" />
@@ -790,6 +790,7 @@
 						</xsd:element>
 					</xsd:choice>
 					<xsd:element name="OwnerVehicleType" type="OwnerVehicleList" />
+					<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:simpleType name="DMInquiryTypeEnum">
@@ -906,6 +907,75 @@
 				<xsd:sequence>
 					<xsd:element name="PlateType" type="xsd:string" />
 					<xsd:element name="PlateTypeFee" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema xmlns="http://rts.dt.com/ladmv/services/inquiries/MVRI01Inquiry"
+			xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:mvri01inq="http://rts.dt.com/ladmv/services/inquiries/MVRI01Inquiry"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified" jaxb:version="2.1"
+			targetNamespace="http://rts.dt.com/ladmv/services/inquiries/MVRI01Inquiry">
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
+			<xsd:element name="MVRI01InquiryRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MVRI01Inquiry" type="MVRIInquiry" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="MVRI01InquiryResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MVRI01InquiryResp" type="MVRI01InquiryResponses" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="MVRIInquiry">
+				<xsd:sequence>
+					<xsd:element name="MVRIInquiryType" type="commoninquiry:MVRIInquiryType" />
+					<xsd:element name="DealerCode" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="MVRI01InquiryResponses">
+				<xsd:sequence>
+					<xsd:element name="MVRIResp" type="commoninquiry:MVRIInquiryType" />
+					<xsd:element name="MVRI01DealerInfo" type="MVRI01DealerInformation" />
+					<xsd:element name="BusinessAddress" type="core:PartyAddressType" />
+					<xsd:element name="MailingAddress" type="core:PartyAddressType" />
+					<xsd:element name="BusinessTypes">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element maxOccurs="unbounded" minOccurs="0"
+									name="Business" type="BusinessType" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="MVRI01DealerInformation">
+				<xsd:sequence>
+					<xsd:element name="DealerLicenseNumber" type="xsd:string" />
+					<xsd:element name="DealerShipName" type="xsd:string" />
+					<xsd:element name="PhoneNumber" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="BusinessTypesList">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Business"
+						type="BusinessType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="BusinessType">
+				<xsd:sequence>
+					<xsd:element name="TypeOfBusiness" type="xsd:string" />
+					<xsd:element name="TypeOfBusinessSelection" type="xsd:boolean" />
 				</xsd:sequence>
 			</xsd:complexType>
 		</xsd:schema>
@@ -1571,14 +1641,17 @@
 	<wsdl:message name="EltrInquiryRequest">
 		<wsdl:part element="sch3:EltrInquiryRequest" name="EltrInquiryRequest"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="MVRI01InquiryRequest">
+		<wsdl:part element="sch7:MVRI01InquiryRequest" name="MVRI01InquiryRequest"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="TitleRegRequest">
-		<wsdl:part element="sch7:TitleRegRequest" name="TitleRegRequest"></wsdl:part>
+		<wsdl:part element="sch8:TitleRegRequest" name="TitleRegRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="EltrInquiryResponse">
 		<wsdl:part element="sch3:EltrInquiryResponse" name="EltrInquiryResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="TitleRegResponse">
-		<wsdl:part element="sch7:TitleRegResponse" name="TitleRegResponse"></wsdl:part>
+		<wsdl:part element="sch8:TitleRegResponse" name="TitleRegResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="EltAddOrModifyRequest">
 		<wsdl:part element="sch4:EltAddOrModifyRequest" name="EltAddOrModifyRequest"></wsdl:part>
@@ -1605,7 +1678,10 @@
 		<wsdl:part element="sch0:VehicleInquiryResponse" name="VehicleInquiryResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="RenewalRegRequest">
-		<wsdl:part element="sch9:RenewalRegRequest" name="RenewalRegRequest"></wsdl:part>
+		<wsdl:part element="sch10:RenewalRegRequest" name="RenewalRegRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="MVRI01InquiryResponse">
+		<wsdl:part element="sch7:MVRI01InquiryResponse" name="MVRI01InquiryResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="VehiclesListInquiryByDLOrEINResponse">
 		<wsdl:part element="sch5:VehiclesListInquiryByDLOrEINResponse"
@@ -1615,6 +1691,10 @@
 		<wsdl:operation name="EltrInquiry">
 			<wsdl:input message="tns:EltrInquiryRequest" name="EltrInquiryRequest"></wsdl:input>
 			<wsdl:output message="tns:EltrInquiryResponse" name="EltrInquiryResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="MVRI01Inquiry">
+			<wsdl:input message="tns:MVRI01InquiryRequest" name="MVRI01InquiryRequest"></wsdl:input>
+			<wsdl:output message="tns:MVRI01InquiryResponse" name="MVRI01InquiryResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="TitleReg">
 			<wsdl:input message="tns:TitleRegRequest" name="TitleRegRequest"></wsdl:input>
@@ -1653,6 +1733,15 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="EltrInquiryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="MVRI01Inquiry">
+			<soap:operation soapAction="" />
+			<wsdl:input name="MVRI01InquiryRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="MVRI01InquiryResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
