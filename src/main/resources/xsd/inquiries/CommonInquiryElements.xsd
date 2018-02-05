@@ -59,6 +59,12 @@
             <xsd:enumeration value="AR74" />
         </xsd:restriction>
     </xsd:simpleType>
+    
+    <xsd:simpleType name="MVRIInquiryType">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="MVRI01" />
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:simpleType name="ELTInquiryTypeEnum">
         <xsd:restriction base="xsd:token">

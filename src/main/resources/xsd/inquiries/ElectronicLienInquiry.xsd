@@ -28,13 +28,7 @@
     </xsd:complexType>
     <xsd:complexType name="ELTInquiryResponse">
         <xsd:sequence>
-            <xsd:element name="ELTInquiryType">
-            	<xsd:simpleType>
-			        <xsd:restriction base="xsd:string">
-			            <xsd:enumeration value="ELTR" />
-			        </xsd:restriction>
-			    </xsd:simpleType>
-            </xsd:element>
+            <xsd:element name="ELTInquiryType" type="commoninquiry:ELTInquiryTypeEnum"/>
             <xsd:element name="ELTType" type="commoninquiry:ELTTypesEnum"/>
             <xsd:element name="LienHolder" type="core:PartyType"/>
             <xsd:element name="PublicTagAgents" type="eltinquiry:PTAsList" minOccurs="0" />

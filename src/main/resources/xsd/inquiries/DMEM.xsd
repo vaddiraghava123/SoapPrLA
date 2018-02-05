@@ -58,6 +58,7 @@
                 </xsd:element>
             </xsd:choice>
             <xsd:element name="OwnerVehicleType" type="OwnerVehicleList" />
+            <xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
     <xsd:simpleType name="DMInquiryTypeEnum">
