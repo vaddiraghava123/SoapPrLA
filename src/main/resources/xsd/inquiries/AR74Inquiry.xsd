@@ -1,15 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!--Created with Liquid Studio 2017 - Developer Bundle Edition (Trial) 15.1.17.7979 (https://www.liquid-technologies.com)-->
 <xsd:schema xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:core="http://rts.dt.com/ladmv/services/CoreElements" xmlns="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry" targetNamespace="http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry" jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import schemaLocation="../common/CoreElements.xsd" namespace="http://rts.dt.com/ladmv/services/CoreElements" />
     <xsd:import schemaLocation="CommonInquiryElements.xsd" namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
-    <!-- This annotation helps us in creating proper element type in Stubs (To 
-		remove JaxBElementType<String>) -->
-    <xsd:annotation>
-        <xsd:appinfo>
-			<jaxb:globalBindings generateElementProperty="false" />
-		</xsd:appinfo>
-    </xsd:annotation>
+
     <xsd:element name="DailyMoniesSummaryInquiryRequest">
         <xsd:complexType>
             <xsd:sequence>

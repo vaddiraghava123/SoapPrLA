@@ -12,11 +12,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import org.springframework.ws.server.EndpointInterceptor;
+import org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
 
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModifyResponse;
+import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 
 @EnableWs
@@ -33,6 +37,25 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	public DailyMoniesSummaryInquiryResponse dailyMoniesInquiryResponse(){
 		return new DailyMoniesSummaryInquiryResponse();
 	}
+	
+	@Bean
+	public EltrInquiryResponse eltrInquiryResponse(){
+		return new EltrInquiryResponse();
+	}
+	
+	@Bean
+	public EltAddOrModifyResponse eltrAddOrModifyResponse(){
+		return new EltAddOrModifyResponse();
+	}
+	
+	@Override
+    public void addInterceptors(List<EndpointInterceptor> interceptors) {
+        PayloadValidatingInterceptor validatingInterceptor = new PayloadValidatingInterceptor();
+        validatingInterceptor.setValidateRequest(true);
+        validatingInterceptor.setValidateResponse(true);
+        validatingInterceptor.setXsdSchemaCollection(xsdSchemaCollection());
+        interceptors.add(validatingInterceptor);
+    }
 	
 	@Bean
 	public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
