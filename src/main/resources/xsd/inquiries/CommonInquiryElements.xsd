@@ -5,13 +5,7 @@
 	xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
 	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
 	targetNamespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements">
-	
-	<xsd:annotation>
-	    <xsd:appinfo>
-	        <jaxb:globalBindings generateElementProperty="false"/>
-	    </xsd:appinfo>
-	</xsd:annotation>
-	
+
 	<xsd:import
 	namespace="http://rts.dt.com/ladmv/services/CoreElements"
 	schemaLocation="../common/CoreElements.xsd" />
@@ -21,14 +15,8 @@
 				<xsd:extension base="core:TitleType">
 					<xsd:sequence>
 						<xsd:element name="PrevNonTitleTransTypeCode" type="xsd:string"
-							minOccurs="0" maxOccurs="1" nillable="true" />
-						<xsd:element name="PrevNonTitleTransDate" minOccurs="0">
-							<xsd:simpleType>
-								<xsd:restriction base="xsd:string">
-									<xsd:pattern value="[0-9]{6}"></xsd:pattern>
-								</xsd:restriction>
-							</xsd:simpleType>
-						</xsd:element>
+							minOccurs="0" maxOccurs="1"/>
+						<xsd:element name="PrevNonTitleTransDate" type="tns:MMDDYYDateFormat" minOccurs="0"/>
 					</xsd:sequence>
 				</xsd:extension>
 			</xsd:complexContent>
@@ -53,26 +41,33 @@
 	</xsd:complexType>
 	
 	<xsd:simpleType name="PaymentModeEnum">
-		<xsd:restriction base="xsd:string">
+		<xsd:restriction base="xsd:token">
 			<xsd:enumeration value="OL" />
 			<xsd:enumeration value="EL" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
+	<xsd:simpleType name="VMInquiryTypeEnum">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="VM"/>
+            <xsd:enumeration value="LM"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
     <xsd:simpleType name="AR74InquiryTypeEnum">
-        <xsd:restriction base="xsd:string">
+        <xsd:restriction base="xsd:token">
             <xsd:enumeration value="AR74" />
         </xsd:restriction>
     </xsd:simpleType>
 
     <xsd:simpleType name="ELTInquiryTypeEnum">
-        <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="ELTR" />
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="ELTR"/>
         </xsd:restriction>
     </xsd:simpleType>
 
     <xsd:simpleType name="ELTTypesEnum">
-        <xsd:restriction base="xsd:string">
+        <xsd:restriction base="xsd:token">
             <xsd:enumeration value="I"/>
             <xsd:enumeration value="A"/>
             <xsd:enumeration value="M"/>

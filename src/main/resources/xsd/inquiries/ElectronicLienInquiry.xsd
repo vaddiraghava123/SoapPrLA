@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!--Created with Liquid Studio 2017 - Developer Bundle Edition (Trial) 15.1.17.7979 (https://www.liquid-technologies.com)-->
 <xsd:schema xmlns:core="http://rts.dt.com/ladmv/services/CoreElements" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" xmlns:eltinquiry="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" targetNamespace="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry" jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import schemaLocation="../common/CoreElements.xsd" namespace="http://rts.dt.com/ladmv/services/CoreElements" />
     <xsd:import schemaLocation="CommonInquiryElements.xsd" namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
-    <!--  This annotation helps us in creating proper element type (as defined) in Stubs from JAXB -->
-    <xsd:annotation>
-        <xsd:appinfo>
-	        <jaxb:globalBindings generateElementProperty="false" />
-	    </xsd:appinfo>
-    </xsd:annotation>
+
     <xsd:element name="EltrInquiryRequest">
         <xsd:complexType>
             <xsd:sequence>
@@ -34,7 +28,13 @@
     </xsd:complexType>
     <xsd:complexType name="ELTInquiryResponse">
         <xsd:sequence>
-            <xsd:element name="ELTInquiryType" type="commoninquiry:ELTInquiryTypeEnum" />
+            <xsd:element name="ELTInquiryType">
+            	<xsd:simpleType>
+			        <xsd:restriction base="xsd:string">
+			            <xsd:enumeration value="ELTR" />
+			        </xsd:restriction>
+			    </xsd:simpleType>
+            </xsd:element>
             <xsd:element name="ELTType" type="commoninquiry:ELTTypesEnum"/>
             <xsd:element name="LienHolder" type="core:PartyType"/>
             <xsd:element name="PublicTagAgents" type="eltinquiry:PTAsList" minOccurs="0" />
