@@ -53,6 +53,13 @@
             <xsd:enumeration value="LM"/>
         </xsd:restriction>
     </xsd:simpleType>
+    
+    <xsd:simpleType name="LienInquiryTypeEnum">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="MVVL"/>
+            <xsd:enumeration value="MVLL"/>
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:simpleType name="AR74InquiryTypeEnum">
         <xsd:restriction base="xsd:token">
