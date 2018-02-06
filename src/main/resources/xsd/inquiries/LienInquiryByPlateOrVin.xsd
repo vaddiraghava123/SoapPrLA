@@ -3,7 +3,7 @@
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 	xmlns="http://rts.dt.com/ladmv/services/inquiries/LienInquiryByPlateOrVin"
 	xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
-	xmlns:mvlinquiry="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry"
+	xmlns:mvlinquiry="http://rts.dt.com/ladmv/services/inquiries/LienInquiryByPlateOrVin"
 	targetNamespace="http://rts.dt.com/ladmv/services/inquiries/LienInquiryByPlateOrVin"
 	jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<xsd:import schemaLocation="../common/CoreElements.xsd"
@@ -15,6 +15,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
+				<xsd:element name="MVLInquiryRequest" type="mvlinquiry:MVLInquiry"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -22,22 +23,60 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
+				<xsd:element name="MVLInquiryResponse" type="mvlinquiry:MVLInquiryResp"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:complexType name="MVLInquiry">
         <xsd:sequence>
-            <xsd:element name="MVLInquiryType" type="commoninquiry:LienInquiryTypeEnum" />
-            <xsd:element name="Vin" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-            <xsd:element name="PlateNum" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-			<xsd:element name="RegExpYear" minOccurs="0" maxOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:pattern value="[0-9][0-9]" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
+            <xsd:element name="MVLInquiryType" type="commoninquiry:LienInquiryTypeEnum"/>
+            <xsd:choice>
+            	<xsd:sequence>
+            		<xsd:element name="Vin" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            	</xsd:sequence>
+            	<xsd:sequence>
+            		<xsd:element name="PlateNum" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="RegExpYear" minOccurs="0" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:pattern value="[0-9][0-9]" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+            	</xsd:sequence>
+            </xsd:choice>
         </xsd:sequence>
     </xsd:complexType>
+    <xsd:complexType name="MVLInquiryResp">
+    	<xsd:sequence>
+    		<xsd:element name="MVLInquiryTypeResp" type="commoninquiry:LienInquiryTypeEnum" />
+    		<xsd:choice>
+            	<xsd:sequence>
+            		<xsd:element name="VinRequested" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            	</xsd:sequence>
+            	<xsd:sequence>
+            		<xsd:element name="PlateNum" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+					<xsd:element name="RegExpYear" minOccurs="0" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:pattern value="[0-9][0-9]" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+            	</xsd:sequence>
+            </xsd:choice>
+            <xsd:element name="MVLVehicle" type="core:TransVehicleType"/>
+            <xsd:element name="MVLOwners" type="mvlinquiry:MVLOwnersType"/>
+            <xsd:element name="LienHolder1" type="core:LienHolderType"/>
+            <xsd:element name="LienHolder2" type="core:LienHolderType"/>
+            <xsd:element name="LienHolder3" type="core:LienHolderType"/>
+    	</xsd:sequence>
+    </xsd:complexType>
     
+    <xsd:complexType name="MVLOwnersType">
+		<xsd:sequence>
+			<xsd:element name="MVLPrimaryOwner" type="core:PrimaryOwnerType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="MVLSecondaryOwner" type="core:SecondaryOwnerType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
 </xsd:schema>

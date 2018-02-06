@@ -7,7 +7,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-                <xsd:element name="DMEMInquiryRequest" type="DMEMInquiryRequest" />
+                <xsd:element name="DMEMInquiryRequest" type="tns:DMEMInquiryRequest" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -15,13 +15,13 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-                <xsd:element name="DMEMInquiryResponse" type="DMEMInquiryResponse" />
+                <xsd:element name="DMEMInquiryResponse" type="tns:DMEMInquiryResponse" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:complexType name="DMEMInquiryRequest">
         <xsd:sequence>
-            <xsd:element name="InquiryType" type="DMInquiryTypeEnum" />
+            <xsd:element name="InquiryType" type="commoninquiry:DMInquiryTypeEnum" />
             <xsd:choice>
                 <xsd:element name="DriverLicenseNum" type="xsd:string" />
                 <xsd:element name="EmployeeIdentificationNum" type="xsd:string" />
@@ -30,7 +30,7 @@
     </xsd:complexType>
     <xsd:complexType name="DMEMInquiryResponse">
         <xsd:sequence>
-            <xsd:element name="InquiryType" type="DMInquiryTypeEnum" />
+            <xsd:element name="InquiryType" type="commoninquiry:DMInquiryTypeEnum" />
             <xsd:element name="OwnerName" type="xsd:string" />
             <xsd:element name="Action" type="xsd:string" minOccurs="0" />
             <xsd:choice minOccurs="0">
@@ -57,25 +57,25 @@
                     </xsd:simpleType>
                 </xsd:element>
             </xsd:choice>
-            <xsd:element name="OwnerVehicleType" type="OwnerVehicleList" />
+            <xsd:element name="OwnerVehicleType" type="tns:OwnerVehicleList" />
             <xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:simpleType name="DMInquiryTypeEnum">
+    <!-- <xsd:simpleType name="DMInquiryTypeEnum">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="DM" />
             <xsd:enumeration value="EM" />
         </xsd:restriction>
-    </xsd:simpleType>
+    </xsd:simpleType> -->
     <xsd:complexType name="OwnerVehicleList">
         <xsd:sequence>
-            <xsd:element name="OwnerVehicle" type="OwnerVehilceType" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="OwnerVehicle" type="tns:OwnerVehilceType" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="OwnerVehilceType">
         <xsd:sequence>
-            <xsd:element name="Owner" type="DMEMInquiryPartyType" />
-            <xsd:element name="Vehicle" type="DMEMInquiryVehicleType" />
+            <xsd:element name="Owner" type="tns:DMEMInquiryPartyType" />
+            <xsd:element name="Vehicle" type="tns:DMEMInquiryVehicleType" />
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="DMEMInquiryPartyType">

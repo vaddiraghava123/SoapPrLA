@@ -21,6 +21,7 @@ import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModifyResponse;
 import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinResponse;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 
@@ -52,6 +53,11 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	@Bean
 	public MVRI01InquiryResponse mvri01Response(){
 		return new MVRI01InquiryResponse();
+	}
+	
+	@Bean
+	public LienInquiryByPlateOrVinResponse lienInquiryResponse(){
+		return new LienInquiryByPlateOrVinResponse();
 	}
 	
 	@Override
@@ -91,6 +97,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		res.add(new ClassPathResource("/xsd/inquiries/DMEM.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/AR74Inquiry.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/MVRI01.xsd"));
+        res.add(new ClassPathResource("/xsd/inquiries/LienInquiryByPlateOrVin.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TitleRegTransaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/RenewalRegTransaction.xsd"));
         

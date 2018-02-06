@@ -9,6 +9,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.dt.rts.ladmv.repository.DailyMoniesInquiryRepository;
 import com.dt.rts.ladmv.repository.ELTRRepository;
+import com.dt.rts.ladmv.repository.LienInquiryByPlateOrVinRepository;
 import com.dt.rts.ladmv.repository.MVRI01Repository;
 import com.dt.rts.ladmv.repository.TitleRegRepository;
 import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
@@ -18,6 +19,8 @@ import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModif
 import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModifyResponse;
 import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinRequest;
+import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinResponse;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
@@ -77,6 +80,15 @@ public class ServiceEndPoint {
 		MVRI01InquiryResponse response = appContext.getBean(MVRI01InquiryResponse.class);
 		System.out.println("MVRI01InquiryResponse Starts");
 		MVRI01Repository mvri01InqRepository = appContext.getBean(MVRI01Repository.class);
+		return response;
+	}
+	
+	@PayloadRoot(localPart = "LienInquiryByPlateOrVinRequest", namespace = MVRI01_INQ_NAMESPACE_URI)
+	@ResponsePayload
+	public LienInquiryByPlateOrVinResponse getVin(@RequestPayload LienInquiryByPlateOrVinRequest request) {
+		LienInquiryByPlateOrVinResponse response = appContext.getBean(LienInquiryByPlateOrVinResponse.class);
+		System.out.println("LienInquiryResponse Starts");
+		LienInquiryByPlateOrVinRepository lienInquiryRepository = appContext.getBean(LienInquiryByPlateOrVinRepository.class);
 		return response;
 	}
 	
