@@ -57,11 +57,11 @@
 			<xsd:element name="PhoneNumber" type="xsd:string" />
 		</xsd:sequence>
 	</xsd:complexType>
-	<xsd:complexType name="BusinessTypesList">
+	<!-- <xsd:complexType name="BusinessTypesList">
 		<xsd:sequence>
 			<xsd:element name="Business" type="mvri01inq:BusinessType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
-	</xsd:complexType>
+	</xsd:complexType> -->
 	<xsd:complexType name="BusinessType">
 		<xsd:sequence>
 			<xsd:element name="TypeOfBusiness" type="xsd:string"/>

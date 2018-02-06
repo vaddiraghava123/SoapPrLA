@@ -53,6 +53,12 @@
             <xsd:enumeration value="LM"/>
         </xsd:restriction>
     </xsd:simpleType>
+    <xsd:simpleType name="DMInquiryTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="DM" />
+            <xsd:enumeration value="EM" />
+        </xsd:restriction>
+    </xsd:simpleType>
     
     <xsd:simpleType name="LienInquiryTypeEnum">
         <xsd:restriction base="xsd:token">
