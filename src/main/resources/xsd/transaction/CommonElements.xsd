@@ -55,6 +55,14 @@
 				type="common:TaxesAndFeesForTitleRegTranResponseType" />
 		</xsd:sequence>
 	</xsd:complexType>
+	<xsd:complexType name="SaleRenewalRegTranResponseType">
+		<xsd:sequence>
+			<xsd:element name="SaleInfo"
+				type="common:SaleInfoTitleRegTranResponseType" />
+			<xsd:element name="TaxesAndFees"
+				type="common:TaxesAndFeesForRenewalRegTranResponseType" />
+		</xsd:sequence>
+	</xsd:complexType>
 	<xsd:complexType name="SaleInfoTitleRegTranResponseType">
 		<xsd:complexContent>
 			<xsd:extension base="common:SaleInfoType">
@@ -128,6 +136,22 @@
 						minOccurs="0" />
 					<xsd:element name="MortgageCode" type="xsd:string"
 						minOccurs="0" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TaxesAndFeesForRenewalRegTranResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="common:TaxesAndFeesType">
+				<xsd:sequence>
+					<xsd:element name="LicensePlateFee" type="xsd:decimal" />
+					<xsd:element name="LicenseCredit" type="xsd:decimal" />
+					<xsd:element name="LicensePenaltyCredit" type="xsd:decimal" />
+					<xsd:element name="TowFee" type="xsd:decimal" />
+					<xsd:element name="AdminFee" type="xsd:decimal" />
+					<xsd:element name="TotalFee" type="xsd:decimal" />
+					<xsd:element name="TotalTax" type="xsd:decimal" />
+					<xsd:element name="GrandTotalFee" type="xsd:decimal" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
