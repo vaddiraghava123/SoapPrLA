@@ -15,6 +15,7 @@ import com.dt.rts.ladmv.repository.MVRI01Repository;
 import com.dt.rts.ladmv.repository.RenewalRegRepository;
 import com.dt.rts.ladmv.repository.TitleRegRepository;
 import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
+import com.dt.rts.ladmv.repository.VehicleListInquiryRepository;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryRequest;
@@ -29,6 +30,8 @@ import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameRequest;
+import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameResponse;
 import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegRequest;
 import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegResponse;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegRequest;
@@ -42,6 +45,7 @@ public class ServiceEndPoint {
 	private static final String ELT_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry";
 	private static final String ELT_ADD_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify";
 	private static final String AR74_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry";
+	private static final String WWS_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName";
 	private static final String MVRI01_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/MVRI01Inquiry";
 	private static final String DL_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/DriverLicenseInquiry";
 	private static final String TITLEREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction";
@@ -127,7 +131,14 @@ public class ServiceEndPoint {
 		DailyMoniesSummaryInquiryResponse response = appContext.getBean(DailyMoniesSummaryInquiryResponse.class);
 		DailyMoniesInquiryRepository dailyMoniesInquiryRepository = appContext.getBean(DailyMoniesInquiryRepository.class);
 		return response;
-		
+	}
+	
+	@PayloadRoot(localPart = "VehiclesListInquiryByNameRequest", namespace = WWS_NAMESPACE_URI)
+	@ResponsePayload
+	public VehiclesListInquiryByNameResponse getVehilesList(@RequestPayload VehiclesListInquiryByNameRequest request) {
+		VehiclesListInquiryByNameResponse response = appContext.getBean(VehiclesListInquiryByNameResponse.class);
+		VehicleListInquiryRepository dailyMoniesInquiryRepository = appContext.getBean(VehicleListInquiryRepository.class);
+		return response;
 	}
 	
 	@PayloadRoot(localPart = "RenewalRegRequest", namespace = RENEWALREG_NAMESPACE_URI)

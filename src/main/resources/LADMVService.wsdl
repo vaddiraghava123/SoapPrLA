@@ -1,9 +1,10 @@
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:sch0="http://rts.dt.com/ladmv/services/inquiries/VehicleInquiry"
 	xmlns:sch1="http://rts.dt.com/ladmv/services/CoreElements"
-	xmlns:sch10="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
-	xmlns:sch11="http://rts.dt.com/ladmv/services/transaction/CommonElements"
-	xmlns:sch12="http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction"
+	xmlns:sch10="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName"
+	xmlns:sch11="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
+	xmlns:sch12="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:sch13="http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction"
 	xmlns:sch2="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
 	xmlns:sch3="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry"
 	xmlns:sch4="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify"
@@ -567,6 +568,12 @@
 					<xsd:enumeration value="EM" />
 				</xsd:restriction>
 			</xsd:simpleType>
+			<xsd:simpleType name="WWSInquiryTypeEnum">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="W" />
+					<xsd:enumeration value="WS" />
+				</xsd:restriction>
+			</xsd:simpleType>
 			<xsd:simpleType name="LienInquiryTypeEnum">
 				<xsd:restriction base="xsd:token">
 					<xsd:enumeration value="MVVL" />
@@ -645,6 +652,12 @@
 			<xsd:simpleType name="TimeFormatWithOutColon">
 				<xsd:restriction base="xsd:string">
 					<xsd:pattern value="[0-9]{4}" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="OwnerTypeIndBus">
+				<xsd:restriction base="xsd:int">
+					<xsd:enumeration value="1" />
+					<xsd:enumeration value="2" />
 				</xsd:restriction>
 			</xsd:simpleType>
 		</xsd:schema>
@@ -1078,6 +1091,7 @@
 					<xsd:element name="LienHolder1" type="core:LienHolderType" />
 					<xsd:element name="LienHolder2" type="core:LienHolderType" />
 					<xsd:element name="LienHolder3" type="core:LienHolderType" />
+					<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="MVLOwnersType">
@@ -1127,6 +1141,7 @@
 					<xsd:element name="DLInquiryType" type="commoninquiry:DLInquiryTypeEnum" />
 					<xsd:element name="Owner" type="DLInquiryPartyType" />
 					<xsd:element name="Vehicle" type="DLInquiryVehicleType" />
+					<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:simpleType name="DLInquiryTypeEnum">
@@ -1201,6 +1216,69 @@
 					<xsd:element name="CurrentPlateNum"
 						type="commoninquiry:CurrentPlateNumberType" />
 					<xsd:element name="Vin" type="commoninquiry:VinNumberFormat" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema
+			xmlns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName"
+			xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+			xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified" jaxb:version="2.1"
+			targetNamespace="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName">
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
+			<xsd:element name="VehiclesListInquiryByNameRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="WWSInquiryRequest" type="WWSInquiryReq" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="VehiclesListInquiryByNameResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="WWSInquiryResponse" type="WWSInquiryResp" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="WWSInquiryReq">
+				<xsd:sequence>
+					<xsd:element name="WWSInquiryType" type="commoninquiry:WWSInquiryTypeEnum" />
+					<xsd:element name="OwnerType" type="commoninquiry:OwnerTypeIndBus" />
+					<xsd:choice>
+						<xsd:sequence>
+							<xsd:element name="LastName" type="xsd:string" />
+							<xsd:element name="FirstName" type="xsd:string" />
+						</xsd:sequence>
+						<xsd:sequence>
+							<xsd:element name="CompanyName" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="WWSInquiryResp">
+				<xsd:sequence>
+					<xsd:element name="WWSInquiryType" type="commoninquiry:WWSInquiryTypeEnum" />
+					<xsd:element name="WWSOwnerVehicles" type="WWSOwnerVehicleList" />
+					<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="WWSOwnerVehicleList">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0"
+						name="WWSOwnerVehicle" type="OwnerVehilceType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerVehilceType">
+				<xsd:sequence>
+					<xsd:element name="WWSOwner" type="core:PrimaryOwnerType" />
+					<xsd:element name="WWSVehicle" type="core:TransVehicleType" />
 				</xsd:sequence>
 			</xsd:complexType>
 		</xsd:schema>
@@ -1910,10 +1988,10 @@
 		<wsdl:part element="sch7:MVRI01InquiryRequest" name="MVRI01InquiryRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="RenewalRegResponse">
-		<wsdl:part element="sch12:RenewalRegResponse" name="RenewalRegResponse"></wsdl:part>
+		<wsdl:part element="sch13:RenewalRegResponse" name="RenewalRegResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="TitleRegRequest">
-		<wsdl:part element="sch10:TitleRegRequest" name="TitleRegRequest"></wsdl:part>
+		<wsdl:part element="sch11:TitleRegRequest" name="TitleRegRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="EltrInquiryResponse">
 		<wsdl:part element="sch3:EltrInquiryResponse" name="EltrInquiryResponse"></wsdl:part>
@@ -1923,7 +2001,7 @@
 			name="LienInquiryByPlateOrVinRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="TitleRegResponse">
-		<wsdl:part element="sch10:TitleRegResponse" name="TitleRegResponse"></wsdl:part>
+		<wsdl:part element="sch11:TitleRegResponse" name="TitleRegResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="EltAddOrModifyRequest">
 		<wsdl:part element="sch4:EltAddOrModifyRequest" name="EltAddOrModifyRequest"></wsdl:part>
@@ -1937,6 +2015,14 @@
 	</wsdl:message>
 	<wsdl:message name="DriverLicenseInquiryRequest">
 		<wsdl:part element="sch9:DriverLicenseInquiryRequest" name="DriverLicenseInquiryRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="VehiclesListInquiryByNameResponse">
+		<wsdl:part element="sch10:VehiclesListInquiryByNameResponse"
+			name="VehiclesListInquiryByNameResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="VehiclesListInquiryByNameRequest">
+		<wsdl:part element="sch10:VehiclesListInquiryByNameRequest"
+			name="VehiclesListInquiryByNameRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="VehiclesListInquiryByDLOrEINRequest">
 		<wsdl:part element="sch5:VehiclesListInquiryByDLOrEINRequest"
@@ -1953,7 +2039,7 @@
 		<wsdl:part element="sch0:VehicleInquiryResponse" name="VehicleInquiryResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="RenewalRegRequest">
-		<wsdl:part element="sch12:RenewalRegRequest" name="RenewalRegRequest"></wsdl:part>
+		<wsdl:part element="sch13:RenewalRegRequest" name="RenewalRegRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="MVRI01InquiryResponse">
 		<wsdl:part element="sch7:MVRI01InquiryResponse" name="MVRI01InquiryResponse"></wsdl:part>
@@ -2000,6 +2086,12 @@
 				name="DailyMoniesSummaryInquiryRequest"></wsdl:input>
 			<wsdl:output message="tns:DailyMoniesSummaryInquiryResponse"
 				name="DailyMoniesSummaryInquiryResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="VehiclesListInquiryByName">
+			<wsdl:input message="tns:VehiclesListInquiryByNameRequest"
+				name="VehiclesListInquiryByNameRequest"></wsdl:input>
+			<wsdl:output message="tns:VehiclesListInquiryByNameResponse"
+				name="VehiclesListInquiryByNameResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="VehiclesListInquiryByDLOrEIN">
 			<wsdl:input message="tns:VehiclesListInquiryByDLOrEINRequest"
@@ -2084,6 +2176,15 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="DailyMoniesSummaryInquiryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="VehiclesListInquiryByName">
+			<soap:operation soapAction="" />
+			<wsdl:input name="VehiclesListInquiryByNameRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="VehiclesListInquiryByNameResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>

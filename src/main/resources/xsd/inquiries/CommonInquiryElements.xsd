@@ -59,7 +59,12 @@
             <xsd:enumeration value="EM" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+    <xsd:simpleType name="WWSInquiryTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="W" />
+            <xsd:enumeration value="WS" />
+        </xsd:restriction>
+    </xsd:simpleType>
     <xsd:simpleType name="LienInquiryTypeEnum">
         <xsd:restriction base="xsd:token">
             <xsd:enumeration value="MVVL"/>
@@ -154,5 +159,12 @@
         <xsd:pattern value="[0-9]{4}"></xsd:pattern>
       </xsd:restriction>
     </xsd:simpleType>
+    
+    <xsd:simpleType name="OwnerTypeIndBus">
+		<xsd:restriction base="xsd:int">
+			<xsd:enumeration value="1" />
+			<xsd:enumeration value="2" />
+		</xsd:restriction>
+	</xsd:simpleType>
 	
 </xsd:schema>

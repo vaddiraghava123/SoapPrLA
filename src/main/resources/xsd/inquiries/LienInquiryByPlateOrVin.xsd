@@ -70,6 +70,7 @@
             <xsd:element name="LienHolder1" type="core:LienHolderType"/>
             <xsd:element name="LienHolder2" type="core:LienHolderType"/>
             <xsd:element name="LienHolder3" type="core:LienHolderType"/>
+            <xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1" />
     	</xsd:sequence>
     </xsd:complexType>
     
