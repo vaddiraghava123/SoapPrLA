@@ -39,6 +39,7 @@
 			<xsd:element name="DLInquiryType" type="commoninquiry:DLInquiryTypeEnum" />
 			<xsd:element name="Owner" type="tns:DLInquiryPartyType" />
 			<xsd:element name="Vehicle" type="tns:DLInquiryVehicleType" />
+			<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1" />
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:simpleType name="DLInquiryTypeEnum">

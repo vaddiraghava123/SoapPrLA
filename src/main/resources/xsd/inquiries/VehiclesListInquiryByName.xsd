@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:core="http://rts.dt.com/ladmv/services/CoreElements" xmlns="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName" targetNamespace="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName" jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import schemaLocation="../common/CoreElements.xsd" namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+    <xsd:import schemaLocation="CommonInquiryElements.xsd" namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
+
+    <xsd:element name="VehiclesListInquiryByNameRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+                <xsd:element name="WWSInquiryRequest" type="tns:WWSInquiryReq" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="VehiclesListInquiryByNameResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+                <xsd:element name="WWSInquiryResponse" type="tns:WWSInquiryResp" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="WWSInquiryReq">
+        <xsd:sequence>
+            <xsd:element name="WWSInquiryType" type="commoninquiry:WWSInquiryTypeEnum" />
+            <xsd:element name="OwnerType" type="commoninquiry:OwnerTypeIndBus"/>
+            <xsd:choice>
+               <xsd:sequence>
+					<xsd:element name="LastName" type="xsd:string" />
+					<xsd:element name="FirstName" type="xsd:string" />
+               </xsd:sequence>
+               <xsd:sequence>
+					<xsd:element name="CompanyName" type="xsd:string" />
+               </xsd:sequence>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="WWSInquiryResp">
+        <xsd:sequence>
+            <xsd:element name="WWSInquiryType" type="commoninquiry:WWSInquiryTypeEnum"/>
+            <xsd:element name="WWSOwnerVehicles" type="tns:WWSOwnerVehicleList"/>
+            <xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="WWSOwnerVehicleList">
+        <xsd:sequence>
+            <xsd:element name="WWSOwnerVehicle" type="tns:OwnerVehilceType" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OwnerVehilceType">
+        <xsd:sequence>
+            <xsd:element name="WWSOwner" type="core:PrimaryOwnerType" />
+            <xsd:element name="WWSVehicle" type="core:TransVehicleType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
