@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema
+	xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/DriverlicenseInquiry"
+	xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns="http://rts.dt.com/ladmv/services/inquiries/DriverlicenseInquiry"
+	targetNamespace="http://rts.dt.com/ladmv/services/inquiries/DriverlicenseInquiry"
+	jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:import schemaLocation="../common/CoreElements.xsd"
+		namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+	<xsd:import schemaLocation="CommonInquiryElements.xsd"
+		namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
+
+	<xsd:element name="DriverLicenseInquiryRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="DLInquiryRequest" type="tns:DLInquiryRequest" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DriverLicenseInquiryResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="DLInquiryResponse" type="tns:DLInquiryResponse" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="DLInquiryRequest">
+		<xsd:sequence>
+			<xsd:element name="DLInquiryType" type="commoninquiry:DLInquiryTypeEnum" />
+			<xsd:element name="DriverLicenseNum" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DLInquiryResponse">
+		<xsd:sequence>
+			<xsd:element name="DLInquiryType" type="commoninquiry:DLInquiryTypeEnum" />
+			<xsd:element name="Owner" type="tns:DLInquiryPartyType" />
+			<xsd:element name="Vehicle" type="tns:DLInquiryVehicleType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="DLInquiryTypeEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="L" />
+			<xsd:enumeration value="LL" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="DLInquiryPartyType">
+		<xsd:sequence>
+			<xsd:element name="DriverLicenseNum" type="commoninquiry:DriversLicenseType" />
+			<xsd:element name="Date">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}"></xsd:pattern>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+			<xsd:element name="Name">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DateOfBirth" type="commoninquiry:MMDDYYYYDateFormat" />
+			<xsd:element name="PrivacyActCompliance" type="commoninquiry:DiscType" />
+			<xsd:element name="DateOfExpiration">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="RecordType" type="xsd:string" />
+			<xsd:element name="Time" type="commoninquiry:TimeFormatWithOutColon"/>
+			<xsd:element name="Race" type="xsd:string" />
+			<xsd:element name="Gender" type="xsd:string" />
+			<xsd:element name="EyeColor" type="xsd:string" />
+			<xsd:element name="Weight" type="xsd:integer" />
+			<xsd:element name="Height" type="xsd:integer" />
+			<xsd:element name="Donor" type="xsd:string" />
+			<xsd:element name="E" type="xsd:string" />
+			<xsd:element name="AuditNum" type="xsd:long" />
+			<xsd:element name="PresentStatus" type="xsd:string" />
+			<xsd:element name="Endorsment" type="xsd:string" />
+			<xsd:element name="Res" type="xsd:string" />
+			<xsd:element name="WildLifeAndFisheryLicenseStatus" type="xsd:string" />
+			<xsd:element name="ReinstateStatus" type="xsd:string" />
+			<xsd:element name="CancellationDate">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SSN" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="9" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ResidentialAddress" type="core:PartyAddressType" />
+			<xsd:element name="MailingAddress" type="core:PartyAddressType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DLInquiryVehicleType">
+		<xsd:sequence>
+			<xsd:element name="CurrentPlateNum" type="commoninquiry:CurrentPlateNumberType" />
+			<xsd:element name="Vin" type="commoninquiry:VinNumberFormat" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

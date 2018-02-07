@@ -24,6 +24,7 @@ import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryResp
 import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinResponse;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryResponse;
 
 @EnableWs
 @Configuration
@@ -58,6 +59,11 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	@Bean
 	public LienInquiryByPlateOrVinResponse lienInquiryResponse(){
 		return new LienInquiryByPlateOrVinResponse();
+	}
+	
+	@Bean
+	public DriverLicenseInquiryResponse licenseInquiryResponse(){
+		return new DriverLicenseInquiryResponse();
 	}
 	
 	@Override
@@ -98,6 +104,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         res.add(new ClassPathResource("/xsd/inquiries/AR74Inquiry.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/MVRI01.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/LienInquiryByPlateOrVin.xsd"));
+        res.add(new ClassPathResource("/xsd/inquiries/DriverLicenseInquiry.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TitleRegTransaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/RenewalRegTransaction.xsd"));
         
