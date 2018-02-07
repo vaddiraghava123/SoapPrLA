@@ -140,6 +140,15 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+	<xsd:complexType name="LienHolderResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="core:LienHolderType">
+				<xsd:sequence>
+					<xsd:element name="LienCount" type="xsd:int" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 	<xsd:complexType name="TaxesAndFeesForRenewalRegTranResponseType">
 		<xsd:complexContent>
 			<xsd:extension base="common:TaxesAndFeesType">
