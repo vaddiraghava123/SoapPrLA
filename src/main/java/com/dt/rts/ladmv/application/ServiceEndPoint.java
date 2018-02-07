@@ -13,6 +13,7 @@ import com.dt.rts.ladmv.repository.LienInquiryByPlateOrVinRepository;
 import com.dt.rts.ladmv.repository.MVRI01Repository;
 import com.dt.rts.ladmv.repository.TitleRegRepository;
 import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
+import com.dt.rts.ladmv.repository.DLRepository;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModifyRequest;
@@ -25,8 +26,11 @@ import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryRequest;
+import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryResponse;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegRequest;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegResponse;
+
 
 
 @Endpoint
@@ -36,6 +40,7 @@ public class ServiceEndPoint {
 	private static final String ELT_ADD_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify";
 	private static final String AR74_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/DailyMoniesSummaryInquiry";
 	private static final String MVRI01_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/MVRI01Inquiry";
+	private static final String DL_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/DriverLicenseInquiry";
 	private static final String TITLEREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction";
 	public static final String VehicleInquiryType = "VM";
 
@@ -89,6 +94,15 @@ public class ServiceEndPoint {
 		LienInquiryByPlateOrVinResponse response = appContext.getBean(LienInquiryByPlateOrVinResponse.class);
 		System.out.println("LienInquiryResponse Starts");
 		LienInquiryByPlateOrVinRepository lienInquiryRepository = appContext.getBean(LienInquiryByPlateOrVinRepository.class);
+		return response;
+	}
+	
+	@PayloadRoot(localPart = "DriverLicenseInquiryRequest", namespace = DL_INQ_NAMESPACE_URI)
+	@ResponsePayload
+	public DriverLicenseInquiryResponse getVin(@RequestPayload DriverLicenseInquiryRequest request) {
+	    	DriverLicenseInquiryResponse response = appContext.getBean(DriverLicenseInquiryResponse.class);
+		System.out.println("DriverLicenseInquiryResponse Starts");
+		DLRepository DLInqRepository = appContext.getBean(DLRepository.class);
 		return response;
 	}
 	
