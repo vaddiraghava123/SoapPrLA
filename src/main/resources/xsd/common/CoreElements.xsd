@@ -229,7 +229,7 @@
 					</xsd:simpleType>
 				</xsd:element>
 			</xsd:choice>
-			<xsd:element name="VehicleType" minOccurs="0">
+			<xsd:element name="NewUsedIndicator" minOccurs="0">
 				<xsd:simpleType>
 					<xsd:restriction base="xsd:string">
 						<xsd:enumeration value="N" />

@@ -83,8 +83,8 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	@Override
     public void addInterceptors(List<EndpointInterceptor> interceptors) {
         PayloadValidatingInterceptor validatingInterceptor = new PayloadValidatingInterceptor();
-        validatingInterceptor.setValidateRequest(true);
-        validatingInterceptor.setValidateResponse(true);
+        validatingInterceptor.setValidateRequest(false);
+        validatingInterceptor.setValidateResponse(false);
         validatingInterceptor.setXsdSchemaCollection(xsdSchemaCollection());
         interceptors.add(validatingInterceptor);
     }
