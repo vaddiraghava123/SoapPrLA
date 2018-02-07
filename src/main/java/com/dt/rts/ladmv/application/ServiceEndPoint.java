@@ -46,6 +46,7 @@ public class ServiceEndPoint {
 	private static final String DL_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/DriverLicenseInquiry";
 	private static final String TITLEREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction";
 	private static final String RENEWALREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction";
+	private static final String LIEN_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/LienInquiryByPlateOrVin";
 	public static final String VehicleInquiryType = "VM";
 
 	@Autowired
@@ -92,7 +93,7 @@ public class ServiceEndPoint {
 		return response;
 	}
 	
-	@PayloadRoot(localPart = "LienInquiryByPlateOrVinRequest", namespace = MVRI01_INQ_NAMESPACE_URI)
+	@PayloadRoot(localPart = "LienInquiryByPlateOrVinRequest", namespace = LIEN_INQ_NAMESPACE_URI)
 	@ResponsePayload
 	public LienInquiryByPlateOrVinResponse getVin(@RequestPayload LienInquiryByPlateOrVinRequest request) {
 		LienInquiryByPlateOrVinResponse response = appContext.getBean(LienInquiryByPlateOrVinResponse.class);
