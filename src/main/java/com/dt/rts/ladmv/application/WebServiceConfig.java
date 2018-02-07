@@ -19,12 +19,13 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
 
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModifyResponse;
 import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinResponse;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
-import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryResponse;
+import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegResponse;
 
 @EnableWs
 @Configuration
@@ -66,6 +67,13 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		return new DriverLicenseInquiryResponse();
 	}
 	
+	@Bean RenewalRegResponse renewalRegResponse(){
+		return new RenewalRegResponse();
+	}
+	
+	/**
+	 * Validate XML Element Values
+	 */
 	@Override
     public void addInterceptors(List<EndpointInterceptor> interceptors) {
         PayloadValidatingInterceptor validatingInterceptor = new PayloadValidatingInterceptor();
