@@ -65,6 +65,12 @@
             <xsd:enumeration value="WS" />
         </xsd:restriction>
     </xsd:simpleType>
+    <xsd:simpleType name="NNSInquiryTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="N" />
+            <xsd:enumeration value="NS" />
+        </xsd:restriction>
+    </xsd:simpleType>
     <xsd:simpleType name="LienInquiryTypeEnum">
         <xsd:restriction base="xsd:token">
             <xsd:enumeration value="MVVL"/>
@@ -166,5 +172,52 @@
 			<xsd:enumeration value="2" />
 		</xsd:restriction>
 	</xsd:simpleType>
+	
+	<xsd:complexType name="IndividualNamesType">
+      <xsd:sequence>
+        <xsd:element name="LastName">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:length value="28"></xsd:length>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="FirstName">
+           <xsd:simpleType>
+             <xsd:restriction base="xsd:string">
+               <xsd:length value="28"></xsd:length>
+             </xsd:restriction>
+           </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="IndividualOwnerFields">
+      <xsd:sequence>
+        <xsd:element name="DateOfBirth" type="tns:MMDDYYYYDateFormat" />
+        <xsd:element name="Race" type="xsd:string" />
+        <xsd:element name="Gender" type="xsd:string" />
+        <xsd:element name="EyeColor" type="xsd:string" />
+        <xsd:element name="Weight" type="xsd:integer" />
+        <xsd:element name="Height" type="xsd:integer" />
+        <xsd:element name="E" type="xsd:string" />
+        <xsd:element name="PrivacyActCompliance" type="tns:DiscType" />
+        <xsd:element name="Restriction" type="xsd:string" />
+        <xsd:element name="DateOfExpiration">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:pattern value="[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}"></xsd:pattern>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SSN" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="9" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
 	
 </xsd:schema>

@@ -26,6 +26,7 @@ import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryBy
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameResponse;
+import com.dt.rts.ladmv.services.inquiries.ownerslistinquirybyname.OwnersListInquiryByNameResponse;
 import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegResponse;
 import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Request;
 
@@ -72,6 +73,11 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	@Bean
 	public VehiclesListInquiryByNameResponse vehicleListInquiryResponse(){
 		return new VehiclesListInquiryByNameResponse();
+	}
+	
+	@Bean
+	public OwnersListInquiryByNameResponse ownerListInquiryByNameResponse(){
+		return new OwnersListInquiryByNameResponse();
 	}
 	
 	@Bean RenewalRegResponse renewalRegResponse(){
@@ -125,6 +131,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         res.add(new ClassPathResource("/xsd/inquiries/LienInquiryByPlateOrVin.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/DriverLicenseInquiry.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/VehiclesListInquiryByName.xsd"));
+        res.add(new ClassPathResource("/xsd/inquiries/OwnersListInquiryByName.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TitleRegTransaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/RenewalRegTransaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TT38Transaction.xsd"));
