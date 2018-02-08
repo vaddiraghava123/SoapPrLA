@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema
+	xmlns:tns="http://rts.dt.com/ladmv/services/inquiries/OwnersListInquiryByName"
+	xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns="http://rts.dt.com/ladmv/services/inquiries/OwnersListInquiryByName"
+	targetNamespace="http://rts.dt.com/ladmv/services/inquiries/OwnersListInquiryByName"
+	jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import schemaLocation="../common/CoreElements.xsd"
+		namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+	<xsd:import schemaLocation="CommonInquiryElements.xsd"
+		namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
+
+	<xsd:element name="OwnersListInquiryByNameRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="NNSInquiryRequest" type="tns:NNSInquiryReq" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OwnersListInquiryByNameResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="NNSInquiryResponse" type="tns:NNSInquiryResp" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="NNSInquiryReq">
+		<xsd:sequence>
+			<xsd:element name="NNSInquiryType" type="commoninquiry:NNSInquiryTypeEnum" />
+			<xsd:element name="IndividualNames" type="commoninquiry:IndividualNamesType" />
+			<xsd:element name="Race" type="xsd:string" />
+      <xsd:element name="Gender" type="xsd:string" />
+			<xsd:choice>
+				<xsd:sequence>
+					<xsd:element name="DateOfBirth" type="commoninquiry:MMDDYYYYDateFormat" />
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:element name="City">
+		        <xsd:simpleType>
+		          <xsd:restriction base="xsd:string">
+		            <xsd:maxLength value="17"></xsd:maxLength>
+		          </xsd:restriction>
+		        </xsd:simpleType>
+		      </xsd:element>
+				</xsd:sequence>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="NNSInquiryResp">
+		<xsd:sequence>
+			<xsd:element name="NNSInquiryType" type="commoninquiry:NNSInquiryTypeEnum" />
+			<xsd:element name="IndividualNames" type="commoninquiry:IndividualNamesType" />
+			<xsd:element name="NNSOwners" type="tns:NNSOwnersList" />
+			<xsd:element name="Errors" type="core:ErrorsListType"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="NNSOwnersList">
+		<xsd:sequence>
+			<xsd:element name="OwnersList" type="tns:OwnersListType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OwnersListType">
+		<xsd:sequence>
+			<xsd:element name="DriverLicenseNum" type="commoninquiry:DriversLicenseType" />
+			<xsd:element name="IndividualNames" type="commoninquiry:IndividualNamesType" />
+			<xsd:element name="MiddleName" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Suffix" type="xsd:string" minOccurs="0" />
+			<xsd:element name="IndividualFields" type="commoninquiry:IndividualOwnerFields" />
+			<xsd:element name="TransactionStatus" type="xsd:string" />
+			<xsd:element name="Street">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="25"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="City">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="17"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
