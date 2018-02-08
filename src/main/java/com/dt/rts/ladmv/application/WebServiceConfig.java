@@ -27,6 +27,7 @@ import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameResponse;
 import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegResponse;
+import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Request;
 
 @EnableWs
 @Configuration
@@ -77,6 +78,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		return new RenewalRegResponse();
 	}
 	
+	@Bean TT38Request tt38Request(){
+		return new TT38Request();
+	}
+	
 	/**
 	 * Validate XML Element Values
 	 */
@@ -122,6 +127,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         res.add(new ClassPathResource("/xsd/inquiries/VehiclesListInquiryByName.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TitleRegTransaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/RenewalRegTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/transaction/TT38Transaction.xsd"));
         
 		CommonsXsdSchemaCollection collection = new CommonsXsdSchemaCollection(res.toArray(new ClassPathResource[0]));
 		collection.setInline(true);

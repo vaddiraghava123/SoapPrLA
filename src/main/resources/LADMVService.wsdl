@@ -5,6 +5,7 @@
 	xmlns:sch11="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
 	xmlns:sch12="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 	xmlns:sch13="http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction"
+	xmlns:sch14="http://rts.dt.com/ladmv/services/transaction/TT38Transaction"
 	xmlns:sch2="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
 	xmlns:sch3="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry"
 	xmlns:sch4="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify"
@@ -1983,6 +1984,257 @@
 				</xsd:restriction>
 			</xsd:simpleType>
 		</xsd:schema>
+		<xsd:schema
+			xmlns="http://rts.dt.com/ladmv/services/transaction/TT38Transaction"
+			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:tt38="http://rts.dt.com/ladmv/services/transaction/TT38Transaction"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified"
+			targetNamespace="http://rts.dt.com/ladmv/services/transaction/TT38Transaction">
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:element name="TT38Request">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="Transaction" type="TT38TransRequestType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="TT38Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element minOccurs="0" name="Transaction"
+							type="TT38TransResponseType" />
+						<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="TT38TransRequestType">
+				<xsd:sequence>
+					<xsd:element name="TranId" type="xsd:long" />
+					<xsd:element name="TranType">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="4" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element minOccurs="0" name="BatchNum">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="10" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element minOccurs="0" name="SequenceNum">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="5" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="DealerCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="4" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="Registration" type="RegistrationForTT38TransRequestType" />
+					<xsd:element name="Title" type="TitleForTT38TransRequestType" />
+					<xsd:element name="Vehicle" type="VehicleForTT38TransRequestType" />
+					<xsd:element name="Owners" type="core:OwnerListType" />
+					<xsd:element name="Sale" type="SaleForTT38TransRequestType" />
+					<xsd:element name="LienHolder" type="core:LienHolderType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="RegistrationForTT38TransRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="core:RegistrationType">
+						<xsd:sequence>
+							<xsd:element minOccurs="0" name="IsRenewMailToOwner">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y" />
+										<xsd:enumeration value="N" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element minOccurs="0" name="HandicappedStatus">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="3" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LicenseCode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="1" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="InCityLimits">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y" />
+										<xsd:enumeration value="N" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element minOccurs="0" name="IsMobileHome">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y" />
+										<xsd:enumeration value="N" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="TitleForTT38TransRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="core:TitleType">
+						<xsd:sequence>
+							<xsd:element minOccurs="0" name="PrevNonTitleTransTypeCode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="2" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element minOccurs="0" name="PrevNonTitleTransDate">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:pattern value="[0-9]{6}" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="VehicleForTT38TransRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="core:TransVehicleType">
+						<xsd:sequence>
+							<xsd:element name="NumOfPassengers" type="xsd:int" />
+							<xsd:element name="ClassCode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="4" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="SaleForTT38TransRequestType">
+				<xsd:sequence>
+					<xsd:element name="SaleInfo" type="SaleInfoForTT38TranRequestType" />
+					<xsd:element name="TaxesAndFees" type="TaxesAndFeesForTT38TranRequestType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="SaleInfoForTT38TranRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="common:SaleInfoType">
+						<xsd:sequence>
+							<xsd:element name="VendorCompensationIndicator">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y" />
+										<xsd:enumeration value="N" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxDate" type="xsd:string" />
+							<xsd:element name="EffectvDate" type="xsd:string" />
+							<xsd:element name="PaymentMode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:int">
+										<xsd:enumeration value="1" />
+										<xsd:enumeration value="2" />
+										<xsd:enumeration value="4" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ElecFundTransfCode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="3" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxExemptionCode" type="xsd:string" />
+							<xsd:element name="CitationDate" type="xsd:string" />
+							<xsd:element name="SpecialFeesCode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="2" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="TaxesAndFeesForTT38TranRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="common:TaxesAndFeesType">
+						<xsd:sequence>
+							<xsd:element name="TaxableValue" type="xsd:decimal" />
+							<xsd:element name="TradeInValue" type="xsd:decimal" />
+							<xsd:element name="RemitFee" type="xsd:decimal" />
+							<xsd:element name="TitleServiceHandlingFee" type="xsd:decimal" />
+							<xsd:element name="MiscFee" type="xsd:decimal" />
+							<xsd:element name="RebateAmount" type="xsd:decimal" />
+							<xsd:element name="WheelChairLiftFee" type="xsd:decimal" />
+							<xsd:element name="TourismFee" type="xsd:decimal" />
+							<xsd:element name="TourismVCFee" type="xsd:decimal" />
+							<xsd:element name="StateSalesTax" type="xsd:decimal" />
+							<xsd:element name="ParishTax" type="xsd:decimal" />
+							<xsd:element name="MunicipalityTax" type="xsd:decimal" />
+							<xsd:element name="StateTaxPenalty" type="xsd:decimal" />
+							<xsd:element name="StateInterest" type="xsd:decimal" />
+							<xsd:element name="TitleFee" type="xsd:decimal" />
+							<xsd:element name="MortgageFee" type="xsd:decimal" />
+							<xsd:element name="LicensePlateFee" type="xsd:decimal" />
+							<xsd:element name="PlateTransferFee" type="xsd:decimal" />
+							<xsd:element name="PlatePenaltyFee" type="xsd:decimal" />
+							<xsd:element name="SpecialPlateFirstIssueFee" type="xsd:decimal" />
+							<xsd:element name="RoyaltyFee" type="xsd:decimal" />
+							<xsd:element name="ExpeditedTitleFee" type="xsd:decimal" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="TT38TransResponseType">
+				<xsd:sequence>
+					<xsd:element name="TranType" type="xsd:string" />
+					<xsd:element name="TranDate" type="xsd:string" />
+					<xsd:element minOccurs="0" name="DealerCode" type="xsd:string" />
+					<xsd:element minOccurs="0" name="BatchSeqNum" type="xsd:string" />
+					<xsd:element minOccurs="0" name="PrinterSequenceNum"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="PID" type="xsd:string" />
+					<xsd:element name="Registration"
+						type="common:RegistrationForTitleRegTransResponseType" />
+					<xsd:element name="Title" type="core:TitleType" />
+					<xsd:element name="Vehicle"
+						type="common:VehicleForTitleRegTransResponseType" />
+					<xsd:element name="Owners" type="core:OwnerListType" />
+					<xsd:element name="Sale" type="common:SaleTitleRegTranResponseType" />
+					<xsd:element name="LienHolder" type="common:LienHolderResponseType" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="LienInquiryByPlateOrVinResponse">
 		<wsdl:part element="sch8:LienInquiryByPlateOrVinResponse"
@@ -2051,8 +2303,14 @@
 	<wsdl:message name="RenewalRegRequest">
 		<wsdl:part element="sch13:RenewalRegRequest" name="RenewalRegRequest"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="TT38Request">
+		<wsdl:part element="sch14:TT38Request" name="TT38Request"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="MVRI01InquiryResponse">
 		<wsdl:part element="sch7:MVRI01InquiryResponse" name="MVRI01InquiryResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="TT38Response">
+		<wsdl:part element="sch14:TT38Response" name="TT38Response"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="VehiclesListInquiryByDLOrEINResponse">
 		<wsdl:part element="sch5:VehiclesListInquiryByDLOrEINResponse"
@@ -2112,6 +2370,10 @@
 		<wsdl:operation name="VehicleInquiry">
 			<wsdl:input message="tns:VehicleInquiryRequest" name="VehicleInquiryRequest"></wsdl:input>
 			<wsdl:output message="tns:VehicleInquiryResponse" name="VehicleInquiryResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="TT38">
+			<wsdl:input message="tns:TT38Request" name="TT38Request"></wsdl:input>
+			<wsdl:output message="tns:TT38Response" name="TT38Response"></wsdl:output>
 		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="LADMVPortSoap11" type="tns:LADMVPort">
@@ -2213,6 +2475,15 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="VehicleInquiryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="TT38">
+			<soap:operation soapAction="" />
+			<wsdl:input name="TT38Request">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="TT38Response">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
