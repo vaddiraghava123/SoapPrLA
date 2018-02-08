@@ -13,6 +13,7 @@ import com.dt.rts.ladmv.repository.ELTRRepository;
 import com.dt.rts.ladmv.repository.LienInquiryByPlateOrVinRepository;
 import com.dt.rts.ladmv.repository.MVRI01Repository;
 import com.dt.rts.ladmv.repository.RenewalRegRepository;
+import com.dt.rts.ladmv.repository.TT38Repository;
 import com.dt.rts.ladmv.repository.TitleRegRepository;
 import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
 import com.dt.rts.ladmv.repository.VehicleListInquiryRepository;
@@ -36,6 +37,8 @@ import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegReq
 import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegResponse;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegRequest;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegResponse;
+import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Request;
+import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Response;
 
 
 
@@ -51,6 +54,7 @@ public class ServiceEndPoint {
 	private static final String TITLEREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction";
 	private static final String RENEWALREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction";
 	private static final String LIEN_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/LienInquiryByPlateOrVin";
+	private static final String TT38_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TT38Transaction";
 	public static final String VehicleInquiryType = "VM";
 
 	@Autowired
@@ -146,6 +150,15 @@ public class ServiceEndPoint {
 	public RenewalRegResponse getSticker(@RequestPayload RenewalRegRequest request) {
 		RenewalRegResponse response = appContext.getBean(RenewalRegResponse.class);
 		RenewalRegRepository renewalRegRepository = appContext.getBean(RenewalRegRepository.class);
+		return response;
+		
+	}
+	
+	@PayloadRoot(localPart = "TT38Request", namespace = TT38_NAMESPACE_URI)
+	@ResponsePayload
+	public TT38Response getSticker(@RequestPayload TT38Request request) {
+		TT38Response response = appContext.getBean(TT38Response.class);
+		TT38Repository tt38Repository = appContext.getBean(TT38Repository.class);
 		return response;
 		
 	}
