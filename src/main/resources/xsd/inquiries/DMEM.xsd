@@ -69,13 +69,13 @@
     </xsd:simpleType> -->
     <xsd:complexType name="OwnerVehicleList">
         <xsd:sequence>
-            <xsd:element name="OwnerVehicle" type="tns:OwnerVehilceType" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="OwnerVehicle" type="tns:OwnerVehilcesType"/>
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:complexType name="OwnerVehilceType">
+    <xsd:complexType name="OwnerVehilcesType">
         <xsd:sequence>
-            <xsd:element name="Owner" type="tns:DMEMInquiryPartyType" />
-            <xsd:element name="Vehicle" type="tns:DMEMInquiryVehicleType" />
+            <xsd:element name="Owner" type="tns:DMEMInquiryPartyType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="Vehicle" type="tns:DMEMInquiryVehicleType" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="DMEMInquiryPartyType">
