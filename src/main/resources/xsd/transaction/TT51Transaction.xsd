@@ -27,7 +27,7 @@
 	</xsd:element>
 	<xsd:complexType name="TT51TransResponseType">
 		<xsd:sequence>
-			<xsd:element name="MetaData" type ="common:TransasctionAttributesReqType"/>
+			<xsd:element name="MetaData" type ="common:TransasctionAttributesRespType"/>
 			<xsd:element name="Registration" type="common:RegistrationForTitleRegTransResponseType" />
 			<xsd:element name="Title" type="core:TitleType" />
 			<xsd:element name="Vehicle" type="common:VehicleForTitleRegTransResponseType" />
@@ -37,7 +37,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="TT51TransRequestType">
 		<xsd:sequence>
-			<xsd:element name="MetaData" type ="common:TransasctionAttributesRespType"/>
+			<xsd:element name="MetaData" type ="common:TransasctionAttributesReqType"/>
 			<xsd:element name="Registration" type="tt51:RegistrationForTT51TransRequestType" />
 			<xsd:element name="Title" type="tt51:TitleForTT51TransRequestType" />
 			<xsd:element name="Vehicle" type="tt51:VehicleForTT51TransRequestType" />
