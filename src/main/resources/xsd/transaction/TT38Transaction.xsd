@@ -32,35 +32,7 @@
 	</xsd:element>
 	<xsd:complexType name="TT38TransRequestType">
 		<xsd:sequence>
-			<xsd:element name="TranId" type="xsd:long" />
-			<xsd:element name="TranType">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="4"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="BatchNum" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="10"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="SequenceNum" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="5"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="DealerCode">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="4"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
+			<xsd:element name="MetaData" type ="common:TransasctionAttributesReqType"/>	
 			<xsd:element name="Registration"
 				type="tt38:RegistrationForTT38TransRequestType" />
 			<xsd:element name="Title" type="tt38:TitleForTT38TransRequestType" />
@@ -238,16 +210,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="TT38TransResponseType">
 		<xsd:sequence>
-			<xsd:element name="TranType" type="xsd:string" />
-			<xsd:element name="TranDate" type="xsd:string" />
-			<xsd:element name="DealerCode" type="xsd:string"
-				minOccurs="0" maxOccurs="1" />
-			<xsd:element name="BatchSeqNum" type="xsd:string"
-				minOccurs="0" maxOccurs="1" />
-			<xsd:element name="PrinterSequenceNum" type="xsd:string"
-				minOccurs="0" maxOccurs="1" />
-			<xsd:element name="PID" type="xsd:string" minOccurs="0"
-				maxOccurs="1" />
+			<xsd:element name="MetaData" type ="common:TransasctionAttributesRespType"/>	
 			<xsd:element name="Registration"
 				type="common:RegistrationForTitleRegTransResponseType" />
 			<xsd:element name="Title" type="core:TitleType" />

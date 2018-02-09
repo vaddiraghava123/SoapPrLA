@@ -12,12 +12,12 @@ import com.dt.rts.ladmv.repository.DailyMoniesInquiryRepository;
 import com.dt.rts.ladmv.repository.ELTRRepository;
 import com.dt.rts.ladmv.repository.LienInquiryByPlateOrVinRepository;
 import com.dt.rts.ladmv.repository.MVRI01Repository;
-import com.dt.rts.ladmv.repository.RenewalRegRepository;
+import com.dt.rts.ladmv.repository.OwnerListInquiryRepository;
 import com.dt.rts.ladmv.repository.TT38Repository;
+import com.dt.rts.ladmv.repository.TT51Repository;
 import com.dt.rts.ladmv.repository.TitleRegRepository;
 import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
 import com.dt.rts.ladmv.repository.VehicleListInquiryRepository;
-import com.dt.rts.ladmv.repository.OwnerListInquiryRepository;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryRequest;
@@ -30,18 +30,18 @@ import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryBy
 import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinResponse;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.ownerslistinquirybyname.OwnersListInquiryByNameRequest;
+import com.dt.rts.ladmv.services.inquiries.ownerslistinquirybyname.OwnersListInquiryByNameResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameResponse;
-import com.dt.rts.ladmv.services.inquiries.ownerslistinquirybyname.OwnersListInquiryByNameRequest;
-import com.dt.rts.ladmv.services.inquiries.ownerslistinquirybyname.OwnersListInquiryByNameResponse;
-import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegRequest;
-import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegResponse;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegRequest;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegResponse;
 import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Request;
 import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Response;
+import com.dt.rts.ladmv.services.transaction.tt51transaction.TT51Request;
+import com.dt.rts.ladmv.services.transaction.tt51transaction.TT51Response;
 
 
 
@@ -56,7 +56,7 @@ public class ServiceEndPoint {
 	private static final String MVRI01_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/MVRI01Inquiry";
 	private static final String DL_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/DriverLicenseInquiry";
 	private static final String TITLEREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction";
-	private static final String RENEWALREG_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction";
+	private static final String TT51_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction";
 	private static final String LIEN_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/LienInquiryByPlateOrVin";
 	private static final String TT38_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TT38Transaction";
 	public static final String VehicleInquiryType = "VM";
@@ -149,11 +149,11 @@ public class ServiceEndPoint {
 		return response;
 	}
 	
-	@PayloadRoot(localPart = "RenewalRegRequest", namespace = RENEWALREG_NAMESPACE_URI)
+	@PayloadRoot(localPart = "TT51Request", namespace = TT51_NAMESPACE_URI)
 	@ResponsePayload
-	public RenewalRegResponse getSticker(@RequestPayload RenewalRegRequest request) {
-		RenewalRegResponse response = appContext.getBean(RenewalRegResponse.class);
-		RenewalRegRepository renewalRegRepository = appContext.getBean(RenewalRegRepository.class);
+	public TT51Response getSticker(@RequestPayload TT51Request request) {
+		TT51Response response = appContext.getBean(TT51Response.class);
+		TT51Repository tt51Repository = appContext.getBean(TT51Repository.class);
 		return response;
 		
 	}
