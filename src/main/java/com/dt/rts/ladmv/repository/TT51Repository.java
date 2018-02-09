@@ -5,7 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RenewalRegRepository {
+public class TT51Repository {
 
 	@PostConstruct
 	public void initData() {

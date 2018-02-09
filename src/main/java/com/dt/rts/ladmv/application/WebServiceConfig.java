@@ -24,11 +24,11 @@ import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModif
 import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinResponse;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
+import com.dt.rts.ladmv.services.inquiries.ownerslistinquirybyname.OwnersListInquiryByNameResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameResponse;
-import com.dt.rts.ladmv.services.inquiries.ownerslistinquirybyname.OwnersListInquiryByNameResponse;
-import com.dt.rts.ladmv.services.transaction.renewalregtransaction.RenewalRegResponse;
 import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Request;
+import com.dt.rts.ladmv.services.transaction.tt51transaction.TT51Request;
 
 @EnableWs
 @Configuration
@@ -80,14 +80,13 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		return new OwnersListInquiryByNameResponse();
 	}
 	
-	@Bean RenewalRegResponse renewalRegResponse(){
-		return new RenewalRegResponse();
-	}
-	
 	@Bean TT38Request tt38Request(){
 		return new TT38Request();
 	}
 	
+	@Bean TT51Request tt51Request(){
+		return new TT51Request();
+	}
 	/**
 	 * Validate XML Element Values
 	 */
@@ -133,7 +132,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         res.add(new ClassPathResource("/xsd/inquiries/VehiclesListInquiryByName.xsd"));
         res.add(new ClassPathResource("/xsd/inquiries/OwnersListInquiryByName.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TitleRegTransaction.xsd"));
-        res.add(new ClassPathResource("/xsd/transaction/RenewalRegTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/transaction/TT51Transaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TT38Transaction.xsd"));
         
 		CommonsXsdSchemaCollection collection = new CommonsXsdSchemaCollection(res.toArray(new ClassPathResource[0]));
