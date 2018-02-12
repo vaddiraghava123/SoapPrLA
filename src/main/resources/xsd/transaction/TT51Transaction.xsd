@@ -38,13 +38,43 @@
 	<xsd:complexType name="TT51TransRequestType">
 		<xsd:sequence>
 			<xsd:element name="MetaData" type ="common:TransasctionAttributesReqType"/>
-			<xsd:element name="Registration" type="common:RegistrationForTransRequestType" />
+			<xsd:element name="Registration" type="tt51:RegistrationForTT51TransRequestType" />
 			<xsd:element name="Title" type="tt51:TitleForTT51TransRequestType" />
 			<xsd:element name="Vehicle" type="tt51:VehicleForTT51TransRequestType" />
 			<xsd:element name="Owners" type="core:OwnerListType" />
 			<xsd:element name="Sale" type="tt51:SaleForTT51TransRequestType" />
 			<xsd:element name="LienHolder" type="common:LienHolderWithCodesType" />
 		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RegistrationForTT51TransRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="core:RegistrationType">
+				<xsd:sequence>
+					<xsd:element name="IsRenewMailToOwner" minOccurs="0" maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="HandicappedStatus" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="LicenseCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
 	</xsd:complexType>
 	<xsd:complexType name="TitleForTT51TransRequestType">
 		<xsd:complexContent>
