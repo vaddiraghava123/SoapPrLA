@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/transaction/LATransaction"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:la="http://rts.dt.com/ladmv/services/transaction/LATransaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/transaction/LATransaction">
+	<xsd:import schemaLocation="CommonElements.xsd" namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
+	<xsd:import schemaLocation="../common/CoreElements.xsd" namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+	<xsd:element name="LAResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Transaction" type="la:LATransResponseType" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LARequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Transaction" type="la:LATransRequestType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="LATransResponseType">
+		<xsd:sequence>
+			<xsd:element name="MetaData" type ="common:TransasctionAttributesRespType"/>
+			<xsd:element name="Registration" type="common:RegistrationForTitleRegTransResponseType" />
+			<xsd:element name="Title" type="core:TitleType" />
+			<xsd:element name="Vehicle" type="common:VehicleForTitleRegTransResponseType" />
+			<xsd:element name="Owners" type="core:OwnerListType" />
+			<xsd:element name="Sale" type="common:SaleTT51TranResponseType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LATransRequestType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:sequence>
+					<xsd:element name="Vin">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="17"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:element name="CurrentPlateNum">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="8"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:choice>
+				<xsd:sequence>
+					<xsd:element name="DuplicateVin">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="17"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:element name="CurrentPlateExpDate">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:element name="MetaData" type ="common:TransasctionAttributesReqType"/>
+			<xsd:element name="OperatorCode" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DomicileCode" minOccurs="0"
+				maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PaymentMode" type="xsd:string" />
+			<xsd:element name="MoneyCode" type="xsd:string" />
+			<xsd:element name="ElecFundTransfCode">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="LATranTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="LA" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
