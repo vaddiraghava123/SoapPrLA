@@ -10,6 +10,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.dt.rts.ladmv.repository.DLRepository;
 import com.dt.rts.ladmv.repository.DailyMoniesInquiryRepository;
 import com.dt.rts.ladmv.repository.ELTRRepository;
+import com.dt.rts.ladmv.repository.LARepository;
 import com.dt.rts.ladmv.repository.LienInquiryByPlateOrVinRepository;
 import com.dt.rts.ladmv.repository.MVRI01Repository;
 import com.dt.rts.ladmv.repository.OwnerListInquiryRepository;
@@ -36,6 +37,8 @@ import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameRequest;
 import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameResponse;
+import com.dt.rts.ladmv.services.transaction.latransaction.LARequest;
+import com.dt.rts.ladmv.services.transaction.latransaction.LAResponse;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegRequest;
 import com.dt.rts.ladmv.services.transaction.titleregtransaction.TitleRegResponse;
 import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Request;
@@ -59,6 +62,7 @@ public class ServiceEndPoint {
 	private static final String TT51_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/RenewalRegTransaction";
 	private static final String LIEN_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/LienInquiryByPlateOrVin";
 	private static final String TT38_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TT38Transaction";
+	private static final String LA_TRAN_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/LATransaction";
 	public static final String VehicleInquiryType = "VM";
 
 	@Autowired
@@ -171,6 +175,15 @@ public class ServiceEndPoint {
 	public TT38Response getSticker(@RequestPayload TT38Request request) {
 		TT38Response response = appContext.getBean(TT38Response.class);
 		TT38Repository tt38Repository = appContext.getBean(TT38Repository.class);
+		return response;
+		
+	}
+	
+	@PayloadRoot(localPart = "LARequest", namespace = LA_TRAN_NAMESPACE_URI)
+	@ResponsePayload
+	public LAResponse getLiens(@RequestPayload LARequest request) {
+		LAResponse response = appContext.getBean(LAResponse.class);
+		LARepository laRepository = appContext.getBean(LARepository.class);
 		return response;
 		
 	}

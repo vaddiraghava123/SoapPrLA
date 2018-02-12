@@ -44,8 +44,31 @@
 	</xsd:complexType>
 	<xsd:complexType name="RegistrationForTT38TransRequestType">
 		<xsd:complexContent>
-			<xsd:extension base="common:RegistrationForTransRequestType">
+			<xsd:extension base="core:RegistrationType">
 				<xsd:sequence>
+					<xsd:element name="IsRenewMailToOwner" minOccurs="0"
+						maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="HandicappedStatus" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="3"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="LicenseCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
 					<xsd:element name="InCityLimits">
 						<xsd:simpleType>
 							<xsd:restriction base="xsd:string">

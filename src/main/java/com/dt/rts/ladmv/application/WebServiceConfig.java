@@ -27,8 +27,14 @@ import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.ownerslistinquirybyname.OwnersListInquiryByNameResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameResponse;
+import com.dt.rts.ladmv.services.transaction.latransaction.LARequest;
+import com.dt.rts.ladmv.services.transaction.latransaction.LAResponse;
+import com.dt.rts.ladmv.services.transaction.latransaction.LATransRequestType;
+import com.dt.rts.ladmv.services.transaction.latransaction.LATransResponseType;
 import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Request;
+import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Response;
 import com.dt.rts.ladmv.services.transaction.tt51transaction.TT51Request;
+import com.dt.rts.ladmv.services.transaction.tt51transaction.TT51Response;
 
 @EnableWs
 @Configuration
@@ -80,12 +86,16 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		return new OwnersListInquiryByNameResponse();
 	}
 	
-	@Bean TT38Request tt38Request(){
-		return new TT38Request();
+	@Bean TT38Response tt38Response(){
+		return new TT38Response();
 	}
 	
-	@Bean TT51Request tt51Request(){
-		return new TT51Request();
+	@Bean TT51Response tt51Response(){
+		return new TT51Response();
+	}
+	
+	@Bean LAResponse laResponse(){
+		return new LAResponse();
 	}
 	/**
 	 * Validate XML Element Values
@@ -134,6 +144,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         res.add(new ClassPathResource("/xsd/transaction/TitleRegTransaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TT51Transaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TT38Transaction.xsd"));
+        res.add(new ClassPathResource("/xsd/transaction/LATransaction.xsd"));
         
 		CommonsXsdSchemaCollection collection = new CommonsXsdSchemaCollection(res.toArray(new ClassPathResource[0]));
 		collection.setInline(true);
