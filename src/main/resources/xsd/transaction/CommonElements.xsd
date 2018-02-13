@@ -88,8 +88,8 @@
 					<xsd:element name="RoyaltyFee" type="xsd:decimal" />
 					<xsd:element name="LicenseCredit" type="xsd:decimal" />
 					<xsd:element name="LicensePenaltyCredit" type="xsd:decimal" />
-					<xsd:element name="StateTaxesAndFees" type="common:StateTaxesAndFeesType" />
-					<xsd:element name="PMTaxesAndFees" type="common:PMTaxesAndFeesType" />
+					<xsd:element name="StateTaxesAndFees" type="common:StateTaxesAndFeesRespType" />
+					<xsd:element name="PMTaxesAndFees" type="common:PMTaxesAndFeesRespType" />
 					<xsd:element name="TotalFee" type="xsd:decimal" />
 					<xsd:element name="TotalTax" type="xsd:decimal" />
 					<xsd:element name="GrandTotalFee" type="xsd:decimal" />
@@ -97,7 +97,7 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	<xsd:complexType name="StateTaxesAndFeesType">
+	<xsd:complexType name="StateTaxesAndFeesRespType">
 		<xsd:sequence>
 			<xsd:element name="LienFee" type="xsd:decimal" />
 			<xsd:element name="TitleFee" type="xsd:decimal" />
@@ -115,7 +115,7 @@
 			<xsd:element name="StateNetTax" type="xsd:decimal" />
 		</xsd:sequence>
 	</xsd:complexType>
-	<xsd:complexType name="PMTaxesAndFeesType">
+	<xsd:complexType name="PMTaxesAndFeesRespType">
 		<xsd:sequence>
 			<xsd:element name="ParishOrMunicTax" type="xsd:decimal" />
 			<xsd:element name="PMTaxPenalty" type="xsd:decimal" />
