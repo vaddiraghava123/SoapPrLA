@@ -19,14 +19,14 @@ import com.dt.rts.ladmv.repository.TT51Repository;
 import com.dt.rts.ladmv.repository.TitleRegRepository;
 import com.dt.rts.ladmv.repository.VehicleInquiryRepository;
 import com.dt.rts.ladmv.repository.VehicleListInquiryRepository;
+import com.dt.rts.ladmv.repository.VoidRepository;
+import com.dt.rts.ladmv.services.inquiries.commoninquiryelements.ELTResponse;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryRequest;
 import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModifyRequest;
-import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModifyResponse;
 import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryRequest;
-import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinRequest;
 import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinResponse;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryRequest;
@@ -45,6 +45,8 @@ import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Request;
 import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Response;
 import com.dt.rts.ladmv.services.transaction.tt51transaction.TT51Request;
 import com.dt.rts.ladmv.services.transaction.tt51transaction.TT51Response;
+import com.dt.rts.ladmv.services.transaction.voidtransaction.VoidRequest;
+import com.dt.rts.ladmv.services.transaction.voidtransaction.VoidResponse;
 
 
 
@@ -63,6 +65,7 @@ public class ServiceEndPoint {
 	private static final String LIEN_INQ_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/inquiries/LienInquiryByPlateOrVin";
 	private static final String TT38_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/TT38Transaction";
 	private static final String LA_TRAN_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/LATransaction";
+	private static final String VOID_TRAN_NAMESPACE_URI = "http://rts.dt.com/ladmv/services/transaction/VoidTransaction";
 	public static final String VehicleInquiryType = "VM";
 
 	@Autowired
@@ -84,8 +87,8 @@ public class ServiceEndPoint {
 	
 	@PayloadRoot(localPart = "EltAddOrModifyRequest", namespace = ELT_ADD_NAMESPACE_URI)
 	@ResponsePayload
-	public EltAddOrModifyResponse getVin(@RequestPayload EltAddOrModifyRequest request) {
-		EltAddOrModifyResponse response = appContext.getBean(EltAddOrModifyResponse.class);
+	public ELTResponse getVin(@RequestPayload EltAddOrModifyRequest request) {
+		ELTResponse response = appContext.getBean(ELTResponse.class);
 		System.out.println("EltInquiryResponse Starts");
 		ELTRRepository eltInqRepository = appContext.getBean(ELTRRepository.class);
 		return response;
@@ -93,8 +96,8 @@ public class ServiceEndPoint {
 	
 	@PayloadRoot(localPart = "EltrInquiryRequest", namespace = ELT_INQ_NAMESPACE_URI)
 	@ResponsePayload
-	public EltrInquiryResponse getVin(@RequestPayload EltrInquiryRequest request) {
-		EltrInquiryResponse response = appContext.getBean(EltrInquiryResponse.class);
+	public ELTResponse getVin(@RequestPayload EltrInquiryRequest request) {
+		ELTResponse response = appContext.getBean(ELTResponse.class);
 		System.out.println("EltInquiryResponse Starts");
 		ELTRRepository eltInqRepository = appContext.getBean(ELTRRepository.class);
 		return response;
@@ -184,6 +187,15 @@ public class ServiceEndPoint {
 	public LAResponse getLiens(@RequestPayload LARequest request) {
 		LAResponse response = appContext.getBean(LAResponse.class);
 		LARepository laRepository = appContext.getBean(LARepository.class);
+		return response;
+		
+	}
+	
+	@PayloadRoot(localPart = "VoidRequest", namespace = VOID_TRAN_NAMESPACE_URI)
+	@ResponsePayload
+	public VoidResponse getLiens(@RequestPayload VoidRequest request) {
+		VoidResponse response = appContext.getBean(VoidResponse.class);
+		VoidRepository voidRepository = appContext.getBean(VoidRepository.class);
 		return response;
 		
 	}

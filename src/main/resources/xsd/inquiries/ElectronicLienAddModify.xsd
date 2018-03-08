@@ -1,45 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<xsd:schema xmlns:core="http://rts.dt.com/ladmv/services/CoreElements" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify" xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" xmlns:eltam="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify" targetNamespace="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify" jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema xmlns:core="http://rts.dt.com/ladmv/services/CoreElements" 
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify"
+	xmlns:commoninquiry="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" 
+	xmlns:eltam="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify" 
+	targetNamespace="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify" 
+	jaxb:version="2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import schemaLocation="../common/CoreElements.xsd" namespace="http://rts.dt.com/ladmv/services/CoreElements" />
     <xsd:import schemaLocation="CommonInquiryElements.xsd" namespace="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements" />
-    <!--  This annotation helps us in creating proper element type (as defined) in Stubs from JAXB -->
-
     <xsd:element name="EltAddOrModifyRequest">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-                <xsd:element name="ELTRAddModify" type="ELTInquiry" />
+                <xsd:element name="ELTRInfo" type="commoninquiry:ELTRInfo" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="EltAddOrModifyResponse">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-                <xsd:element name="ELTRInfo" type="ELTInquiry" />
-                <xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1" />
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:complexType name="ELTInquiry">
-        <xsd:sequence>
-            <xsd:element name="ELTInquiryType" type="commoninquiry:ELTInquiryTypeEnum" />
-            <xsd:element name="ELTType" type="commoninquiry:ELTTypesEnum" />
-            <xsd:element name="LienHolder" type="core:PartyType" />
-            <xsd:element name="PublicTagAgents" type="PTAsList" minOccurs="0" />
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="PTAsList">
-        <xsd:sequence>
-            <xsd:element name="PublicTagAgent" type="PTAgent" minOccurs="0" maxOccurs="2" />
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="PTAgent">
-        <xsd:sequence>
-            <xsd:element name="Agent" type="xsd:string" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="BeginDate" type="commoninquiry:MMDDYYYYDateFormat" minOccurs="0" />
-            <xsd:element name="EndDate" type="commoninquiry:MMDDYYYYDateFormat" minOccurs="0" />
-            <xsd:element name="OfficeNumber" type="xsd:int" minOccurs="0" maxOccurs="1" />
-        </xsd:sequence>
-    </xsd:complexType>
+    <xsd:element name="EltAddOrModifyResponse" type="commoninquiry:ELTResponse"/>
+
 </xsd:schema>

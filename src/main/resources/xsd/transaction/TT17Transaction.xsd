@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/transaction/TT17Transaction"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:tt17="http://rts.dt.com/ladmv/services/transaction/TT17Transaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/transaction/TT17Transaction">
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="CommonElements.xsd" />
+	<xsd:import
+	namespace="http://rts.dt.com/ladmv/services/CoreElements"
+	schemaLocation="../common/CoreElements.xsd" />
+	<xsd:element name="TT17Request">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Transaction" type="tt17:TT17RequestType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="TT17RequestType">					
+		<xsd:sequence>
+			<xsd:element name="MetaData" type ="common:TransasctionAttributesReqType"/>			
+			<xsd:element name="Registration" type="core:RegistrationType" />
+			<xsd:element name="Title" type="common:TitleTypeWithPrevNonTitleInfo" />
+			<xsd:element name="Vehicle" type="common:VehicleForTitleRegTransResponseType" />
+			<xsd:element name="Owners" type="core:OwnerListType" />
+			<xsd:element name="Sale" type="tt17:SaleForTT17TransType" />
+			<xsd:element name="LienHolder" type="common:LienHolderWithCodesType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SaleForTT17TransType">
+		<xsd:sequence>
+			<xsd:element name="DateAquired" type="common:SaleInfoType" />
+			<xsd:element name="salesPrice" type="common:TaxesAndFeesType" />
+			<xsd:element name="SpecialFeesCode" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="TT17Response">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Transaction" type="tt17:TT17ResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="TT17ResponseType">
+		<xsd:sequence>
+			<xsd:element name="MetaData" type ="common:TransasctionAttributesRespType"/>
+			<xsd:element name="Registration" type="core:RegistrationType"/>
+			<xsd:element name="Title" type="common:TitleTypeWithPrevNonTitleInfo"/>
+			<xsd:element name="Vehicle" type="common:VehicleForTitleRegTransResponseType"/>
+			<xsd:element name="Owners" type="core:OwnerListType" />
+			<xsd:element name="Sale" type="tt17:SaleForTT17TransType" />
+			<xsd:element name="LienHolder" type="core:LienHolderType"/>
+			<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

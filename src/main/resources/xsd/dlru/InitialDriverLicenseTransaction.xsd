@@ -1,0 +1,37 @@
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:initialDL="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction">
+	
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="../transaction/CommonElements.xsd" />
+	<xsd:import
+	namespace="http://rts.dt.com/ladmv/services/CoreElements"
+	schemaLocation="../common/CoreElements.xsd" />
+	
+	<xsd:element name="InitialDriverLicenseResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="InitialDriverLicenseRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="MetaData" type ="common:TransIdAndTypeMetaData"/>
+				<xsd:element name="ExistingDLMetaData" type="common:ExistingDriverLicesnseMetaData" />
+				<xsd:element name="OOSDLMetaData" type="common:OOSDriverLicenseMetaData" />
+				<xsd:element name="NewDLMetaData" type="common:NewDriverLicenseMetaData" />
+				<xsd:element name="DuplicateCount" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	
+</xsd:schema>

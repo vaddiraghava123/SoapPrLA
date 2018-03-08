@@ -18,23 +18,18 @@ import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
 
+import com.dt.rts.ladmv.services.inquiries.commoninquiryelements.ELTResponse;
 import com.dt.rts.ladmv.services.inquiries.dailymoniessummaryinquiry.DailyMoniesSummaryInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.driverlicenseinquiry.DriverLicenseInquiryResponse;
-import com.dt.rts.ladmv.services.inquiries.electroniclienaddmodify.EltAddOrModifyResponse;
-import com.dt.rts.ladmv.services.inquiries.electroniclieninquiry.EltrInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.lieninquirybyplateorvin.LienInquiryByPlateOrVinResponse;
 import com.dt.rts.ladmv.services.inquiries.mvri01inquiry.MVRI01InquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.ownerslistinquirybyname.OwnersListInquiryByNameResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleinquiry.VehicleInquiryResponse;
 import com.dt.rts.ladmv.services.inquiries.vehicleslistinquirybyname.VehiclesListInquiryByNameResponse;
-import com.dt.rts.ladmv.services.transaction.latransaction.LARequest;
 import com.dt.rts.ladmv.services.transaction.latransaction.LAResponse;
-import com.dt.rts.ladmv.services.transaction.latransaction.LATransRequestType;
-import com.dt.rts.ladmv.services.transaction.latransaction.LATransResponseType;
-import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Request;
 import com.dt.rts.ladmv.services.transaction.tt38transaction.TT38Response;
-import com.dt.rts.ladmv.services.transaction.tt51transaction.TT51Request;
 import com.dt.rts.ladmv.services.transaction.tt51transaction.TT51Response;
+import com.dt.rts.ladmv.services.transaction.voidtransaction.VoidResponse;
 
 @EnableWs
 @Configuration
@@ -52,13 +47,13 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	}
 	
 	@Bean
-	public EltrInquiryResponse eltrInquiryResponse(){
-		return new EltrInquiryResponse();
+	public ELTResponse eltrInquiryResponse(){
+		return new ELTResponse();
 	}
 	
 	@Bean
-	public EltAddOrModifyResponse eltrAddOrModifyResponse(){
-		return new EltAddOrModifyResponse();
+	public ELTResponse eltrAddOrModifyResponse(){
+		return new ELTResponse();
 	}
 	
 	@Bean
@@ -96,6 +91,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	
 	@Bean LAResponse laResponse(){
 		return new LAResponse();
+	}
+	
+	@Bean VoidResponse voidResponse(){
+		return new VoidResponse();
 	}
 	/**
 	 * Validate XML Element Values
@@ -145,6 +144,11 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         res.add(new ClassPathResource("/xsd/transaction/TT51Transaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/TT38Transaction.xsd"));
         res.add(new ClassPathResource("/xsd/transaction/LATransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/transaction/VoidTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/transaction/ChangeTitleRegInfoTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/transaction/TT17Transaction.xsd"));
+        res.add(new ClassPathResource("/xsd/transaction/AF80Transaction.xsd"));
+        res.add(new ClassPathResource("/xsd/dlru/InitialDriverLicenseTransaction.xsd"));
         
 		CommonsXsdSchemaCollection collection = new CommonsXsdSchemaCollection(res.toArray(new ClassPathResource[0]));
 		collection.setInline(true);

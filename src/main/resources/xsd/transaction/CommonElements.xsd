@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema
 	xmlns="http://rts.dt.com/ladmv/services/transaction/CommonElements"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-	xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
 	targetNamespace="http://rts.dt.com/ladmv/services/transaction/CommonElements">
-	<xsd:import
-	namespace="http://rts.dt.com/ladmv/services/CoreElements"
-	schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
+		schemaLocation="../common/CoreElements.xsd" />
 
 	<xsd:complexType name="RegistrationForTitleRegTransResponseType">
 		<xsd:complexContent>
@@ -136,6 +134,8 @@
 						minOccurs="0" />
 					<xsd:element name="MortgageCode" type="xsd:string"
 						minOccurs="0" />
+					<xsd:element name="LienFlags" type="core:FlagListType"
+						minOccurs="0" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -189,10 +189,24 @@
 					</xsd:restriction>
 				</xsd:simpleType>
 			</xsd:element>
-			<xsd:element name="DealerCode">
+			<xsd:element name="DealerCode" minOccurs="0" maxOccurs="1">
 				<xsd:simpleType>
 					<xsd:restriction base="xsd:string">
 						<xsd:maxLength value="4"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="FlagSetDate1" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="FlagSetDate2" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{6}"></xsd:pattern>
 					</xsd:restriction>
 				</xsd:simpleType>
 			</xsd:element>
@@ -212,4 +226,149 @@
 				maxOccurs="1" />
 		</xsd:sequence>
 	</xsd:complexType>
+	<xsd:complexType name="TitleTypeWithPrevNonTitleInfo">
+		<xsd:complexContent>
+			<xsd:extension base="core:TitleType">
+				<xsd:sequence>
+					<xsd:element name="PrevNonTitleTransTypeCode"
+						minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="2"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="PrevNonTitleTransDate" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{6}"></xsd:pattern>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="TransIdAndTypeMetaData">
+		<xsd:sequence>
+			<xsd:element name="TranId" type="xsd:long" />
+			<xsd:element name="TranType">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ExistingDriverLicesnseMetaData">
+		<xsd:complexContent>
+			<xsd:extension base="common:OwnerMetaDataWithDriversLicense">
+				<xsd:sequence>
+					<xsd:element name="ExpirationDate">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{8}"></xsd:pattern>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="Restriction" minOccurs="0"
+						maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{2}"></xsd:pattern>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="Flags" type="core:FlagListType" />
+					<xsd:element name="Endorsement" type="xsd:string" />
+					<xsd:element name="WildLifeAndFisheryLicenseStatus"
+						type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="OOSDriverLicenseMetaData">
+		<xsd:complexContent>
+			<xsd:extension base="common:OwnerMetaDataWithDriversLicense">
+				<xsd:sequence>
+					<xsd:element name="State" type="xsd:string" />
+					<xsd:element name="IsCommercialDriverLicense" type="xsd:string" />
+					<xsd:element name="isDLComplainceWithFederalGovernment"
+						type="xsd:string" />
+					<xsd:element name="OutofStateCommercialDriverLicnese"
+						type="xsd:string" />
+					<xsd:element name="visitQueueNumber" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="NewDriverLicenseMetaData">
+		<xsd:complexContent>
+			<xsd:extension base="common:OwnerMetaData">
+				<xsd:sequence>
+					<xsd:element name="Class" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="OwnerMetaDataWithDriversLicense">
+		<xsd:complexContent>
+			<xsd:extension base="common:OwnerMetaData">
+		<xsd:sequence>
+			<xsd:element name="DLNo" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="OwnerMetaData">
+		<xsd:sequence>
+			<xsd:element name="LastName" type="common:NameWithTCTL" />
+			<xsd:element name="FirstName" type="common:NameWithTCTL" />
+			<xsd:element name="MiddleName" type="common:NameWithTCTL" />
+			<xsd:element name="Race" type="xsd:string" />
+			<xsd:element name="Gender" type="xsd:string" />
+			<xsd:element name="DateOfBirth" type="xsd:string" />
+			<xsd:element name="Suffix" type="xsd:string" />
+			<xsd:element name="Ssn" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="NameWithTCTL">
+		<xsd:sequence>
+			<xsd:element name="Name" type="xsd:string" />
+			<xsd:element name="TC" type="xsd:string" />
+			<xsd:element name="TL" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="VinOrPlateChoice">
+		<xsd:choice>
+			<xsd:sequence>
+				<xsd:element name="Vin" type="xsd:string" minOccurs="0"
+					maxOccurs="1" />
+			</xsd:sequence>
+			<xsd:sequence>
+				<xsd:element name="PlateNum" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="RegExpYear" minOccurs="0" maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:int">
+							<xsd:pattern value="[0-9][0-9]" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:simpleType name="PaymentMode">
+		<xsd:restriction base="xsd:int">
+			<xsd:enumeration value="1" />
+			<xsd:enumeration value="2" />
+			<xsd:enumeration value="4" />
+		</xsd:restriction>
+	</xsd:simpleType>
 </xsd:schema>
