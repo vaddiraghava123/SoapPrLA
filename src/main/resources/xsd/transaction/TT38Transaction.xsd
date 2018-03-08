@@ -35,7 +35,7 @@
 			<xsd:element name="MetaData" type ="common:TransasctionAttributesReqType"/>	
 			<xsd:element name="Registration"
 				type="tt38:RegistrationForTT38TransRequestType" />
-			<xsd:element name="Title" type="tt38:TitleForTT38TransRequestType" />
+			<xsd:element name="Title" type="common:TitleTypeWithPrevNonTitleInfo" />
 			<xsd:element name="Vehicle" type="tt38:VehicleForTT38TransRequestType" />
 			<xsd:element name="Owners" type="core:OwnerListType" />
 			<xsd:element name="Sale" type="tt38:SaleForTT38TransRequestType" />
@@ -82,29 +82,6 @@
 							<xsd:restriction base="xsd:string">
 								<xsd:enumeration value="Y" />
 								<xsd:enumeration value="N" />
-							</xsd:restriction>
-						</xsd:simpleType>
-					</xsd:element>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-	<xsd:complexType name="TitleForTT38TransRequestType">
-		<xsd:complexContent>
-			<xsd:extension base="core:TitleType">
-				<xsd:sequence>
-					<xsd:element name="PrevNonTitleTransTypeCode"
-						minOccurs="0">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:string">
-								<xsd:maxLength value="2"></xsd:maxLength>
-							</xsd:restriction>
-						</xsd:simpleType>
-					</xsd:element>
-					<xsd:element name="PrevNonTitleTransDate" minOccurs="0">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:string">
-								<xsd:pattern value="[0-9]{6}"></xsd:pattern>
 							</xsd:restriction>
 						</xsd:simpleType>
 					</xsd:element>

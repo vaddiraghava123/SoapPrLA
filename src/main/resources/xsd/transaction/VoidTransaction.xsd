@@ -1,0 +1,201 @@
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/transaction/VoidTransaction"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:voidtrans="http://rts.dt.com/ladmv/services/transaction/VoidTransaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/transaction/VoidTransaction">
+
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="CommonElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
+		schemaLocation="../common/CoreElements.xsd" />
+
+	<xsd:element name="VoidResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Message" type="xsd:string"/>
+				<xsd:element name="Errors" type="core:ErrorsListType"
+					minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="VoidRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Transaction" type="voidtrans:VoidTransRequestType" />
+			</xsd:sequence>
+		</xsd:complexType>
+
+	</xsd:element>
+
+	<xsd:complexType name="VoidTransRequestType">
+		<xsd:sequence>
+			<xsd:element name="MetaData" type="common:TransasctionAttributesReqType" />
+			<xsd:element name="Registration"
+				type="voidtrans:RegistrationForVoidTransRequestType" />
+			<xsd:element name="Title" type="common:TitleTypeWithPrevNonTitleInfo" />
+			<xsd:element name="Vehicle"
+				type="voidtrans:VehicleForVoidTransRequestType" />
+			<xsd:element name="Owners" type="core:OwnerListType" />
+			<xsd:element name="Sale"
+				type="voidtrans:SaleForVoidTransRequestType" />
+			<xsd:element name="LienHolder" type="common:LienHolderWithCodesType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="RegistrationForVoidTransRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="core:RegistrationType">
+				<xsd:sequence>
+					<xsd:element name="IsRenewMailToOwner" minOccurs="0"
+						maxOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="HandicappedStatus" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="3"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="LicenseCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="InCityLimits">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="IsMobileHome" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="VehicleForVoidTransRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="common:VehicleForTitleRegTransResponseType">
+				<xsd:sequence>
+					<xsd:element name="NumOfPassengers" type="xsd:int" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SaleForVoidTransRequestType">
+		<xsd:sequence>
+			<xsd:element name="SaleInfo"
+				type="voidtrans:SaleInfoForVoidTranRequestType" />
+			<xsd:element name="TaxesAndFees"
+				type="voidtrans:TaxesAndFeesForVoidTranRequestType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SaleInfoForVoidTranRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="common:SaleInfoType">
+				<xsd:sequence>
+					<xsd:element name="VendorCompensationIndicator">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="TaxDate" type="xsd:string" />
+					<xsd:element name="EffectvDate" type="xsd:string" />
+					<xsd:element name="PaymentMode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:enumeration value="1" />
+								<xsd:enumeration value="2" />
+								<xsd:enumeration value="4" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="IsSpeclPlateFirstTimeIssued"
+						minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="ElecFundTransfCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="3"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="TaxCreditState">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[A-Za-z]{2}"></xsd:pattern>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="TaxExemptionCode" type="xsd:string" />
+					<xsd:element name="CitationDate" type="xsd:string" />
+					<xsd:element name="IsInitialFeeApplicable">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="SpecialFeesCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="2"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TaxesAndFeesForVoidTranRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="common:TaxesAndFeesType">
+				<xsd:sequence>
+					<xsd:element name="StateAssignedVinFee" type="xsd:decimal" />
+					<xsd:element name="TaxableValue" type="xsd:decimal" />
+					<xsd:element name="TradeInValue" type="xsd:decimal" />
+					<xsd:element name="RemitFee" type="xsd:decimal" />
+					<xsd:element name="TitleServiceHandlingFee" type="xsd:decimal" />
+					<xsd:element name="MiscFee" type="xsd:decimal" />
+					<xsd:element name="RebateAmount" type="xsd:decimal" />
+					<xsd:element name="StatePenaltyCredit" type="xsd:decimal" />
+					<xsd:element name="LicenseCredit" type="xsd:decimal" />
+					<xsd:element name="LicensePenalityCredit" type="xsd:decimal" />
+					<xsd:element name="WheelChairLiftFee" type="xsd:decimal" />
+					<xsd:element name="ParishOrMunicTax" type="xsd:decimal" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+</xsd:schema>
