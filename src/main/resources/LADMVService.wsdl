@@ -13,7 +13,13 @@
 	xmlns:sch19="http://rts.dt.com/ladmv/services/transaction/TT17Transaction"
 	xmlns:sch2="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
 	xmlns:sch20="http://rts.dt.com/ladmv/services/transaction/AF80Transaction"
-	xmlns:sch21="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction"
+	xmlns:sch21="http://rts.dt.com/ladmv/services/dlru/InitialDriverLicenseTransaction"
+	xmlns:sch22="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+	xmlns:sch23="http://rts.dt.com/ladmv/services/dlru/DriverLicenseSearch"
+	xmlns:sch24="http://rts.dt.com/ladmv/services/dlru/DriverLicenseUpdate"
+	xmlns:sch25="http://rts.dt.com/ladmv/services/dlru/DriverLicenseVoid"
+	xmlns:sch26="http://rts.dt.com/ladmv/services/dlru/OfficeCustomerList"
+	xmlns:sch27="http://rts.dt.com/ladmv/services/reinstatement/LicensePlateTransaction"
 	xmlns:sch3="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry"
 	xmlns:sch4="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify"
 	xmlns:sch5="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN"
@@ -1946,6 +1952,25 @@
 					<xsd:enumeration value="4" />
 				</xsd:restriction>
 			</xsd:simpleType>
+			<xsd:simpleType name="RecordTypeEnum">
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="V" />
+					<xsd:enumeration value="L" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ActionEnum">
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="I" />
+					<xsd:enumeration value="M" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="DealComments">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Comments" type="xsd:string" />
+					<xsd:element minOccurs="0" name="CommentsOri" type="xsd:string" />
+					<xsd:element minOccurs="0" name="CommentsOca" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
 		</xsd:schema>
 		<xsd:schema
 			xmlns="http://rts.dt.com/ladmv/services/transaction/TT51Transaction"
@@ -2950,20 +2975,27 @@
 			</xsd:complexType>
 		</xsd:schema>
 		<xsd:schema
-			xmlns="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction"
+			xmlns="http://rts.dt.com/ladmv/services/dlru/InitialDriverLicenseTransaction"
 			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
-			xmlns:initialDL="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction"
+			xmlns:dlrucommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+			xmlns:initialDL="http://rts.dt.com/ladmv/services/dlru/InitialDriverLicenseTransaction"
 			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
 			elementFormDefault="unqualified"
-			targetNamespace="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction">
+			targetNamespace="http://rts.dt.com/ladmv/services/dlru/InitialDriverLicenseTransaction">
 			<xsd:import
 				namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
 			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements" />
 			<xsd:element name="InitialDriverLicenseResponse">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="InitialDriverLicenseResp"
+							type="dlrucommon:DriverLicenseSearchElement" />
+						<xsd:element name="Message" type="xsd:string" />
 						<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
 					</xsd:sequence>
 				</xsd:complexType>
@@ -2972,22 +3004,720 @@
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-						<xsd:element name="MetaData" type="common:TransIdAndTypeMetaData" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="ActionAndDL" type="dlrucommon:ActionAndDLMetaData" />
 						<xsd:element name="ExistingDLMetaData"
-							type="common:ExistingDriverLicesnseMetaData" />
-						<xsd:element name="OOSDLMetaData" type="common:OOSDriverLicenseMetaData" />
-						<xsd:element name="NewDLMetaData" type="common:NewDriverLicenseMetaData" />
+							type="dlrucommon:ExistingDriverLicesnseMetaData" />
+						<xsd:element name="OOSDLMetaData"
+							type="dlrucommon:OOSDriverLicenseMetaData" />
+						<xsd:element name="NewDLMetaData" type="dlrucommon:OwnerMetaDataWithTCTL" />
 						<xsd:element name="DuplicateCount" type="xsd:string" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 		</xsd:schema>
+		<xsd:schema xmlns="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:dlruCommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified"
+			targetNamespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements">
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:complexType name="TransIdAndTypeMetaData">
+				<xsd:sequence>
+					<xsd:element name="TranId" type="xsd:long" />
+					<xsd:element name="TranType">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="4" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ExistingDriverLicesnseMetaData">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaDataWithTCTLAndFlags">
+						<xsd:sequence>
+							<xsd:element name="ResEndors"
+								type="RestrictionsAndEndorsmentWithEndorsmentWLF" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="ExistingDriverLicesnseMetaDataWithOutTCTL">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaDataWithNameAndFlags">
+						<xsd:sequence>
+							<xsd:element name="ResEndors" type="RestrictionsAndExpirationDate" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="OOSDriverLicenseMetaData">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaDataWithDriversLicenseAndTCTL">
+						<xsd:sequence>
+							<xsd:element name="State" type="xsd:string" />
+							<xsd:element name="IsCommercialDriverLicense" type="xsd:string" />
+							<xsd:element name="isDLComplainceWithFederalGovernment"
+								type="xsd:string" />
+							<xsd:element minOccurs="0" name="VisitQueueNumber"
+								type="xsd:string" />
+							<xsd:element minOccurs="0" name="RealID" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="OOSDriverLicenseMetaDataWithoutTCTL">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaDataWithName">
+						<xsd:sequence>
+							<xsd:element name="State" type="xsd:string" />
+							<xsd:element name="IsCommercialDriverLicense" type="xsd:string" />
+							<xsd:element name="isDLComplainceWithFederalGovernment"
+								type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="ActionAndDLMetaData">
+				<xsd:sequence>
+					<xsd:element name="Action" type="xsd:string" />
+					<xsd:element name="DLNum" type="xsd:string" />
+					<xsd:element minOccurs="0" name="Class" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerMetaData">
+				<xsd:sequence>
+					<xsd:element name="Race" type="xsd:string" />
+					<xsd:element name="Gender" type="xsd:string" />
+					<xsd:element name="DateOfBirth" type="xsd:string" />
+					<xsd:element minOccurs="0" name="Suffix" type="xsd:string" />
+					<xsd:element minOccurs="0" name="Ssn" type="xsd:string" />
+					<xsd:element minOccurs="0" name="Class" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerMetaDataWithHieghtWeightEyes">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaData">
+						<xsd:sequence>
+							<xsd:element name="Height" type="xsd:string" />
+							<xsd:element name="Weight" type="xsd:string" />
+							<xsd:element name="Eyes" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerMetaDataWithNameHieghtWeightEyes">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaDataWithHieghtWeightEyes">
+						<xsd:sequence>
+							<xsd:element name="Name" type="xsd:string" />
+							<xsd:element name="DuplicateCount" type="xsd:string" />
+							<xsd:element name="LicenseFee" type="xsd:string" />
+							<xsd:element name="IssueDate" type="YYYYMMDDDateFormat" />
+							<xsd:element name="Endorsement" type="xsd:string" />
+							<xsd:element name="WildLifeAndFisheryLicenseStatus"
+								type="xsd:string" />
+							<xsd:element name="Restrictions" type="RestrictionsAndExpirationDate" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="RestrictionsAndExpirationDate">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="ExpirationDate">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{8}" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element maxOccurs="6" minOccurs="0" name="Restriction">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{2}" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="RestrictionsAndEndorsmentWithEndorsmentWLF">
+				<xsd:complexContent>
+					<xsd:extension base="RestrictionsAndExpirationDate">
+						<xsd:sequence>
+							<xsd:element name="Endorsement" type="xsd:string" />
+							<xsd:element name="WildLifeAndFisheryLicenseStatus"
+								type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="RestrictionsAndEndorsmentWithMilitaryDonor">
+				<xsd:complexContent>
+					<xsd:extension base="RestrictionsAndExpirationDate">
+						<xsd:sequence>
+							<xsd:element name="BloodType" type="xsd:string" />
+							<xsd:element name="Donor" type="xsd:string" />
+							<xsd:element name="Military" type="xsd:string" />
+							<xsd:element name="Vote" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerMetaDataWithTCTL">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaData">
+						<xsd:sequence>
+							<xsd:element name="LastName" type="NameWithTCTL" />
+							<xsd:element name="FirstName" type="NameWithTCTL" />
+							<xsd:element name="MiddleName" type="NameWithTCTL" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerMetaDataWithDriversLicenseAndTCTL">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaDataWithTCTL">
+						<xsd:sequence>
+							<xsd:element name="DLNo" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerMetaDataWithTCTLAndFlags">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaDataWithTCTL">
+						<xsd:sequence>
+							<xsd:element minOccurs="0" name="OwnerFlags" type="core:FlagListType" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerMetaDataWithName">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaData">
+						<xsd:sequence>
+							<xsd:element name="Name" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerMetaDataWithNameAndFlags">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaDataWithName">
+						<xsd:sequence>
+							<xsd:element minOccurs="0" name="OwnerFlags" type="core:FlagListType" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="OwnerMetaDataWithNameWithDLNum">
+				<xsd:complexContent>
+					<xsd:extension base="OwnerMetaDataWithName">
+						<xsd:sequence>
+							<xsd:element name="DLNo" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="NameWithTCTL">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Name" type="xsd:string" />
+					<xsd:element minOccurs="0" name="TC" type="xsd:string" />
+					<xsd:element minOccurs="0" name="TL" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="DLRU20AdditionalElements">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="MedicalQuestions"
+						type="MedicalQuestions" />
+					<xsd:element minOccurs="0" name="EyeVision" type="Acuity" />
+					<xsd:element minOccurs="0" name="Lens" type="Acuity" />
+					<xsd:element minOccurs="0" name="Endorsment" type="Endorsments" />
+					<xsd:element minOccurs="0" name="MedicalSelfCertification"
+						type="MedicalSelfCert" />
+					<xsd:element minOccurs="0" name="OptionalControlItems"
+						type="OptionalCntrlItems" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="MedicalQuestions">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Ok" type="xsd:string" />
+					<xsd:element minOccurs="0" name="One" type="xsd:string" />
+					<xsd:element minOccurs="0" name="Two" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Acuity">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Left" type="xsd:string" />
+					<xsd:element minOccurs="0" name="Right" type="xsd:string" />
+					<xsd:element minOccurs="0" name="Both" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="MedicalSelfCert">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="MedicalSelfCertificateNonInter"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="MedicalSelfCertificateExcInter"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="MedicalSelfCertificateNonIntra"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="MedicalSelfCertificateExcIntra"
+						type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Endorsments">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="MC" type="xsd:string" />
+					<xsd:element minOccurs="0" name="DL-TL" type="xsd:string" />
+					<xsd:element minOccurs="0" name="TNK" type="xsd:string" />
+					<xsd:element minOccurs="0" name="HAZ" type="xsd:string" />
+					<xsd:element minOccurs="0" name="PASSENGER" type="xsd:string" />
+					<xsd:element minOccurs="0" name="SB" type="xsd:string" />
+					<xsd:element minOccurs="0" name="EMR" type="xsd:string" />
+					<xsd:element minOccurs="0" name="LifeTimeHunting" type="xsd:string" />
+					<xsd:element minOccurs="0" name="HuntersEducation"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="LifeTimeFishing" type="xsd:string" />
+					<xsd:element minOccurs="0" name="BoatersEducation"
+						type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="OptionalCntrlItems">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Veteran" type="xsd:string" />
+					<xsd:element minOccurs="0" name="Cajun" type="xsd:string" />
+					<xsd:element minOccurs="0" name="FreeDocumentCredit"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="FosterChild" type="xsd:string" />
+					<xsd:element minOccurs="0" name="OrleansPar" type="xsd:string" />
+					<xsd:element minOccurs="0" name="NonPermanentAlien"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="Duplicate" type="xsd:string" />
+					<xsd:element minOccurs="0" name="PhotoRetake" type="xsd:string" />
+					<xsd:element minOccurs="0" name="ChangeData" type="xsd:string" />
+					<xsd:element minOccurs="0" name="Correction" type="xsd:string" />
+					<xsd:element minOccurs="0" name="ChangeRest" type="xsd:string" />
+					<xsd:element minOccurs="0" name="DelinqueCredit" type="xsd:string" />
+					<xsd:element minOccurs="0" name="ComercialLicensePermit"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="AssignDriverLicenseNumber"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="ApplicationFeeCredit"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="VoterId" type="xsd:string" />
+					<xsd:element minOccurs="0" name="ReferToHazardLicense"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="Interlock-Breathlizer"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="DisabledVeteran" type="xsd:string" />
+					<xsd:element minOccurs="0" name="ChildID" type="xsd:string" />
+					<xsd:element minOccurs="0" name="UndocumentAliens"
+						type="xsd:string" />
+					<xsd:element minOccurs="0"
+						name="DrivingWhileIntoxicated1-2-3-Offense" type="xsd:string" />
+					<xsd:element minOccurs="0" name="GenderOffender" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="DriverLicenseSearchElement">
+				<xsd:sequence>
+					<xsd:element name="ActionAndDL" type="ActionAndDLMetaData" />
+					<xsd:element name="ExistingDLMetaData"
+						type="ExistingDriverLicesnseMetaDataWithOutTCTL" />
+					<xsd:element name="OOSDLMetaData" type="OOSDriverLicenseMetaData" />
+					<xsd:element name="NewDLMetaData" type="OwnerMetaDataWithName" />
+					<xsd:element name="DuplicateCount" type="xsd:string" />
+					<xsd:element name="DLRAdditionalProperties" type="DLRU20AdditionalElements" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="DriverLicenseUpdateElement">
+				<xsd:sequence>
+					<xsd:element name="ActionAndDL" type="ActionAndDLMetaData" />
+					<xsd:element name="NewDLMetaData" type="OwnerMetaDataWithHieghtWeightEyes" />
+					<xsd:element name="LicenseAddress" type="PartyAddressWithDom" />
+					<xsd:element name="MailingAddress" type="PartyAddressWithDom" />
+					<xsd:element name="DLAdditionalInfo"
+						type="RestrictionsAndEndorsmentWithMilitaryDonor" />
+					<xsd:element name="HandicapInformation" type="HandicapInfo" />
+					<xsd:element name="Remarks" type="RemarksInfo" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="HandicapInfo">
+				<xsd:sequence>
+					<xsd:element name="HandicapType" type="xsd:string" />
+					<xsd:element name="HandicapControl" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="RemarksInfo">
+				<xsd:sequence>
+					<xsd:element name="RemarkOne" type="xsd:string" />
+					<xsd:element name="RemarkTwo" type="xsd:string" />
+					<xsd:element name="RemarkThree" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="PartyAddressWithDom">
+				<xsd:complexContent>
+					<xsd:extension base="core:PartyAddressType">
+						<xsd:sequence>
+							<xsd:element minOccurs="0" name="DOM" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:simpleType name="YYYYMMDDDateFormat">
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="[0-9]{8}" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="TimeFormat">
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="[0-9]{6}" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="StatusCodes">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="C" />
+					<xsd:enumeration value="I" />
+					<xsd:enumeration value="E" />
+					<xsd:enumeration value="V" />
+					<xsd:enumeration value="S" />
+					<xsd:enumeration value="*" />
+					<xsd:enumeration value="O" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:schema>
+		<xsd:schema
+			xmlns="http://rts.dt.com/ladmv/services/dlru/DriverLicenseSearch"
+			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:dlrucommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+			xmlns:searchDL="http://rts.dt.com/ladmv/services/dlru/DriverLicenseSearch"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified"
+			targetNamespace="http://rts.dt.com/ladmv/services/dlru/DriverLicenseSearch">
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements" />
+			<xsd:element name="DriverLicenseSearchRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="DriverLicenseSearch"
+							type="dlrucommon:DriverLicenseSearchElement" />
+						<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DriverLicenseSearchResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="DriverLicenseSearchResp"
+							type="dlrucommon:DriverLicenseSearchElement" />
+						<xsd:element name="FeeMessage" type="xsd:string" />
+						<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+		<xsd:schema
+			xmlns="http://rts.dt.com/ladmv/services/dlru/DriverLicenseUpdate"
+			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:dlrucommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+			xmlns:searchDL="http://rts.dt.com/ladmv/services/dlru/DriverLicenseUpdate"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified"
+			targetNamespace="http://rts.dt.com/ladmv/services/dlru/DriverLicenseUpdate">
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements" />
+			<xsd:element name="DriverLicenseUpdateRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="DriverLicenseUpdate"
+							type="dlrucommon:DriverLicenseUpdateElement" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DriverLicenseUpdateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="DriverLicenseUpdateResp"
+							type="dlrucommon:DriverLicenseUpdateElement" />
+						<xsd:element name="TotalDollar" type="xsd:string" />
+						<xsd:element name="AuditNum" type="xsd:string" />
+						<xsd:element name="OMVStatusMessage" type="xsd:string" />
+						<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+		<xsd:schema xmlns="http://rts.dt.com/ladmv/services/dlru/DriverLicenseVoid"
+			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:dlrucommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+			xmlns:dlrvoid="http://rts.dt.com/ladmv/services/dlru/DriverLicenseVoid"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified"
+			targetNamespace="http://rts.dt.com/ladmv/services/dlru/DriverLicenseVoid">
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements" />
+			<xsd:element name="DriverLicenseVoidRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="ActionAndDL" type="dlrucommon:ActionAndDLMetaData" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DriverLicenseVoidResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="ActionAndDL" type="dlrucommon:ActionAndDLMetaData" />
+						<xsd:element name="PreviousMasterInformation" type="MasterInformation" />
+						<xsd:element name="CurrentMasterInformation" type="MasterInformation" />
+						<xsd:element name="Message" type="xsd:string" />
+						<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="MasterInformation">
+				<xsd:sequence>
+					<xsd:element name="AuditNum" type="xsd:string" />
+					<xsd:element name="OwnerMetadata"
+						type="dlrucommon:OwnerMetaDataWithNameHieghtWeightEyes" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema xmlns="http://rts.dt.com/ladmv/services/dlru/OfficeCustomerList"
+			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:dlrucommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+			xmlns:offcustlist="http://rts.dt.com/ladmv/services/dlru/OfficeCustomerList"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified"
+			targetNamespace="http://rts.dt.com/ladmv/services/dlru/OfficeCustomerList">
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements" />
+			<xsd:element name="OfficeCustListRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="ActionAndDL" type="dlrucommon:ActionAndDLMetaData" />
+						<xsd:element name="BeginDate" type="dlrucommon:YYYYMMDDDateFormat" />
+						<xsd:element name="BeginTime" type="dlrucommon:TimeFormat" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="OfficeCustListResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+						<xsd:element name="CustomersList" type="CustomerList" />
+						<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="CustomerList">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Customer"
+						type="Customer" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Customer">
+				<xsd:sequence>
+					<xsd:element name="SelectionItem" type="xsd:string" />
+					<xsd:element name="Date" type="dlrucommon:YYYYMMDDDateFormat" />
+					<xsd:element name="Time" type="dlrucommon:TimeFormat" />
+					<xsd:element name="State" type="xsd:string" />
+					<xsd:element name="DriverLicense" type="xsd:string" />
+					<xsd:element name="Ssn" type="xsd:string" />
+					<xsd:element name="Name" type="xsd:string" />
+					<xsd:element name="StatusCodeList" type="StatusCodeColumns" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="StatusCodeColumns">
+				<xsd:sequence>
+					<xsd:element name="InitialInquiry" nillable="true"
+						type="dlrucommon:StatusCodes" />
+					<xsd:element name="Update" nillable="true"
+						type="dlrucommon:StatusCodes" />
+					<xsd:element name="HistoryForCDLIS" nillable="true"
+						type="dlrucommon:StatusCodes" />
+					<xsd:element name="DuplicateRecordForCDLIS" nillable="true"
+						type="dlrucommon:StatusCodes" />
+					<xsd:element name="NationalDriverRegisterInquiry"
+						nillable="true" type="dlrucommon:StatusCodes" />
+					<xsd:element name="PassedOffToCamera" nillable="true"
+						type="dlrucommon:StatusCodes" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema
+			xmlns="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
+			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:lpTrans="http://rts.dt.com/ladmv/services/reinstatement/LicensePlateTransaction"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified"
+			targetNamespace="http://rts.dt.com/ladmv/services/reinstatement/LicensePlateTransaction">
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:element name="LicensePlateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element minOccurs="0" name="Transaction"
+							type="lpTrans:LicensePlateTransResponseType" />
+						<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="LicensePlateRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="Transaction"
+							type="lpTrans:LicensePlateTransRequestType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="LicensePlateTransResponseType">
+				<xsd:sequence>
+					<xsd:element name="MetaData"
+						type="common:TransasctionAttributesReqType" />
+					<xsd:element name="Registration" type="core:RegistrationType" />
+					<xsd:element name="Title"
+						type="lpTrans:TitleForTitleRegTransRequestType" />
+					<xsd:element name="Vehicle"
+						type="lpTrans:VehicleForTitleRegTransRequestType" />
+					<xsd:element name="Owners" type="core:OwnerListType" />
+					<xsd:element name="Sale"
+						type="lpTrans:SaleForTitleRegTransRequestType" />
+					<xsd:element name="LienHolder" type="common:LienHolderWithCodesType" />
+					<xsd:element name="Comments" type="common:DealComments" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="LicensePlateTransRequestType">
+				<xsd:sequence>
+					<xsd:element name="Action" type="common:ActionEnum" />
+					<xsd:element name="InquiryType" type="common:RecordTypeEnum" />
+					<xsd:element name="MetaData"
+						type="common:TransasctionAttributesReqType" />
+					<xsd:element name="Registration" type="core:RegistrationType" />
+					<xsd:element name="Vehicle"
+						type="lpTrans:VehicleForTitleRegTransRequestType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TitleForTitleRegTransRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="core:TitleType">
+						<xsd:sequence>
+							<xsd:element minOccurs="0" name="PrevNonTitleTransTypeCode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="2" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="VehicleForTitleRegTransRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="core:TransVehicleType">
+						<xsd:sequence>
+							<xsd:element name="DupVin" type="xsd:string" />
+							<xsd:element name="NumOfPassengers" type="xsd:int" />
+							<xsd:element name="ClassCode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="4" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="SaleForTitleRegTransRequestType">
+				<xsd:sequence>
+					<xsd:element name="SaleInfo"
+						type="lpTrans:SaleInfoForTitleRegTranRequestType" />
+					<xsd:element name="TaxesAndFees" type="lpTrans:TaxesAndFeesLPRequestType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="SaleInfoForTitleRegTranRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="common:SaleInfoType">
+						<xsd:sequence>
+							<xsd:element name="SpecialFeesCode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="2" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="TaxesAndFeesLPRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="common:TaxesAndFeesType">
+						<xsd:sequence>
+							<xsd:element name="PrivacyActCompliance" type="lpTrans:DiscType" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:simpleType name="DiscType">
+				<xsd:restriction base="xsd:int">
+					<xsd:pattern value="[0-9]" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:schema>
 	</wsdl:types>
+	<wsdl:message name="DriverLicenseVoidResponse">
+		<wsdl:part element="sch25:DriverLicenseVoidResponse" name="DriverLicenseVoidResponse"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="DriverLicenseInquiryResponse">
 		<wsdl:part element="sch9:DriverLicenseInquiryResponse" name="DriverLicenseInquiryResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="LARequest">
 		<wsdl:part element="sch16:LARequest" name="LARequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="OfficeCustListRequest">
+		<wsdl:part element="sch26:OfficeCustListRequest" name="OfficeCustListRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="InitialDriverLicenseResponse">
 		<wsdl:part element="sch21:InitialDriverLicenseResponse"
@@ -3006,6 +3736,9 @@
 	<wsdl:message name="VoidResponse">
 		<wsdl:part element="sch17:VoidResponse" name="VoidResponse"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="DriverLicenseUpdateRequest">
+		<wsdl:part element="sch24:DriverLicenseUpdateRequest" name="DriverLicenseUpdateRequest"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="TitleRegResponse">
 		<wsdl:part element="sch12:TitleRegResponse" name="TitleRegResponse"></wsdl:part>
 	</wsdl:message>
@@ -3018,6 +3751,9 @@
 	</wsdl:message>
 	<wsdl:message name="DriverLicenseInquiryRequest">
 		<wsdl:part element="sch9:DriverLicenseInquiryRequest" name="DriverLicenseInquiryRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DriverLicenseSearchResponse">
+		<wsdl:part element="sch23:DriverLicenseSearchResponse" name="DriverLicenseSearchResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="VehiclesListInquiryByNameRequest">
 		<wsdl:part element="sch10:VehiclesListInquiryByNameRequest"
@@ -3037,8 +3773,14 @@
 	<wsdl:message name="TT38Response">
 		<wsdl:part element="sch15:TT38Response" name="TT38Response"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="DriverLicenseVoidRequest">
+		<wsdl:part element="sch25:DriverLicenseVoidRequest" name="DriverLicenseVoidRequest"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="VoidRequest">
 		<wsdl:part element="sch17:VoidRequest" name="VoidRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DriverLicenseUpdateResponse">
+		<wsdl:part element="sch24:DriverLicenseUpdateResponse" name="DriverLicenseUpdateResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="VehiclesListInquiryByDLOrEINResponse">
 		<wsdl:part element="sch5:VehiclesListInquiryByDLOrEINResponse"
@@ -3061,6 +3803,12 @@
 		<wsdl:part element="sch11:OwnersListInquiryByNameResponse"
 			name="OwnersListInquiryByNameResponse"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="OfficeCustListResponse">
+		<wsdl:part element="sch26:OfficeCustListResponse" name="OfficeCustListResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DriverLicenseSearchRequest">
+		<wsdl:part element="sch23:DriverLicenseSearchRequest" name="DriverLicenseSearchRequest"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="EltAddOrModifyRequest">
 		<wsdl:part element="sch4:EltAddOrModifyRequest" name="EltAddOrModifyRequest"></wsdl:part>
 	</wsdl:message>
@@ -3076,6 +3824,9 @@
 	<wsdl:message name="AF80Request">
 		<wsdl:part element="sch20:AF80Request" name="AF80Request"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="LicensePlateRequest">
+		<wsdl:part element="sch27:LicensePlateRequest" name="LicensePlateRequest"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="VehiclesListInquiryByNameResponse">
 		<wsdl:part element="sch10:VehiclesListInquiryByNameResponse"
 			name="VehiclesListInquiryByNameResponse"></wsdl:part>
@@ -3085,6 +3836,9 @@
 	</wsdl:message>
 	<wsdl:message name="LAResponse">
 		<wsdl:part element="sch16:LAResponse" name="LAResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="LicensePlateResponse">
+		<wsdl:part element="sch27:LicensePlateResponse" name="LicensePlateResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="VehicleInquiryRequest">
 		<wsdl:part element="sch0:VehicleInquiryRequest" name="VehicleInquiryRequest"></wsdl:part>
@@ -3109,6 +3863,11 @@
 			name="OwnersListInquiryByNameRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:portType name="LADMVPort">
+		<wsdl:operation name="DriverLicenseVoid">
+			<wsdl:input message="tns:DriverLicenseVoidRequest" name="DriverLicenseVoidRequest"></wsdl:input>
+			<wsdl:output message="tns:DriverLicenseVoidResponse"
+				name="DriverLicenseVoidResponse"></wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="DriverLicenseInquiry">
 			<wsdl:input message="tns:DriverLicenseInquiryRequest"
 				name="DriverLicenseInquiryRequest"></wsdl:input>
@@ -3118,6 +3877,10 @@
 		<wsdl:operation name="LA">
 			<wsdl:input message="tns:LARequest" name="LARequest"></wsdl:input>
 			<wsdl:output message="tns:LAResponse" name="LAResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="OfficeCustList">
+			<wsdl:input message="tns:OfficeCustListRequest" name="OfficeCustListRequest"></wsdl:input>
+			<wsdl:output message="tns:OfficeCustListResponse" name="OfficeCustListResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="InitialDriverLicense">
 			<wsdl:input message="tns:InitialDriverLicenseRequest"
@@ -3143,6 +3906,11 @@
 			<wsdl:input message="tns:VoidRequest" name="VoidRequest"></wsdl:input>
 			<wsdl:output message="tns:VoidResponse" name="VoidResponse"></wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="DriverLicenseUpdate">
+			<wsdl:input message="tns:DriverLicenseUpdateRequest" name="DriverLicenseUpdateRequest"></wsdl:input>
+			<wsdl:output message="tns:DriverLicenseUpdateResponse"
+				name="DriverLicenseUpdateResponse"></wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="DailyMoniesSummaryInquiry">
 			<wsdl:input message="tns:DailyMoniesSummaryInquiryRequest"
 				name="DailyMoniesSummaryInquiryRequest"></wsdl:input>
@@ -3152,6 +3920,11 @@
 		<wsdl:operation name="EltAddOrModify">
 			<wsdl:input message="tns:EltAddOrModifyRequest" name="EltAddOrModifyRequest"></wsdl:input>
 			<wsdl:output message="tns:EltAddOrModifyResponse" name="EltAddOrModifyResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DriverLicenseSearch">
+			<wsdl:input message="tns:DriverLicenseSearchRequest" name="DriverLicenseSearchRequest"></wsdl:input>
+			<wsdl:output message="tns:DriverLicenseSearchResponse"
+				name="DriverLicenseSearchResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="VehiclesListInquiryByName">
 			<wsdl:input message="tns:VehiclesListInquiryByNameRequest"
@@ -3196,6 +3969,10 @@
 			<wsdl:input message="tns:AF80Request" name="AF80Request"></wsdl:input>
 			<wsdl:output message="tns:AF80Response" name="AF80Response"></wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="LicensePlate">
+			<wsdl:input message="tns:LicensePlateRequest" name="LicensePlateRequest"></wsdl:input>
+			<wsdl:output message="tns:LicensePlateResponse" name="LicensePlateResponse"></wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="VehicleInquiry">
 			<wsdl:input message="tns:VehicleInquiryRequest" name="VehicleInquiryRequest"></wsdl:input>
 			<wsdl:output message="tns:VehicleInquiryResponse" name="VehicleInquiryResponse"></wsdl:output>
@@ -3204,6 +3981,15 @@
 	<wsdl:binding name="LADMVPortSoap11" type="tns:LADMVPort">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="DriverLicenseVoid">
+			<soap:operation soapAction="" />
+			<wsdl:input name="DriverLicenseVoidRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DriverLicenseVoidResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="DriverLicenseInquiry">
 			<soap:operation soapAction="" />
 			<wsdl:input name="DriverLicenseInquiryRequest">
@@ -3219,6 +4005,15 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="LAResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="OfficeCustList">
+			<soap:operation soapAction="" />
+			<wsdl:input name="OfficeCustListRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="OfficeCustListResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
@@ -3267,6 +4062,15 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="DriverLicenseUpdate">
+			<soap:operation soapAction="" />
+			<wsdl:input name="DriverLicenseUpdateRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DriverLicenseUpdateResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="DailyMoniesSummaryInquiry">
 			<soap:operation soapAction="" />
 			<wsdl:input name="DailyMoniesSummaryInquiryRequest">
@@ -3282,6 +4086,15 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="EltAddOrModifyResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DriverLicenseSearch">
+			<soap:operation soapAction="" />
+			<wsdl:input name="DriverLicenseSearchRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DriverLicenseSearchResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
@@ -3363,6 +4176,15 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="AF80Response">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="LicensePlate">
+			<soap:operation soapAction="" />
+			<wsdl:input name="LicensePlateRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="LicensePlateResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
