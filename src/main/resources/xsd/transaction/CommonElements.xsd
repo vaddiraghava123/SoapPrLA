@@ -371,4 +371,27 @@
 			<xsd:enumeration value="4" />
 		</xsd:restriction>
 	</xsd:simpleType>
+	
+	<xsd:simpleType name="RecordTypeEnum">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="V"/>
+            <xsd:enumeration value="L"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ActionEnum">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="I"/>
+            <xsd:enumeration value="M"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+	<!--  For Testing purpose .. will remove after test -->
+	<xsd:complexType name="DealComments">
+      <xsd:sequence>
+        <xsd:element name="Comments" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="CommentsOri" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="CommentsOca" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+	</xsd:complexType>
+	
 </xsd:schema>
