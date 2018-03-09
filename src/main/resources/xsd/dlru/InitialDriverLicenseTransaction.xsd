@@ -1,9 +1,10 @@
 <xsd:schema
-	xmlns="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction"
+	xmlns="http://rts.dt.com/ladmv/services/dlru/InitialDriverLicenseTransaction"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
-	xmlns:initialDL="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction"
-	targetNamespace="http://rts.dt.com/ladmv/services/transaction/InitialDriverLicenseTransaction">
+	xmlns:dlrucommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+	xmlns:initialDL="http://rts.dt.com/ladmv/services/dlru/InitialDriverLicenseTransaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/dlru/InitialDriverLicenseTransaction">
 	
 	<xsd:import
 		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
@@ -11,11 +12,17 @@
 	<xsd:import
 	namespace="http://rts.dt.com/ladmv/services/CoreElements"
 	schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+		schemaLocation="DLRUCommonElements.xsd" />
 	
 	<xsd:element name="InitialDriverLicenseResponse">
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="MetaData" type ="dlrucommon:TransIdAndTypeMetaData"/>
+				<xsd:element name="InitialDriverLicenseResp" type="dlrucommon:DriverLicenseSearchElement"/>
+				<xsd:element name="Message" type="xsd:string"/>
 				<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
 			</xsd:sequence>
 		</xsd:complexType>
@@ -25,13 +32,14 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="MetaData" type ="common:TransIdAndTypeMetaData"/>
-				<xsd:element name="ExistingDLMetaData" type="common:ExistingDriverLicesnseMetaData" />
-				<xsd:element name="OOSDLMetaData" type="common:OOSDriverLicenseMetaData" />
-				<xsd:element name="NewDLMetaData" type="common:NewDriverLicenseMetaData" />
+				<xsd:element name="MetaData" type ="dlrucommon:TransIdAndTypeMetaData"/>
+				<xsd:element name="ActionAndDL" type ="dlrucommon:ActionAndDLMetaData"/>
+				<xsd:element name="ExistingDLMetaData" type="dlrucommon:ExistingDriverLicesnseMetaData" />
+				<xsd:element name="OOSDLMetaData" type="dlrucommon:OOSDriverLicenseMetaData" />
+				<xsd:element name="NewDLMetaData" type="dlrucommon:OwnerMetaDataWithTCTL" />
 				<xsd:element name="DuplicateCount" type="xsd:string" />
 			</xsd:sequence>
 		</xsd:complexType>
-	</xsd:element>	
-	
+	</xsd:element>
+		
 </xsd:schema>

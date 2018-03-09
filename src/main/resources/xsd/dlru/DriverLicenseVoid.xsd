@@ -1,0 +1,52 @@
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/dlru/DriverLicenseVoid"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:dlrucommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+	xmlns:dlrvoid="http://rts.dt.com/ladmv/services/dlru/DriverLicenseVoid"
+	targetNamespace="http://rts.dt.com/ladmv/services/dlru/DriverLicenseVoid">
+	
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="../transaction/CommonElements.xsd" />
+	<xsd:import
+	namespace="http://rts.dt.com/ladmv/services/CoreElements"
+	schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+		schemaLocation="DLRUCommonElements.xsd" />
+	
+	<xsd:element name="DriverLicenseVoidRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="ActionAndDL" type ="dlrucommon:ActionAndDLMetaData"/>
+				
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DriverLicenseVoidResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="ActionAndDL" type ="dlrucommon:ActionAndDLMetaData"/>
+				<xsd:element name="PreviousMasterInformation" type ="dlrvoid:MasterInformation"/>
+				<xsd:element name="CurrentMasterInformation" type ="dlrvoid:MasterInformation"/>
+				<xsd:element name="Message" type="xsd:string"/>
+				<xsd:element name="Errors" type="core:ErrorsListType"
+					minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	
+	<xsd:complexType name="MasterInformation">
+		<xsd:sequence>
+			<xsd:element name="AuditNum" type="xsd:string" />
+			<xsd:element name="OwnerMetadata" type="dlrucommon:OwnerMetaDataWithNameHieghtWeightEyes" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+		
+</xsd:schema>
