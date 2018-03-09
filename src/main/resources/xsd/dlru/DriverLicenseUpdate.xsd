@@ -1,0 +1,44 @@
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/dlru/DriverLicenseUpdate"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:dlrucommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+	xmlns:searchDL="http://rts.dt.com/ladmv/services/dlru/DriverLicenseUpdate"
+	targetNamespace="http://rts.dt.com/ladmv/services/dlru/DriverLicenseUpdate">
+	
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="../transaction/CommonElements.xsd" />
+	<xsd:import
+	namespace="http://rts.dt.com/ladmv/services/CoreElements"
+	schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+		schemaLocation="DLRUCommonElements.xsd" />
+		
+	<xsd:element name="DriverLicenseUpdateRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="DriverLicenseUpdate" type="dlrucommon:DriverLicenseUpdateElement"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="DriverLicenseUpdateResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="DriverLicenseUpdateResp" type="dlrucommon:DriverLicenseUpdateElement"/>
+				<xsd:element name="TotalDollar" type="xsd:string"/>
+				<xsd:element name="AuditNum" type="xsd:string"/>
+				<xsd:element name="OMVStatusMessage" type="xsd:string"/>
+				<xsd:element name="Errors" type="core:ErrorsListType"
+					minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	
+</xsd:schema>
