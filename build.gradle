@@ -42,9 +42,7 @@ task genJaxb {
             mkdir(dir: classesDir)
 
             xjc(destdir: sourcesDir, removeOldOutput:'yes') {
-                schema(dir: schemaDir, includes: "common/*.xsd")
-                schema(dir: schemaDir, includes: "inquiries/*.xsd")
-                schema(dir: schemaDir, includes: "transaction/*.xsd")
+                schema(dir: schemaDir, includes: "**/*.xsd")
                 produces(dir: sourcesDir, includes: "**/*.java")
             }
 
