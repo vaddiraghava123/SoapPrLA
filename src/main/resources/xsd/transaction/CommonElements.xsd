@@ -385,7 +385,6 @@
         </xsd:restriction>
     </xsd:simpleType>
     
-	<!--  For Testing purpose .. will remove after test -->
 	<xsd:complexType name="DealComments">
       <xsd:sequence>
         <xsd:element name="Comments" type="xsd:string"  minOccurs="0" maxOccurs="1"/>

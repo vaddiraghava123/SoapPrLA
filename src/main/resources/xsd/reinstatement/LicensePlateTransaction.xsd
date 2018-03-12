@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema
-	xmlns="http://rts.dt.com/ladmv/services/transaction/TitleRegTransaction"
+	xmlns="http://rts.dt.com/ladmv/services/reinstatement/LicensePlateTransaction"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
 	xmlns:lpTrans="http://rts.dt.com/ladmv/services/reinstatement/LicensePlateTransaction"
@@ -33,16 +33,13 @@
 	</xsd:element>
 	<xsd:complexType name="LicensePlateTransResponseType">
 		<xsd:sequence>
-			<xsd:element name="MetaData" type="common:TransasctionAttributesReqType" />
-			<xsd:element name="Registration" type="core:RegistrationType" />
-			<xsd:element name="Title"
-				type="lpTrans:TitleForTitleRegTransRequestType" />
-			<xsd:element name="Vehicle"
-				type="lpTrans:VehicleForTitleRegTransRequestType" />
+			<xsd:element name="MetaData" type ="common:TransasctionAttributesRespType"/>
+			<xsd:element name="Registration" type="core:RegistrationType"/>
+			<xsd:element name="Title" type="lpTrans:TitleForLicensePlateTransResponseType"/>
+			<xsd:element name="Vehicle" type="common:VehicleForTitleRegTransResponseType"/>
 			<xsd:element name="Owners" type="core:OwnerListType" />
-			<xsd:element name="Sale"
-				type="lpTrans:SaleForTitleRegTransRequestType" />
-			<xsd:element name="LienHolder" type="common:LienHolderWithCodesType" />
+			<xsd:element name="Sale" type="lpTrans:SaleForLicensePlateTransResponseType" />
+			<xsd:element name="LienHolder" type="common:LienHolderResponseType"/>
 			<xsd:element name="Comments" type="common:DealComments" />
 		</xsd:sequence>
 	</xsd:complexType>
@@ -53,11 +50,11 @@
 			<xsd:element name="MetaData" type="common:TransasctionAttributesReqType" />
 			<xsd:element name="Registration" type="core:RegistrationType" />
 			<xsd:element name="Vehicle"
-				type="lpTrans:VehicleForTitleRegTransRequestType" />
+				type="lpTrans:VehicleForLicensePlateTransRequestType" />
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="TitleForTitleRegTransRequestType">
+	<xsd:complexType name="TitleForLicensePlateTransResponseType">
 		<xsd:complexContent>
 			<xsd:extension base="core:TitleType">
 				<xsd:sequence>
@@ -73,31 +70,27 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	<xsd:complexType name="VehicleForTitleRegTransRequestType">
-		<xsd:complexContent>
-			<xsd:extension base="core:TransVehicleType">
-				<xsd:sequence>
-					<xsd:element name="DupVin" type="xsd:string" />
-					<xsd:element name="NumOfPassengers" type="xsd:int" />
-					<xsd:element name="ClassCode">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:string">
-								<xsd:maxLength value="4"></xsd:maxLength>
-							</xsd:restriction>
-						</xsd:simpleType>
-					</xsd:element>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-	<xsd:complexType name="SaleForTitleRegTransRequestType">
+	<xsd:complexType name="VehicleForLicensePlateTransRequestType">
+	<xsd:sequence>
+		<xsd:element name="Vin">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="17"></xsd:maxLength>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:element>
+		<xsd:element name="Flags" type="core:FlagListType" />
+		<xsd:element name="DuplicateVin" type="xsd:string" />
+	</xsd:sequence>
+</xsd:complexType>
+	<xsd:complexType name="SaleForLicensePlateTransResponseType">
 		<xsd:sequence>
 			<xsd:element name="SaleInfo"
-				type="lpTrans:SaleInfoForTitleRegTranRequestType" />
-			<xsd:element name="TaxesAndFees" type="lpTrans:TaxesAndFeesLPRequestType" />
+				type="lpTrans:SaleInfoForLicensePlateTranRespType" />
+			<xsd:element name="TaxesAndFees" type="lpTrans:TaxesAndFeesLPRespType" />
 		</xsd:sequence>
 	</xsd:complexType>
-	<xsd:complexType name="SaleInfoForTitleRegTranRequestType">
+	<xsd:complexType name="SaleInfoForLicensePlateTranRespType">
 		<xsd:complexContent>
 			<xsd:extension base="common:SaleInfoType">
 				<xsd:sequence>
@@ -112,7 +105,7 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	<xsd:complexType name="TaxesAndFeesLPRequestType">
+	<xsd:complexType name="TaxesAndFeesLPRespType">
 		<xsd:complexContent>
 			<xsd:extension base="common:TaxesAndFeesType">
 				<xsd:sequence>
