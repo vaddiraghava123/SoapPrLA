@@ -13,13 +13,14 @@
 	xmlns:sch19="http://rts.dt.com/ladmv/services/transaction/TT17Transaction"
 	xmlns:sch2="http://rts.dt.com/ladmv/services/inquiries/CommonInquiryElements"
 	xmlns:sch20="http://rts.dt.com/ladmv/services/transaction/AF80Transaction"
-	xmlns:sch21="http://rts.dt.com/ladmv/services/dlru/InitialDriverLicenseTransaction"
-	xmlns:sch22="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
-	xmlns:sch23="http://rts.dt.com/ladmv/services/dlru/DriverLicenseSearch"
-	xmlns:sch24="http://rts.dt.com/ladmv/services/dlru/DriverLicenseUpdate"
-	xmlns:sch25="http://rts.dt.com/ladmv/services/dlru/DriverLicenseVoid"
-	xmlns:sch26="http://rts.dt.com/ladmv/services/dlru/OfficeCustomerList"
-	xmlns:sch27="http://rts.dt.com/ladmv/services/dlru/DLRU51Inquiry"
+	xmlns:sch21="http://rts.dt.com/ladmv/services/transaction/FetchFeesTransaction"
+	xmlns:sch22="http://rts.dt.com/ladmv/services/dlru/InitialDriverLicenseTransaction"
+	xmlns:sch23="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+	xmlns:sch24="http://rts.dt.com/ladmv/services/dlru/DriverLicenseSearch"
+	xmlns:sch25="http://rts.dt.com/ladmv/services/dlru/DriverLicenseUpdate"
+	xmlns:sch26="http://rts.dt.com/ladmv/services/dlru/DriverLicenseVoid"
+	xmlns:sch27="http://rts.dt.com/ladmv/services/dlru/OfficeCustomerList"
+	xmlns:sch28="http://rts.dt.com/ladmv/services/dlru/DLRU51Inquiry"
 	xmlns:sch3="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienInquiry"
 	xmlns:sch4="http://rts.dt.com/ladmv/services/inquiries/ElectronicLienAddModify"
 	xmlns:sch5="http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryDLEIN"
@@ -1391,7 +1392,7 @@
 			<xsd:complexType name="TitleRegTransResponseType">
 				<xsd:sequence>
 					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesRespType" />
+						type="common:TransactionAttributesRespType" />
 					<xsd:element name="Registration"
 						type="common:RegistrationForTitleRegTransResponseType" />
 					<xsd:element name="Title" type="core:TitleType" />
@@ -1404,8 +1405,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="TitleRegTransRequestType">
 				<xsd:sequence>
-					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesReqType" />
+					<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
 					<xsd:element name="Registration"
 						type="RegistrationForTitleRegTransRequestType" />
 					<xsd:element name="Title" type="TitleForTitleRegTransRequestType" />
@@ -1765,7 +1765,7 @@
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
-			<xsd:complexType name="TransasctionAttributesReqType">
+			<xsd:complexType name="TransactionAttributesReqType">
 				<xsd:sequence>
 					<xsd:element name="TranId" type="xsd:long" />
 					<xsd:element name="TranType">
@@ -1810,9 +1810,10 @@
 							</xsd:restriction>
 						</xsd:simpleType>
 					</xsd:element>
+					<xsd:element minOccurs="0" name="FlagSequence" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
-			<xsd:complexType name="TransasctionAttributesRespType">
+			<xsd:complexType name="TransactionAttributesRespType">
 				<xsd:sequence>
 					<xsd:element name="TranType" type="xsd:string" />
 					<xsd:element name="TranDate" type="xsd:string" />
@@ -2011,7 +2012,7 @@
 			<xsd:complexType name="TT51TransResponseType">
 				<xsd:sequence>
 					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesRespType" />
+						type="common:TransactionAttributesRespType" />
 					<xsd:element name="Registration"
 						type="common:RegistrationForTitleRegTransResponseType" />
 					<xsd:element name="Title" type="core:TitleType" />
@@ -2023,8 +2024,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="TT51TransRequestType">
 				<xsd:sequence>
-					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesReqType" />
+					<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
 					<xsd:element name="Registration" type="RegistrationForTT51TransRequestType" />
 					<xsd:element name="Title" type="TitleForTT51TransRequestType" />
 					<xsd:element name="Vehicle" type="VehicleForTT51TransRequestType" />
@@ -2237,8 +2237,7 @@
 			</xsd:element>
 			<xsd:complexType name="TT38TransRequestType">
 				<xsd:sequence>
-					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesReqType" />
+					<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
 					<xsd:element name="Registration" type="RegistrationForTT38TransRequestType" />
 					<xsd:element name="Title"
 						type="common:TitleTypeWithPrevNonTitleInfo" />
@@ -2392,7 +2391,7 @@
 			<xsd:complexType name="TT38TransResponseType">
 				<xsd:sequence>
 					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesRespType" />
+						type="common:TransactionAttributesRespType" />
 					<xsd:element name="Registration"
 						type="common:RegistrationForTitleRegTransResponseType" />
 					<xsd:element name="Title" type="core:TitleType" />
@@ -2435,7 +2434,7 @@
 			<xsd:complexType name="LATransResponseType">
 				<xsd:sequence>
 					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesRespType" />
+						type="common:TransactionAttributesRespType" />
 					<xsd:element name="Registration" type="RegistrationForLATransResponseType" />
 					<xsd:element name="Vehicle"
 						type="common:VehicleForTitleRegTransResponseType" />
@@ -2445,8 +2444,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="LATransRequestType">
 				<xsd:sequence>
-					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesReqType" />
+					<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
 					<xsd:element name="Registration" type="RegistrationForLATransRequestType" />
 					<xsd:element name="Sale" type="SaleForLATransRequestType" />
 				</xsd:sequence>
@@ -2582,8 +2580,7 @@
 			</xsd:element>
 			<xsd:complexType name="VoidTransRequestType">
 				<xsd:sequence>
-					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesReqType" />
+					<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
 					<xsd:element name="Registration" type="RegistrationForVoidTransRequestType" />
 					<xsd:element name="Title"
 						type="common:TitleTypeWithPrevNonTitleInfo" />
@@ -2847,7 +2844,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="ChangeTitleRegInfoTransAttributesReqType">
 				<xsd:complexContent>
-					<xsd:extension base="common:TransasctionAttributesReqType">
+					<xsd:extension base="common:TransactionAttributesReqType">
 						<xsd:sequence>
 							<xsd:element name="Comments" type="CommentsType" />
 						</xsd:sequence>
@@ -2882,8 +2879,7 @@
 			</xsd:element>
 			<xsd:complexType name="TT17RequestType">
 				<xsd:sequence>
-					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesReqType" />
+					<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
 					<xsd:element name="Registration" type="core:RegistrationType" />
 					<xsd:element name="Title"
 						type="common:TitleTypeWithPrevNonTitleInfo" />
@@ -2912,7 +2908,7 @@
 			<xsd:complexType name="TT17ResponseType">
 				<xsd:sequence>
 					<xsd:element name="MetaData"
-						type="common:TransasctionAttributesRespType" />
+						type="common:TransactionAttributesRespType" />
 					<xsd:element name="Registration" type="core:RegistrationType" />
 					<xsd:element name="Title"
 						type="common:TitleTypeWithPrevNonTitleInfo" />
@@ -2978,6 +2974,241 @@
 							</xsd:restriction>
 						</xsd:simpleType>
 					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema
+			xmlns="http://rts.dt.com/ladmv/services/transaction/FetchFeesTransaction"
+			xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+			xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+			xmlns:fetchfeestrans="http://rts.dt.com/ladmv/services/transaction/FetchFeesTransaction"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified"
+			targetNamespace="http://rts.dt.com/ladmv/services/transaction/FetchFeesTransaction">
+			<xsd:import
+				namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements" />
+			<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements" />
+			<xsd:element name="FetchFeesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element minOccurs="0" name="Transaction"
+							type="FetchFeesTransResponseType" />
+						<xsd:element minOccurs="0" name="Errors" type="core:ErrorsListType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="FetchFeesRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+						<xsd:element name="Transaction" type="FetchFeesTransRequestType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="FetchFeesTransResponseType">
+				<xsd:sequence>
+					<xsd:element name="MetaData"
+						type="common:TransactionAttributesRespType" />
+					<xsd:element name="Registration"
+						type="RegistrationForFetchFeesTransResponseType" />
+					<xsd:element name="Vehicle"
+						type="VehicleForFetchFeesTransResponseType" />
+					<xsd:element name="Sale" type="common:SaleTitleRegTranResponseType" />
+					<xsd:element name="LienHolder"
+						type="LienHolderForFetchFeesTransResponseType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="FetchFeesTransRequestType">
+				<xsd:sequence>
+					<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
+					<xsd:element name="Registration"
+						type="RegistrationForFetchFeesTransRequestType" />
+					<xsd:element name="Title" type="TitleForFetchFeesTransRequestType" />
+					<xsd:element name="Vehicle" type="VehicleForFetchFeesTransRequestType" />
+					<xsd:element name="Sale" type="SaleForFetchFeesTransRequestType" />
+					<xsd:element name="LienHolder"
+						type="LienHolderForFetchFeesTranRequestType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="RegistrationForFetchFeesTransRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="core:RegistrationType">
+						<xsd:sequence>
+							<xsd:element name="LicenseCode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="1" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element minOccurs="0" name="IsMobileHome">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y" />
+										<xsd:enumeration value="N" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="TitleForFetchFeesTransRequestType">
+				<xsd:sequence>
+					<xsd:element name="IsTitleCharged">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="VehicleForFetchFeesTransRequestType">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="Model">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="6" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="Weight">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="6" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:choice>
+					<xsd:element name="NumOfPassengers" type="xsd:int" />
+					<xsd:element name="ClassCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="4" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="SaleForFetchFeesTransRequestType">
+				<xsd:sequence>
+					<xsd:element name="SaleInfo" type="SaleInfoForFetchFeesTranRequestType" />
+					<xsd:element name="TaxesAndFees"
+						type="TaxesAndFeesForFetchFeesTranRequestType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="SaleInfoForFetchFeesTranRequestType">
+				<xsd:sequence>
+					<xsd:element name="SpecialFeesCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="2" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="TaxDate" type="xsd:string" />
+					<xsd:element name="EffectvDate" type="xsd:string" />
+					<xsd:element name="VendorCompensationIndicator">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="TaxExemptionCode" type="xsd:string" />
+					<xsd:element name="IsInitialFeeApplicable">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element minOccurs="0" name="IsSpeclPlateFirstTimeIssued">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="TaxCreditState">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[A-Za-z]{2}" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TaxesAndFeesForFetchFeesTranRequestType">
+				<xsd:complexContent>
+					<xsd:extension base="common:TaxesAndFeesType">
+						<xsd:sequence>
+							<xsd:element name="TaxableValue" type="xsd:decimal" />
+							<xsd:element name="TitleServiceHandlingFee" type="xsd:decimal" />
+							<xsd:element name="RebateAmount" type="xsd:decimal" />
+							<xsd:element name="LicenseCredit" type="xsd:decimal" />
+							<xsd:element name="TradeInValue" type="xsd:decimal" />
+							<xsd:element name="WheelChairLiftFee" type="xsd:decimal" />
+							<xsd:element name="StateAssignedVinFee" type="xsd:decimal" />
+							<xsd:element name="ParishOrMunicTax" type="xsd:decimal" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="LienHolderForFetchFeesTranRequestType">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="MortgageCodeWithUCC"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="MortgageCode" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="RegistrationForFetchFeesTransResponseType">
+				<xsd:complexContent>
+					<xsd:extension base="core:RegistrationType">
+						<xsd:sequence>
+							<xsd:element minOccurs="0" name="UseType" type="xsd:string" />
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="VehicleForFetchFeesTransResponseType">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="Model">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="6" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="Weight">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="6" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:choice>
+					<xsd:element minOccurs="0" name="NewUsedIndicator">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="N" />
+								<xsd:enumeration value="U" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="LienHolderForFetchFeesTransResponseType">
+				<xsd:sequence>
+					<xsd:element name="LienCount" type="xsd:int" />
 				</xsd:sequence>
 			</xsd:complexType>
 		</xsd:schema>
@@ -3629,9 +3860,6 @@
 			</xsd:complexType>
 		</xsd:schema>
 	</wsdl:types>
-	<wsdl:message name="DriverLicenseVoidResponse">
-		<wsdl:part element="sch25:DriverLicenseVoidResponse" name="DriverLicenseVoidResponse"></wsdl:part>
-	</wsdl:message>
 	<wsdl:message name="DriverLicenseInquiryResponse">
 		<wsdl:part element="sch9:DriverLicenseInquiryResponse" name="DriverLicenseInquiryResponse"></wsdl:part>
 	</wsdl:message>
@@ -3639,14 +3867,11 @@
 		<wsdl:part element="sch16:LARequest" name="LARequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="OfficeCustListRequest">
-		<wsdl:part element="sch26:OfficeCustListRequest" name="OfficeCustListRequest"></wsdl:part>
+		<wsdl:part element="sch27:OfficeCustListRequest" name="OfficeCustListRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="InitialDriverLicenseResponse">
-		<wsdl:part element="sch21:InitialDriverLicenseResponse"
+		<wsdl:part element="sch22:InitialDriverLicenseResponse"
 			name="InitialDriverLicenseResponse"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="TitleRegRequest">
-		<wsdl:part element="sch12:TitleRegRequest" name="TitleRegRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="EltrInquiryResponse">
 		<wsdl:part element="sch3:EltrInquiryResponse" name="EltrInquiryResponse"></wsdl:part>
@@ -3659,29 +3884,16 @@
 		<wsdl:part element="sch17:VoidResponse" name="VoidResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="DriverLicenseUpdateRequest">
-		<wsdl:part element="sch24:DriverLicenseUpdateRequest" name="DriverLicenseUpdateRequest"></wsdl:part>
+		<wsdl:part element="sch25:DriverLicenseUpdateRequest" name="DriverLicenseUpdateRequest"></wsdl:part>
 	</wsdl:message>
-	<wsdl:message name="TitleRegResponse">
-		<wsdl:part element="sch12:TitleRegResponse" name="TitleRegResponse"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="DLRU51Request">
-		<wsdl:part element="sch27:DLRU51Request" name="DLRU51Request"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="DailyMoniesSummaryInquiryRequest">
-		<wsdl:part element="sch6:DailyMoniesSummaryInquiryRequest"
-			name="DailyMoniesSummaryInquiryRequest"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="DLRU51Response">
-		<wsdl:part element="sch27:DLRU51Response" name="DLRU51Response"></wsdl:part>
+	<wsdl:message name="FetchFeesRequest">
+		<wsdl:part element="sch21:FetchFeesRequest" name="FetchFeesRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="EltAddOrModifyResponse">
 		<wsdl:part element="sch4:EltAddOrModifyResponse" name="EltAddOrModifyResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="DriverLicenseInquiryRequest">
 		<wsdl:part element="sch9:DriverLicenseInquiryRequest" name="DriverLicenseInquiryRequest"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="DriverLicenseSearchResponse">
-		<wsdl:part element="sch23:DriverLicenseSearchResponse" name="DriverLicenseSearchResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="VehiclesListInquiryByNameRequest">
 		<wsdl:part element="sch10:VehiclesListInquiryByNameRequest"
@@ -3694,6 +3906,9 @@
 	<wsdl:message name="TT51Response">
 		<wsdl:part element="sch14:TT51Response" name="TT51Response"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="FetchFeesResponse">
+		<wsdl:part element="sch21:FetchFeesResponse" name="FetchFeesResponse"></wsdl:part>
+	</wsdl:message>
 	<wsdl:message name="DailyMoniesSummaryInquiryResponse">
 		<wsdl:part element="sch6:DailyMoniesSummaryInquiryResponse"
 			name="DailyMoniesSummaryInquiryResponse"></wsdl:part>
@@ -3702,40 +3917,23 @@
 		<wsdl:part element="sch15:TT38Response" name="TT38Response"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="DriverLicenseVoidRequest">
-		<wsdl:part element="sch25:DriverLicenseVoidRequest" name="DriverLicenseVoidRequest"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="VoidRequest">
-		<wsdl:part element="sch17:VoidRequest" name="VoidRequest"></wsdl:part>
+		<wsdl:part element="sch26:DriverLicenseVoidRequest" name="DriverLicenseVoidRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="DriverLicenseUpdateResponse">
-		<wsdl:part element="sch24:DriverLicenseUpdateResponse" name="DriverLicenseUpdateResponse"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="VehiclesListInquiryByDLOrEINResponse">
-		<wsdl:part element="sch5:VehiclesListInquiryByDLOrEINResponse"
-			name="VehiclesListInquiryByDLOrEINResponse"></wsdl:part>
+		<wsdl:part element="sch25:DriverLicenseUpdateResponse" name="DriverLicenseUpdateResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="LienInquiryByPlateOrVinResponse">
 		<wsdl:part element="sch8:LienInquiryByPlateOrVinResponse"
 			name="LienInquiryByPlateOrVinResponse"></wsdl:part>
 	</wsdl:message>
-	<wsdl:message name="TT51Request">
-		<wsdl:part element="sch14:TT51Request" name="TT51Request"></wsdl:part>
-	</wsdl:message>
 	<wsdl:message name="EltrInquiryRequest">
 		<wsdl:part element="sch3:EltrInquiryRequest" name="EltrInquiryRequest"></wsdl:part>
 	</wsdl:message>
-	<wsdl:message name="MVRI01InquiryRequest">
-		<wsdl:part element="sch7:MVRI01InquiryRequest" name="MVRI01InquiryRequest"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="OwnersListInquiryByNameResponse">
-		<wsdl:part element="sch11:OwnersListInquiryByNameResponse"
-			name="OwnersListInquiryByNameResponse"></wsdl:part>
-	</wsdl:message>
 	<wsdl:message name="OfficeCustListResponse">
-		<wsdl:part element="sch26:OfficeCustListResponse" name="OfficeCustListResponse"></wsdl:part>
+		<wsdl:part element="sch27:OfficeCustListResponse" name="OfficeCustListResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="DriverLicenseSearchRequest">
-		<wsdl:part element="sch23:DriverLicenseSearchRequest" name="DriverLicenseSearchRequest"></wsdl:part>
+		<wsdl:part element="sch24:DriverLicenseSearchRequest" name="DriverLicenseSearchRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="EltAddOrModifyRequest">
 		<wsdl:part element="sch4:EltAddOrModifyRequest" name="EltAddOrModifyRequest"></wsdl:part>
@@ -3746,30 +3944,15 @@
 	<wsdl:message name="ChangeTitleRegInfoRequest">
 		<wsdl:part element="sch18:ChangeTitleRegInfoRequest" name="ChangeTitleRegInfoRequest"></wsdl:part>
 	</wsdl:message>
-	<wsdl:message name="TT17Request">
-		<wsdl:part element="sch19:TT17Request" name="TT17Request"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="AF80Request">
-		<wsdl:part element="sch20:AF80Request" name="AF80Request"></wsdl:part>
-	</wsdl:message>
 	<wsdl:message name="VehiclesListInquiryByNameResponse">
 		<wsdl:part element="sch10:VehiclesListInquiryByNameResponse"
 			name="VehiclesListInquiryByNameResponse"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="TT17Response">
-		<wsdl:part element="sch19:TT17Response" name="TT17Response"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="LAResponse">
 		<wsdl:part element="sch16:LAResponse" name="LAResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="VehicleInquiryRequest">
 		<wsdl:part element="sch0:VehicleInquiryRequest" name="VehicleInquiryRequest"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="VehicleInquiryResponse">
-		<wsdl:part element="sch0:VehicleInquiryResponse" name="VehicleInquiryResponse"></wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="AF80Response">
-		<wsdl:part element="sch20:AF80Response" name="AF80Response"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="TT38Request">
 		<wsdl:part element="sch15:TT38Request" name="TT38Request"></wsdl:part>
@@ -3778,18 +3961,67 @@
 		<wsdl:part element="sch7:MVRI01InquiryResponse" name="MVRI01InquiryResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="InitialDriverLicenseRequest">
-		<wsdl:part element="sch21:InitialDriverLicenseRequest" name="InitialDriverLicenseRequest"></wsdl:part>
+		<wsdl:part element="sch22:InitialDriverLicenseRequest" name="InitialDriverLicenseRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DriverLicenseVoidResponse">
+		<wsdl:part element="sch26:DriverLicenseVoidResponse" name="DriverLicenseVoidResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="TitleRegRequest">
+		<wsdl:part element="sch12:TitleRegRequest" name="TitleRegRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="TitleRegResponse">
+		<wsdl:part element="sch12:TitleRegResponse" name="TitleRegResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DLRU51Request">
+		<wsdl:part element="sch28:DLRU51Request" name="DLRU51Request"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DailyMoniesSummaryInquiryRequest">
+		<wsdl:part element="sch6:DailyMoniesSummaryInquiryRequest"
+			name="DailyMoniesSummaryInquiryRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DLRU51Response">
+		<wsdl:part element="sch28:DLRU51Response" name="DLRU51Response"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DriverLicenseSearchResponse">
+		<wsdl:part element="sch24:DriverLicenseSearchResponse" name="DriverLicenseSearchResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="VoidRequest">
+		<wsdl:part element="sch17:VoidRequest" name="VoidRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="VehiclesListInquiryByDLOrEINResponse">
+		<wsdl:part element="sch5:VehiclesListInquiryByDLOrEINResponse"
+			name="VehiclesListInquiryByDLOrEINResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="TT51Request">
+		<wsdl:part element="sch14:TT51Request" name="TT51Request"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="MVRI01InquiryRequest">
+		<wsdl:part element="sch7:MVRI01InquiryRequest" name="MVRI01InquiryRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="OwnersListInquiryByNameResponse">
+		<wsdl:part element="sch11:OwnersListInquiryByNameResponse"
+			name="OwnersListInquiryByNameResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="TT17Request">
+		<wsdl:part element="sch19:TT17Request" name="TT17Request"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="AF80Request">
+		<wsdl:part element="sch20:AF80Request" name="AF80Request"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="TT17Response">
+		<wsdl:part element="sch19:TT17Response" name="TT17Response"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="VehicleInquiryResponse">
+		<wsdl:part element="sch0:VehicleInquiryResponse" name="VehicleInquiryResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="AF80Response">
+		<wsdl:part element="sch20:AF80Response" name="AF80Response"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="OwnersListInquiryByNameRequest">
 		<wsdl:part element="sch11:OwnersListInquiryByNameRequest"
 			name="OwnersListInquiryByNameRequest"></wsdl:part>
 	</wsdl:message>
 	<wsdl:portType name="LADMVPort">
-		<wsdl:operation name="DriverLicenseVoid">
-			<wsdl:input message="tns:DriverLicenseVoidRequest" name="DriverLicenseVoidRequest"></wsdl:input>
-			<wsdl:output message="tns:DriverLicenseVoidResponse"
-				name="DriverLicenseVoidResponse"></wsdl:output>
-		</wsdl:operation>
 		<wsdl:operation name="DriverLicenseInquiry">
 			<wsdl:input message="tns:DriverLicenseInquiryRequest"
 				name="DriverLicenseInquiryRequest"></wsdl:input>
@@ -3810,10 +4042,6 @@
 			<wsdl:output message="tns:InitialDriverLicenseResponse"
 				name="InitialDriverLicenseResponse"></wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="TitleReg">
-			<wsdl:input message="tns:TitleRegRequest" name="TitleRegRequest"></wsdl:input>
-			<wsdl:output message="tns:TitleRegResponse" name="TitleRegResponse"></wsdl:output>
-		</wsdl:operation>
 		<wsdl:operation name="EltrInquiry">
 			<wsdl:input message="tns:EltrInquiryRequest" name="EltrInquiryRequest"></wsdl:input>
 			<wsdl:output message="tns:EltrInquiryResponse" name="EltrInquiryResponse"></wsdl:output>
@@ -3833,24 +4061,13 @@
 			<wsdl:output message="tns:DriverLicenseUpdateResponse"
 				name="DriverLicenseUpdateResponse"></wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="DLRU51">
-			<wsdl:input message="tns:DLRU51Request" name="DLRU51Request"></wsdl:input>
-			<wsdl:output message="tns:DLRU51Response" name="DLRU51Response"></wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="DailyMoniesSummaryInquiry">
-			<wsdl:input message="tns:DailyMoniesSummaryInquiryRequest"
-				name="DailyMoniesSummaryInquiryRequest"></wsdl:input>
-			<wsdl:output message="tns:DailyMoniesSummaryInquiryResponse"
-				name="DailyMoniesSummaryInquiryResponse"></wsdl:output>
+		<wsdl:operation name="FetchFees">
+			<wsdl:input message="tns:FetchFeesRequest" name="FetchFeesRequest"></wsdl:input>
+			<wsdl:output message="tns:FetchFeesResponse" name="FetchFeesResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="EltAddOrModify">
 			<wsdl:input message="tns:EltAddOrModifyRequest" name="EltAddOrModifyRequest"></wsdl:input>
 			<wsdl:output message="tns:EltAddOrModifyResponse" name="EltAddOrModifyResponse"></wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="DriverLicenseSearch">
-			<wsdl:input message="tns:DriverLicenseSearchRequest" name="DriverLicenseSearchRequest"></wsdl:input>
-			<wsdl:output message="tns:DriverLicenseSearchResponse"
-				name="DriverLicenseSearchResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="VehiclesListInquiryByName">
 			<wsdl:input message="tns:VehiclesListInquiryByNameRequest"
@@ -3868,24 +4085,52 @@
 			<wsdl:input message="tns:TT51Request" name="TT51Request"></wsdl:input>
 			<wsdl:output message="tns:TT51Response" name="TT51Response"></wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="DailyMoniesSummaryInquiry">
+			<wsdl:input message="tns:DailyMoniesSummaryInquiryRequest"
+				name="DailyMoniesSummaryInquiryRequest"></wsdl:input>
+			<wsdl:output message="tns:DailyMoniesSummaryInquiryResponse"
+				name="DailyMoniesSummaryInquiryResponse"></wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="TT38">
 			<wsdl:input message="tns:TT38Request" name="TT38Request"></wsdl:input>
 			<wsdl:output message="tns:TT38Response" name="TT38Response"></wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="DriverLicenseVoid">
+			<wsdl:input message="tns:DriverLicenseVoidRequest" name="DriverLicenseVoidRequest"></wsdl:input>
+			<wsdl:output message="tns:DriverLicenseVoidResponse"
+				name="DriverLicenseVoidResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DriverLicenseSearch">
+			<wsdl:input message="tns:DriverLicenseSearchRequest" name="DriverLicenseSearchRequest"></wsdl:input>
+			<wsdl:output message="tns:DriverLicenseSearchResponse"
+				name="DriverLicenseSearchResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ChangeTitleRegInfo">
+			<wsdl:input message="tns:ChangeTitleRegInfoRequest" name="ChangeTitleRegInfoRequest"></wsdl:input>
+			<wsdl:output message="tns:ChangeTitleRegInfoResponse"
+				name="ChangeTitleRegInfoResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="VehicleInquiry">
+			<wsdl:input message="tns:VehicleInquiryRequest" name="VehicleInquiryRequest"></wsdl:input>
+			<wsdl:output message="tns:VehicleInquiryResponse" name="VehicleInquiryResponse"></wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="MVRI01Inquiry">
 			<wsdl:input message="tns:MVRI01InquiryRequest" name="MVRI01InquiryRequest"></wsdl:input>
 			<wsdl:output message="tns:MVRI01InquiryResponse" name="MVRI01InquiryResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="TitleReg">
+			<wsdl:input message="tns:TitleRegRequest" name="TitleRegRequest"></wsdl:input>
+			<wsdl:output message="tns:TitleRegResponse" name="TitleRegResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DLRU51">
+			<wsdl:input message="tns:DLRU51Request" name="DLRU51Request"></wsdl:input>
+			<wsdl:output message="tns:DLRU51Response" name="DLRU51Response"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="OwnersListInquiryByName">
 			<wsdl:input message="tns:OwnersListInquiryByNameRequest"
 				name="OwnersListInquiryByNameRequest"></wsdl:input>
 			<wsdl:output message="tns:OwnersListInquiryByNameResponse"
 				name="OwnersListInquiryByNameResponse"></wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="ChangeTitleRegInfo">
-			<wsdl:input message="tns:ChangeTitleRegInfoRequest" name="ChangeTitleRegInfoRequest"></wsdl:input>
-			<wsdl:output message="tns:ChangeTitleRegInfoResponse"
-				name="ChangeTitleRegInfoResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="TT17">
 			<wsdl:input message="tns:TT17Request" name="TT17Request"></wsdl:input>
@@ -3895,23 +4140,10 @@
 			<wsdl:input message="tns:AF80Request" name="AF80Request"></wsdl:input>
 			<wsdl:output message="tns:AF80Response" name="AF80Response"></wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="VehicleInquiry">
-			<wsdl:input message="tns:VehicleInquiryRequest" name="VehicleInquiryRequest"></wsdl:input>
-			<wsdl:output message="tns:VehicleInquiryResponse" name="VehicleInquiryResponse"></wsdl:output>
-		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="LADMVPortSoap11" type="tns:LADMVPort">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
-		<wsdl:operation name="DriverLicenseVoid">
-			<soap:operation soapAction="" />
-			<wsdl:input name="DriverLicenseVoidRequest">
-				<soap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output name="DriverLicenseVoidResponse">
-				<soap:body use="literal" />
-			</wsdl:output>
-		</wsdl:operation>
 		<wsdl:operation name="DriverLicenseInquiry">
 			<soap:operation soapAction="" />
 			<wsdl:input name="DriverLicenseInquiryRequest">
@@ -3945,15 +4177,6 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="InitialDriverLicenseResponse">
-				<soap:body use="literal" />
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="TitleReg">
-			<soap:operation soapAction="" />
-			<wsdl:input name="TitleRegRequest">
-				<soap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output name="TitleRegResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
@@ -3993,21 +4216,12 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="DLRU51">
+		<wsdl:operation name="FetchFees">
 			<soap:operation soapAction="" />
-			<wsdl:input name="DLRU51Request">
+			<wsdl:input name="FetchFeesRequest">
 				<soap:body use="literal" />
 			</wsdl:input>
-			<wsdl:output name="DLRU51Response">
-				<soap:body use="literal" />
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="DailyMoniesSummaryInquiry">
-			<soap:operation soapAction="" />
-			<wsdl:input name="DailyMoniesSummaryInquiryRequest">
-				<soap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output name="DailyMoniesSummaryInquiryResponse">
+			<wsdl:output name="FetchFeesResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
@@ -4017,15 +4231,6 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="EltAddOrModifyResponse">
-				<soap:body use="literal" />
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="DriverLicenseSearch">
-			<soap:operation soapAction="" />
-			<wsdl:input name="DriverLicenseSearchRequest">
-				<soap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output name="DriverLicenseSearchResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
@@ -4056,12 +4261,57 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="DailyMoniesSummaryInquiry">
+			<soap:operation soapAction="" />
+			<wsdl:input name="DailyMoniesSummaryInquiryRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DailyMoniesSummaryInquiryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="TT38">
 			<soap:operation soapAction="" />
 			<wsdl:input name="TT38Request">
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="TT38Response">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DriverLicenseVoid">
+			<soap:operation soapAction="" />
+			<wsdl:input name="DriverLicenseVoidRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DriverLicenseVoidResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DriverLicenseSearch">
+			<soap:operation soapAction="" />
+			<wsdl:input name="DriverLicenseSearchRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DriverLicenseSearchResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ChangeTitleRegInfo">
+			<soap:operation soapAction="" />
+			<wsdl:input name="ChangeTitleRegInfoRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ChangeTitleRegInfoResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="VehicleInquiry">
+			<soap:operation soapAction="" />
+			<wsdl:input name="VehicleInquiryRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="VehicleInquiryResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
@@ -4074,21 +4324,30 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="TitleReg">
+			<soap:operation soapAction="" />
+			<wsdl:input name="TitleRegRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="TitleRegResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DLRU51">
+			<soap:operation soapAction="" />
+			<wsdl:input name="DLRU51Request">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DLRU51Response">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
 		<wsdl:operation name="OwnersListInquiryByName">
 			<soap:operation soapAction="" />
 			<wsdl:input name="OwnersListInquiryByNameRequest">
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="OwnersListInquiryByNameResponse">
-				<soap:body use="literal" />
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="ChangeTitleRegInfo">
-			<soap:operation soapAction="" />
-			<wsdl:input name="ChangeTitleRegInfoRequest">
-				<soap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output name="ChangeTitleRegInfoResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
@@ -4107,15 +4366,6 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="AF80Response">
-				<soap:body use="literal" />
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="VehicleInquiry">
-			<soap:operation soapAction="" />
-			<wsdl:input name="VehicleInquiryRequest">
-				<soap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output name="VehicleInquiryResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>

@@ -33,7 +33,7 @@
 	</xsd:element>
 	<xsd:complexType name="LicensePlateTransResponseType">
 		<xsd:sequence>
-			<xsd:element name="MetaData" type ="common:TransasctionAttributesRespType"/>
+			<xsd:element name="MetaData" type ="common:TransactionAttributesRespType"/>
 			<xsd:element name="Registration" type="core:RegistrationType"/>
 			<xsd:element name="Title" type="lpTrans:TitleForLicensePlateTransResponseType"/>
 			<xsd:element name="Vehicle" type="common:VehicleForTitleRegTransResponseType"/>
@@ -47,7 +47,7 @@
 		<xsd:sequence>
 			<xsd:element name="Action" type="common:ActionEnum" />
 			<xsd:element name="InquiryType" type="common:RecordTypeEnum" />
-			<xsd:element name="MetaData" type="common:TransasctionAttributesReqType" />
+			<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
 			<xsd:element name="Registration" type="core:RegistrationType" />
 			<xsd:element name="Vehicle"
 				type="lpTrans:VehicleForLicensePlateTransRequestType" />

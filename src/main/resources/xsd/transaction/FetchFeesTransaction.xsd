@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/transaction/FetchFeesTransaction"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:fetchfeestrans="http://rts.dt.com/ladmv/services/transaction/FetchFeesTransaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/transaction/FetchFeesTransaction">
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="CommonElements.xsd" />
+	<xsd:import
+	namespace="http://rts.dt.com/ladmv/services/CoreElements"
+	schemaLocation="../common/CoreElements.xsd" />
+	<xsd:element name="FetchFeesResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Transaction" type="fetchfeestrans:FetchFeesTransResponseType" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="FetchFeesRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Transaction" type="fetchfeestrans:FetchFeesTransRequestType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="FetchFeesTransResponseType">
+		<xsd:sequence>
+			<xsd:element name="MetaData" type ="common:TransactionAttributesRespType"/>
+			<xsd:element name="Registration" type="fetchfeestrans:RegistrationForFetchFeesTransResponseType"/>
+			<xsd:element name="Vehicle" type="fetchfeestrans:VehicleForFetchFeesTransResponseType"/>
+			<xsd:element name="Sale" type="common:SaleTitleRegTranResponseType" />
+			<xsd:element name="LienHolder" type="fetchfeestrans:LienHolderForFetchFeesTransResponseType"/>
+		</xsd:sequence>
+	</xsd:complexType>			
+	<xsd:complexType name="FetchFeesTransRequestType">					
+		<xsd:sequence>
+			<xsd:element name="MetaData" type ="common:TransactionAttributesReqType"/>			
+			<xsd:element name="Registration" type="fetchfeestrans:RegistrationForFetchFeesTransRequestType" />
+			<xsd:element name="Title" type="fetchfeestrans:TitleForFetchFeesTransRequestType" />
+			<xsd:element name="Vehicle" type="fetchfeestrans:VehicleForFetchFeesTransRequestType" />
+			<xsd:element name="Sale" type="fetchfeestrans:SaleForFetchFeesTransRequestType" />
+			<xsd:element name="LienHolder" type="fetchfeestrans:LienHolderForFetchFeesTranRequestType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="RegistrationForFetchFeesTransRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="core:RegistrationType">
+				<xsd:sequence>
+					<xsd:element name="LicenseCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>					
+					<xsd:element name="IsMobileHome" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TitleForFetchFeesTransRequestType">
+				<xsd:sequence>
+					<xsd:element name="IsTitleCharged" >
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="VehicleForFetchFeesTransRequestType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="Model">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="6"></xsd:maxLength>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Weight">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="6"></xsd:maxLength>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="NumOfPassengers" type="xsd:int" />
+			<xsd:element name="ClassCode">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SaleForFetchFeesTransRequestType">
+		<xsd:sequence>
+			<xsd:element name="SaleInfo" type="fetchfeestrans:SaleInfoForFetchFeesTranRequestType" />
+			<xsd:element name="TaxesAndFees" type="fetchfeestrans:TaxesAndFeesForFetchFeesTranRequestType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SaleInfoForFetchFeesTranRequestType">
+				<xsd:sequence>
+					<xsd:element name="SpecialFeesCode">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="2"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>	
+					<xsd:element name="TaxDate" type="xsd:string" />
+					<xsd:element name="EffectvDate" type="xsd:string" />
+					<xsd:element name="VendorCompensationIndicator">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="TaxExemptionCode" type="xsd:string" />
+					<xsd:element name="IsInitialFeeApplicable">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="IsSpeclPlateFirstTimeIssued" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="Y" />
+								<xsd:enumeration value="N" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="TaxCreditState">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[A-Za-z]{2}"></xsd:pattern>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TaxesAndFeesForFetchFeesTranRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="common:TaxesAndFeesType">
+				<xsd:sequence>
+					<xsd:element name="TaxableValue" type="xsd:decimal" />
+					<xsd:element name="TitleServiceHandlingFee" type="xsd:decimal" />
+					<xsd:element name="RebateAmount" type="xsd:decimal" />
+					<xsd:element name="LicenseCredit" type="xsd:decimal" />
+					<xsd:element name="TradeInValue" type="xsd:decimal" />
+					<xsd:element name="WheelChairLiftFee" type="xsd:decimal" />
+					<xsd:element name="StateAssignedVinFee" type="xsd:decimal" />
+					<xsd:element name="ParishOrMunicTax" type="xsd:decimal" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="LienHolderForFetchFeesTranRequestType">
+				<xsd:sequence>
+					<xsd:element name="MortgageCodeWithUCC" type="xsd:string" minOccurs="0" />
+					<xsd:element name="MortgageCode" type="xsd:string" minOccurs="0" />
+				</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RegistrationForFetchFeesTransResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="core:RegistrationType">
+				<xsd:sequence>
+					<xsd:element name="UseType" type="xsd:string"
+						minOccurs="0" maxOccurs="1" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="VehicleForFetchFeesTransResponseType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="Model">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="6"></xsd:maxLength>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Weight">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="6"></xsd:maxLength>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="NewUsedIndicator" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="N" />
+						<xsd:enumeration value="U" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LienHolderForFetchFeesTransResponseType">
+		<xsd:sequence>
+					<xsd:element name="LienCount" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>		
+</xsd:schema>
