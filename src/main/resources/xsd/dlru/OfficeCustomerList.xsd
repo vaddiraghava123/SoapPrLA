@@ -32,40 +32,11 @@
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
 				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
-				<xsd:element name="CustomersList" type="offcustlist:CustomerList"/>
+				<xsd:element name="CustomersList" type="dlrucommon:CustomerList"/>
 				<xsd:element name="Errors" type="core:ErrorsListType"
 					minOccurs="0" maxOccurs="1" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>	
-	
-	<xsd:complexType name="CustomerList">
-		<xsd:sequence>
-			<xsd:element name="Customer" type="offcustlist:Customer" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>	
-	
-	<xsd:complexType name="Customer">
-		<xsd:sequence>
-			<xsd:element name="SelectionItem" type="xsd:string" />
-			<xsd:element name="Date" type="dlrucommon:YYYYMMDDDateFormat" />
-			<xsd:element name="Time" type="dlrucommon:TimeFormat"/>
-			<xsd:element name="State" type="xsd:string"/>
-			<xsd:element name="DriverLicense" type="xsd:string" />
-			<xsd:element name="Ssn" type="xsd:string" />
-			<xsd:element name="Name" type="xsd:string" />
-			<xsd:element name="StatusCodeList" type="offcustlist:StatusCodeColumns" />
-		</xsd:sequence>
-	</xsd:complexType>	
-	<xsd:complexType name="StatusCodeColumns">
-		<xsd:sequence>
-			<xsd:element name="InitialInquiry" type="dlrucommon:StatusCodes" nillable="true"/>
-			<xsd:element name="Update" type="dlrucommon:StatusCodes" nillable="true"/>
-			<xsd:element name="HistoryForCDLIS" type="dlrucommon:StatusCodes" nillable="true"/>
-			<xsd:element name="DuplicateRecordForCDLIS" type="dlrucommon:StatusCodes" nillable="true"/>
-			<xsd:element name="NationalDriverRegisterInquiry" type="dlrucommon:StatusCodes" nillable="true"/>
-			<xsd:element name="PassedOffToCamera" type="dlrucommon:StatusCodes" nillable="true"/>
-		</xsd:sequence>
-	</xsd:complexType>	
 		
 </xsd:schema>

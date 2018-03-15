@@ -21,8 +21,7 @@
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
 				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
-				<xsd:element name="DriverLicenseSearch" type="dlrucommon:DriverLicenseSearchElement"/>
-				<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="DriverLicenseSearch" type="dlrucommon:DriverLicenseSearchElement"/>				
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
