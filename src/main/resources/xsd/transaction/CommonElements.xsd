@@ -165,7 +165,7 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	<xsd:complexType name="TransasctionAttributesReqType">
+	<xsd:complexType name="TransactionAttributesReqType">
 		<xsd:sequence>
 			<xsd:element name="TranId" type="xsd:long" />
 			<xsd:element name="TranType">
@@ -210,9 +210,10 @@
 					</xsd:restriction>
 				</xsd:simpleType>
 			</xsd:element>
+			<xsd:element name="FlagSequence" minOccurs="0" maxOccurs="1" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
-	<xsd:complexType name="TransasctionAttributesRespType">
+	<xsd:complexType name="TransactionAttributesRespType">
 		<xsd:sequence>
 			<xsd:element name="TranType" type="xsd:string" />
 			<xsd:element name="TranDate" type="xsd:string" />
@@ -249,7 +250,7 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	
+
 	<xsd:complexType name="TransIdAndTypeMetaData">
 		<xsd:sequence>
 			<xsd:element name="TranId" type="xsd:long" />
@@ -319,8 +320,8 @@
 	<xsd:complexType name="OwnerMetaDataWithDriversLicense">
 		<xsd:complexContent>
 			<xsd:extension base="common:OwnerMetaData">
-		<xsd:sequence>
-			<xsd:element name="DLNo" type="xsd:string" />
+				<xsd:sequence>
+					<xsd:element name="DLNo" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -344,7 +345,6 @@
 			<xsd:element name="TL" type="xsd:string" />
 		</xsd:sequence>
 	</xsd:complexType>
-	
 	<xsd:complexType name="VinOrPlateChoice">
 		<xsd:choice>
 			<xsd:sequence>

@@ -29,7 +29,7 @@
 	</xsd:element>
 	<xsd:complexType name="LATransResponseType">
 		<xsd:sequence>
-			<xsd:element name="MetaData" type="common:TransasctionAttributesRespType" />
+			<xsd:element name="MetaData" type="common:TransactionAttributesRespType" />
 			<xsd:element name="Registration" type="la:RegistrationForLATransResponseType" />
 			<xsd:element name="Vehicle"
 				type="common:VehicleForTitleRegTransResponseType" />
@@ -39,7 +39,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="LATransRequestType">
 		<xsd:sequence>
-			<xsd:element name="MetaData" type="common:TransasctionAttributesReqType" />
+			<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
 			<xsd:element name="Registration" type="la:RegistrationForLATransRequestType" />
 			<xsd:element name="Sale" type="la:SaleForLATransRequestType" />
 		</xsd:sequence>

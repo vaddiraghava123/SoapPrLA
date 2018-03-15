@@ -104,7 +104,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="ChangeTitleRegInfoTransAttributesReqType">
 		<xsd:complexContent>
-			<xsd:extension base="common:TransasctionAttributesReqType">
+			<xsd:extension base="common:TransactionAttributesReqType">
 				<xsd:sequence>
 					<xsd:element name="Comments" type="changetitlereginfotrans:CommentsType" />
 				</xsd:sequence>	

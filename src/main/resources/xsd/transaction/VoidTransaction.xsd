@@ -33,7 +33,7 @@
 
 	<xsd:complexType name="VoidTransRequestType">
 		<xsd:sequence>
-			<xsd:element name="MetaData" type="common:TransasctionAttributesReqType" />
+			<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
 			<xsd:element name="Registration"
 				type="voidtrans:RegistrationForVoidTransRequestType" />
 			<xsd:element name="Title" type="common:TitleTypeWithPrevNonTitleInfo" />
