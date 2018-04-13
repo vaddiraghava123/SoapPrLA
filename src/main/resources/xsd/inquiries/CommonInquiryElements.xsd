@@ -32,14 +32,6 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:complexType name="DealComments">
-      <xsd:sequence>
-        <xsd:element name="Comments" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
-		<xsd:element name="CommentsOri" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-		<xsd:element name="CommentsOca" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-      </xsd:sequence>
-	</xsd:complexType>
-	
 	<xsd:simpleType name="PaymentModeEnum">
 		<xsd:restriction base="xsd:token">
 			<xsd:enumeration value="OL" />
@@ -242,8 +234,8 @@
         <xsd:element name="Race" type="xsd:string" />
         <xsd:element name="Gender" type="xsd:string" />
         <xsd:element name="EyeColor" type="xsd:string" />
-        <xsd:element name="Weight" type="xsd:integer" />
-        <xsd:element name="Height" type="xsd:integer" />
+        <xsd:element name="Weight" type="xsd:string" />
+        <xsd:element name="Height" type="xsd:string" />
         <xsd:element name="E" type="xsd:string" />
         <xsd:element name="PrivacyActCompliance" type="tns:DiscType" />
         <xsd:element name="Restriction" type="xsd:string" />

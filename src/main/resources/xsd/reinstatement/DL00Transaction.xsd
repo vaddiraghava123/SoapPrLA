@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/reinstatement/DL00Transaction"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:dlruCommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+	xmlns:commonReinstatement="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
+	xmlns:dlHistoryTrans="http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction"
+	xmlns:dl00Trans="http://rts.dt.com/ladmv/services/reinstatement/DL00Transaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/reinstatement/DL00Transaction">
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="../transaction/CommonElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
+		schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+		schemaLocation="../dlru/DLRUCommonElements.xsd" />
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
+		schemaLocation="../reinstatement/CommonReinstatement.xsd" />
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction"
+		schemaLocation="../reinstatement/DriverLicenseHistoryTransaction.xsd" />
+
+	<xsd:element name="DL00TransactionResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="DL00Response" type="dl00Trans:DLHistoryTransType" />
+				<xsd:element name="Message" type="xsd:string" />
+				<xsd:element name="Errors" type="core:ErrorsListType"
+					minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="DL00TransactionRequest" type="dl00Trans:DLHistoryTransType" />
+
+	<xsd:complexType name="DLHistoryTransType">
+		<xsd:sequence>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="DL00HistoryInfo"
+					type="dlHistoryTrans:DLHistoryInfoTransactionType" />
+			</xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+</xsd:schema>

@@ -20,7 +20,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
 				<xsd:element name="ActionAndDL" type ="dlrucommon:ActionAndDLMetaData"/>
 				
 			</xsd:sequence>
@@ -30,7 +30,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
 				<xsd:element name="ActionAndDL" type ="dlrucommon:ActionAndDLMetaData"/>
 				<xsd:element name="PreviousMasterInformation" type ="dlrvoid:MasterInformation"/>
 				<xsd:element name="CurrentMasterInformation" type ="dlrvoid:MasterInformation"/>
@@ -44,7 +44,7 @@
 	<xsd:complexType name="MasterInformation">
 		<xsd:sequence>
 			<xsd:element name="AuditNum" type="xsd:string" />
-			<xsd:element name="OwnerMetadata" type="dlrucommon:OwnerMetaDataWithNameHieghtWeightEyes" />
+			<xsd:element name="Owner" type="dlrucommon:OwnerMetaDataWithNameHieghtWeightEyes" />
 		</xsd:sequence>
 	</xsd:complexType>
 	

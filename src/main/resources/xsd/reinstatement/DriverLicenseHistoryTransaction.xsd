@@ -1,0 +1,152 @@
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:dlruCommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+	xmlns:commonReinstatement="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
+	xmlns:dlHistoryTrans="http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction">
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="../transaction/CommonElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
+		schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
+		schemaLocation="CommonReinstatement.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+		schemaLocation="../dlru/DLRUCommonElements.xsd" />
+
+	<xsd:element name="DriverLicenseHistoryResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Transaction"
+					type="dlHistoryTrans:DLHistoryInfoTransactionType" />
+				<xsd:element name="Message" type="xsd:string" />
+				<xsd:element name="Errors" type="core:ErrorsListType"
+					minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="DriverLicenseHistoryRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
+				<xsd:element name="DLHistoryInquiryRequest" type="dlHistoryTrans:DLHistoryTransType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="DLHistoryTransType">
+		<xsd:sequence>
+			<xsd:element name="Action" type="core:ActionEnum" />
+			<xsd:element name="DriverLicenseNum" type="xsd:string" />
+			<xsd:element name="OperatorSocialSecurityNum" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DLHistoryInfoTransactionType">
+		<xsd:sequence>
+			<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
+			<xsd:element name="Action" type="core:ActionEnum" />
+			<xsd:element name="DLNo" type="xsd:string" />
+			<xsd:element name="DLInquiryAdditionalInfo"
+				type="dlHistoryTrans:DLInquiryAdditionalInfoType" />
+			<xsd:element name="ExistingDriverLicense"
+				type="dlHistoryTrans:ExistingDriverLicenseMetaDataType" />
+			<xsd:element name="LicenseAddress" type="dlruCommon:PartyAddressWithDom" />
+			<xsd:element name="MailingAddress" type="dlruCommon:PartyAddressWithDom" />
+			<xsd:element name="DlHistoryAdditonalInfo"
+				type="dlHistoryTrans:DLHistoryAdditionalInfoType" />
+			<xsd:element name="DateRecordCreated" type="xsd:string" />
+			<xsd:element name="dateFlagModified" type="xsd:string" />
+			<xsd:element name="UserNu" type="xsd:string" />
+			<xsd:element name="OfficeCode" type="xsd:string" />
+			<xsd:element name="OperatorSocialSecurityNum" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ExistingDriverLicenseMetaDataType">
+		<xsd:complexContent>
+			<xsd:extension base="dlruCommon:ExistingDriverLicesnseMetaData">
+				<xsd:sequence>
+					<xsd:element name="Height" type="xsd:string" />
+					<xsd:element name="Weight" type="xsd:string" />
+					<xsd:element name="Eyes" type="xsd:string" />
+					<xsd:element name="IssuedDate" type="xsd:string" />
+					<xsd:element name="LastKnownAddress" type="dlruCommon:PartyAddressWithDom" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="DLHistoryAdditionalInfoType">
+		<xsd:sequence>
+			<xsd:element name="FlagsInformation" type="dlHistoryTrans:FlagsInfoType" />
+			<xsd:element name="CommercialDriverLicenseTestInfo"
+				type="dlHistoryTrans:CommercialDriverLicenseTestInfoType" />
+			<xsd:element name="DriverEducationCompleted" type="xsd:string" />
+			<xsd:element name="DriverTestCompleted" type="xsd:string" />
+			<xsd:element name="WritingTest" type="xsd:string" />
+			<xsd:element name="Military" type="xsd:string" />
+			<xsd:element name="GPStatus" type="xsd:string" />
+			<xsd:element name="isStatusActiveOrNot" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="FlagsInfoType">
+		<xsd:sequence>
+			<xsd:element name="FeeOnly" type="xsd:string" />
+			<xsd:element name="SuspDI" type="xsd:string" />
+			<xsd:element name="SuspFR" type="xsd:string" />
+			<xsd:element name="NIFlag" type="xsd:string" />
+			<xsd:element name="Aff" type="xsd:string" />
+			<xsd:element name="Nsf" type="xsd:string" />
+			<xsd:element name="Temp" type="xsd:string" />
+			<xsd:element name="Hardship" type="xsd:string" />
+			<xsd:element name="Pet" type="xsd:string" />
+			<xsd:element name="NationalDriverRegister" type="xsd:string" />
+			<xsd:element name="PrivacyActCompliance" type="commonReinstatement:DiscType" />
+			<xsd:element name="DriverLicenseField" type="xsd:string" />
+			<xsd:element name="IgnitionInterlock" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CommercialDriverLicenseTestInfoType">
+		<xsd:sequence>
+			<xsd:element name="PrivacyDisclosureForCDLLicense" type="xsd:string" />
+			<xsd:element name="Vwp" type="xsd:string" />
+			<xsd:element name="Recon" type="xsd:string" />
+			<xsd:element name="IA" type="xsd:string" />
+			<xsd:element name="CDLMedicalTestInfo" type="dlHistoryTrans:CDLMedicalTestInfoType" />
+			<xsd:element name="OfficeIssued" type="xsd:string" />
+			<xsd:element name="PictureIssued" type="xsd:string" />
+			<xsd:element name="AuditNum" type="xsd:string" />
+			<xsd:element name="OutOfStateCDL" type="xsd:string" />
+			<xsd:element name="AttendClass" type="xsd:string" />
+			<xsd:element name="IsVaildCDLStatusOrNot" type="xsd:string" />
+			<xsd:element name="IsValidFromPreviousRenewal" type="xsd:string" />
+			<xsd:element name="CommercialLearnersPermit" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CDLMedicalTestInfoType">
+		<xsd:sequence>
+			<xsd:element name="MedicalCertification" type="xsd:string" />
+			<xsd:element name="MedicalVar" type="xsd:string" />
+			<xsd:element name="EligibleDate" type="xsd:string" />
+			<xsd:element name="HazMatEndorsement" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DLInquiryAdditionalInfoType">
+		<xsd:sequence>
+			<xsd:element name="Pseudo" type="xsd:string" />
+			<xsd:element name="Delete" type="xsd:string" />
+			<xsd:element name="CompanyFlag" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -74,7 +74,7 @@
 			<xsd:element name="Title" type="commoninquiry:InqTitleType" />
 			<xsd:element name="LienHolder" type="core:LienHolderType"/>
 			<xsd:element name="Sales" type="tns:InqSalesType"/>
-			<xsd:element name="Comments" type="commoninquiry:DealComments"/>
+			<xsd:element name="Comments" type="core:DealComments"/>
 			<xsd:element name="Errors" type="core:ErrorsListType"/>
 		</xsd:sequence>
 	</xsd:complexType>

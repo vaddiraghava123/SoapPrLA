@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/reinstatement/LS00CancellationRecord"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:dlruCommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+	xmlns:commonReinstatement="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
+	xmlns:ls00CancelTrans="http://rts.dt.com/ladmv/services/reinstatement/LS00CancellationRecord"
+	xmlns:cn00="http://rts.dt.com/ladmv/services/reinstatement/CancellationTransaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/reinstatement/LS00CancellationRecord">
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="../transaction/CommonElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
+		schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+		schemaLocation="../dlru/DLRUCommonElements.xsd" />
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
+		schemaLocation="../reinstatement/CommonReinstatement.xsd" />
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/reinstatement/CancellationTransaction"
+		schemaLocation="../reinstatement/CancellationTransaction.xsd" />
+
+	<xsd:element name="LS00CancellationRecordResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Action" type="core:ActionEnum"/>
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
+				<xsd:element name="Transaction" type="cn00:CancellationTrans" />
+				<xsd:element name="StatusMessage" type="xsd:string" />
+				<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1" />				
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="LS00CancellationRecordRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
+				<xsd:element name="Transaction" type="ls00CancelTrans:LS00CancellationRecordTransRequestType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="LS00CancellationRecordTransRequestType">
+		<xsd:sequence>
+			<xsd:element name="Action" type="core:ActionEnum" />
+			<xsd:element name="DLNum" type="xsd:string" />
+			<xsd:element name="AssociateRecords" type="commonReinstatement:AssociatedRecord" />
+			<xsd:element name="OperatorSocialSecurityNum" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">
+						Operators OID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

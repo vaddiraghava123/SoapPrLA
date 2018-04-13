@@ -15,7 +15,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
-				<xsd:element name="MVLInquiryRequest" type="mvlinquiry:MVLInquiry"/>
+				<xsd:element name="InquiryRequest" type="mvlinquiry:MVLInquiry"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -23,13 +23,13 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType"/>
-				<xsd:element name="MVLInquiryResponse" type="mvlinquiry:MVLInquiryResp"/>
+				<xsd:element name="InquiryResponse" type="mvlinquiry:MVLInquiryResp"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:complexType name="MVLInquiry">
         <xsd:sequence>
-            <xsd:element name="MVLInquiryType" type="commoninquiry:LienInquiryTypeEnum"/>
+            <xsd:element name="InquiryType" type="commoninquiry:LienInquiryTypeEnum"/>
             <xsd:choice>
             	<xsd:sequence>
             		<xsd:element name="Vin" type="xsd:string" minOccurs="0" maxOccurs="1"/>
@@ -49,7 +49,7 @@
     </xsd:complexType>
     <xsd:complexType name="MVLInquiryResp">
     	<xsd:sequence>
-    		<xsd:element name="MVLInquiryTypeResp" type="commoninquiry:LienInquiryTypeEnum" />
+    		<xsd:element name="InquiryTypeResp" type="commoninquiry:LienInquiryTypeEnum" />
     		<xsd:choice>
             	<xsd:sequence>
             		<xsd:element name="VinRequested" type="xsd:string" minOccurs="0" maxOccurs="1"/>
@@ -65,8 +65,8 @@
 					</xsd:element>
             	</xsd:sequence>
             </xsd:choice>
-            <xsd:element name="MVLVehicle" type="core:TransVehicleType"/>
-            <xsd:element name="MVLOwners" type="mvlinquiry:MVLOwnersType"/>
+            <xsd:element name="Vehicle" type="core:TransVehicleType"/>
+            <xsd:element name="Owners" type="mvlinquiry:MVLOwnersType"/>
             <xsd:element name="LienHolder1" type="core:LienHolderType"/>
             <xsd:element name="LienHolder2" type="core:LienHolderType"/>
             <xsd:element name="LienHolder3" type="core:LienHolderType"/>
@@ -76,8 +76,8 @@
     
     <xsd:complexType name="MVLOwnersType">
 		<xsd:sequence>
-			<xsd:element name="MVLPrimaryOwner" type="core:PrimaryOwnerType" minOccurs="0" maxOccurs="1"/>
-			<xsd:element name="MVLSecondaryOwner" type="core:SecondaryOwnerType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="PrimaryOwner" type="core:PrimaryOwnerType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="SecondaryOwner" type="core:SecondaryOwnerType" minOccurs="0" maxOccurs="1"/>
 		</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema>

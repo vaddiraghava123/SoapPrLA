@@ -1,0 +1,1438 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Documentation for </title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_transaction_TT38Transaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl', 
+				'properties_TT38Request', 
+				'properties_TT38Response');
+var usedByBoxes= new Array('usedBy_TT38Request', 
+				'usedBy_TT38Response', 
+				'usedBy_TT38TransRequestType', 
+				'usedBy_RegistrationForTT38TransRequestType', 
+				'usedBy_VehicleForTT38TransRequestType', 
+				'usedBy_SaleForTT38TransRequestType', 
+				'usedBy_SaleInfoForTT38TranRequestType', 
+				'usedBy_TaxesAndFeesForTT38TranRequestType', 
+				'usedBy_TT38TransResponseType');
+var sourceBoxes= new Array('source_TT38Request', 
+				'source_TT38Response', 
+				'source_TT38TransRequestType', 
+				'source_RegistrationForTT38TransRequestType', 
+				'source_VehicleForTT38TransRequestType', 
+				'source_SaleForTT38TransRequestType', 
+				'source_SaleInfoForTT38TranRequestType', 
+				'source_TaxesAndFeesForTT38TranRequestType', 
+				'source_TT38TransResponseType');
+var instanceBoxes= new Array('instance_TT38Request', 
+				'instance_TT38Response');
+var diagramBoxes= new Array('diagram_TT38Request', 
+				'diagram_TT38Response', 
+				'diagram_TT38TransRequestType', 
+				'diagram_RegistrationForTT38TransRequestType', 
+				'diagram_VehicleForTT38TransRequestType', 
+				'diagram_SaleForTT38TransRequestType', 
+				'diagram_SaleInfoForTT38TranRequestType', 
+				'diagram_TaxesAndFeesForTT38TranRequestType', 
+				'diagram_TT38TransResponseType');
+var modelBoxes= new Array('model_TT38Request', 
+				'model_TT38Response', 
+				'model_TT38TransRequestType', 
+				'model_RegistrationForTT38TransRequestType', 
+				'model_VehicleForTT38TransRequestType', 
+				'model_SaleForTT38TransRequestType', 
+				'model_SaleInfoForTT38TranRequestType', 
+				'model_TaxesAndFeesForTT38TranRequestType', 
+				'model_TT38TransResponseType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="schema_NAMESPACE_http___rts.dt.com_ladmv_services_transaction_TT38Transaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl"></a><div class="componentTitle">Inner Schema <span class="qname">LADMVService.wsdl</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_transaction_TT38Transaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_transaction_TT38Transaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_transaction_TT38Transaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">attribute form default</td>
+                                    <td><b>unqualified</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">element form default</td>
+                                    <td><b>unqualified</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TT38Request"></a><div class="componentTitle">Element <span class="qname">TT38Request</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TT38Request" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TT38Request');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TT38Request" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Element_TT38Request.png" usemap="#LADMVService_wsdl_Element_TT38Request" /><map name="LADMVService_wsdl_Element_TT38Request" id="LADMVService_wsdl_Element_TT38Request"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TT38Request" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TT38Request');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TT38Request" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_TT38Request" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_TT38Request');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_TT38Request" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Message </td>
+                                    <td><b><a href="ladmv.html#http___rts.dt.com_ladmv_TT38Request" target="mainFrame" title="http://rts.dt.com/ladmv" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv')">tns:TT38Request</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_TT38Request" type="image" src="img/btM.gif" value="-" onclick="switchState('model_TT38Request');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_TT38Request" style="display:block"><b>AuthHeader</b> , <b>Transaction</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>AuthHeader</b>, <b>Transaction</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_TT38Request" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_TT38Request');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_TT38Request" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;TT38Request</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"http://rts.dt.com/ladmv/services/transaction/TT38Transaction"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;AuthHeader</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/AuthHeader&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Transaction</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Transaction&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/TT38Request&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TT38Request" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TT38Request');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TT38Request" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TT38Request"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AuthHeader"</span><span class="tAN"> type=</span><span class="tAV">"core:AuthHeaderType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Transaction"</span><span class="tAN"> type=</span><span class="tAV">"TT38TransRequestType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TT38Response"></a><div class="componentTitle">Element <span class="qname">TT38Response</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TT38Response" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TT38Response');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TT38Response" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Element_TT38Response.png" usemap="#LADMVService_wsdl_Element_TT38Response" /><map name="LADMVService_wsdl_Element_TT38Response" id="LADMVService_wsdl_Element_TT38Response"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TT38Response" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TT38Response');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TT38Response" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_TT38Response" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_TT38Response');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_TT38Response" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Message </td>
+                                    <td><b><a href="ladmv.html#http___rts.dt.com_ladmv_TT38Response" target="mainFrame" title="http://rts.dt.com/ladmv" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv')">tns:TT38Response</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_TT38Response" type="image" src="img/btM.gif" value="-" onclick="switchState('model_TT38Response');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_TT38Response" style="display:block"><b>AuthHeader</b> , <b>Transaction{0,1}</b> , <b>Errors{0,1}</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>AuthHeader</b>, <b>Errors</b>, <b>Transaction</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_TT38Response" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_TT38Response');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_TT38Response" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;TT38Response</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"http://rts.dt.com/ladmv/services/transaction/TT38Transaction"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;AuthHeader</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/AuthHeader&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Transaction</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Transaction&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Errors</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Errors&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/TT38Response&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TT38Response" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TT38Response');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TT38Response" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TT38Response"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AuthHeader"</span><span class="tAN"> type=</span><span class="tAV">"core:AuthHeaderType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"Transaction"</span><span class="tAN"> type=</span><span class="tAV">"TT38TransResponseType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"Errors"</span><span class="tAN"> type=</span><span class="tAV">"core:ErrorsListType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TT38TransRequestType"></a><div class="componentTitle">Complex Type <span class="qname">TT38TransRequestType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TT38TransRequestType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_TT38TransRequestType.png" usemap="#LADMVService_wsdl_Complex_Type_TT38TransRequestType" /><map name="LADMVService_wsdl_Complex_Type_TT38TransRequestType" id="LADMVService_wsdl_Complex_Type_TT38TransRequestType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_TT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_TT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_TT38TransRequestType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>TT38Request/Transaction</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_TT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_TT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_TT38TransRequestType" style="display:block"><b>MetaData</b> , <b>Registration</b> , <b>Title</b> , <b>Vehicle</b> , <b>Owners</b> , <b>Sale</b> , <b>LienHolder</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>LienHolder</b>, <b>MetaData</b>, <b>Owners</b>, <b>Registration</b>, <b>Sale</b>, <b>Title</b>, <b>Vehicle</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TT38TransRequestType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"TT38TransRequestType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MetaData"</span><span class="tAN"> type=</span><span class="tAV">"common:TransactionAttributesReqType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Registration"</span><span class="tAN"> type=</span><span class="tAV">"RegistrationForTT38TransRequestType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Title"</span><span class="tAN"> type=</span><span class="tAV">"common:TitleTypeWithPrevNonTitleInfo"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Vehicle"</span><span class="tAN"> type=</span><span class="tAV">"VehicleForTT38TransRequestType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Owners"</span><span class="tAN"> type=</span><span class="tAV">"core:OwnerListType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Sale"</span><span class="tAN"> type=</span><span class="tAV">"SaleForTT38TransRequestType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"LienHolder"</span><span class="tAN"> type=</span><span class="tAV">"core:LienHolderType"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="RegistrationForTT38TransRequestType"></a><div class="componentTitle">Complex Type <span class="qname">RegistrationForTT38TransRequestType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_RegistrationForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_RegistrationForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_RegistrationForTT38TransRequestType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_RegistrationForTT38TransRequestType.png" usemap="#LADMVService_wsdl_Complex_Type_RegistrationForTT38TransRequestType" /><map name="LADMVService_wsdl_Complex_Type_RegistrationForTT38TransRequestType" id="LADMVService_wsdl_Complex_Type_RegistrationForTT38TransRequestType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="CoreElements.html#RegistrationType" target="mainFrame" title="http://rts.dt.com/ladmv/services/CoreElements" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/CoreElements')">RegistrationType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>RegistrationType</b><ul class="internal">
+                                    <li class="internal"><b><a href="TT38Transaction.html#RegistrationForTT38TransRequestType" target="mainFrame" title="http://rts.dt.com/ladmv/services/transaction/TT38Transaction" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/transaction/TT38Transaction')">RegistrationForTT38TransRequestType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_RegistrationForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_RegistrationForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_RegistrationForTT38TransRequestType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>TT38TransRequestType/Registration</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_RegistrationForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_RegistrationForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_RegistrationForTT38TransRequestType" style="display:block"><b>IsRenewMailToOwner{0,1}</b> , <b>HandicappedStatus{0,1}</b> , <b>LicenseCode</b> , <b>InCityLimits</b> , <b>IsMobileHome{0,1}</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>HandicappedStatus</b>, <b>InCityLimits</b>, <b>IsMobileHome</b>, <b>IsRenewMailToOwner</b>, <b>LicenseCode</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_RegistrationForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_RegistrationForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_RegistrationForTT38TransRequestType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"RegistrationForTT38TransRequestType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:extension</span><span class="tAN"> base=</span><span class="tAV">"core:RegistrationType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"IsRenewMailToOwner"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"Y"</span><span class="tEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"N"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"HandicappedStatus"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:maxLength</span><span class="tAN"> value=</span><span class="tAV">"3"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"LicenseCode"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:maxLength</span><span class="tAN"> value=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"InCityLimits"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"Y"</span><span class="tEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"N"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"IsMobileHome"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"Y"</span><span class="tEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"N"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="VehicleForTT38TransRequestType"></a><div class="componentTitle">Complex Type <span class="qname">VehicleForTT38TransRequestType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_VehicleForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_VehicleForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_VehicleForTT38TransRequestType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_VehicleForTT38TransRequestType.png" usemap="#LADMVService_wsdl_Complex_Type_VehicleForTT38TransRequestType" /><map name="LADMVService_wsdl_Complex_Type_VehicleForTT38TransRequestType" id="LADMVService_wsdl_Complex_Type_VehicleForTT38TransRequestType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="CoreElements.html#TransVehicleType" target="mainFrame" title="http://rts.dt.com/ladmv/services/CoreElements" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/CoreElements')">TransVehicleType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>TransVehicleType</b><ul class="internal">
+                                    <li class="internal"><b><a href="TT38Transaction.html#VehicleForTT38TransRequestType" target="mainFrame" title="http://rts.dt.com/ladmv/services/transaction/TT38Transaction" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/transaction/TT38Transaction')">VehicleForTT38TransRequestType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_VehicleForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_VehicleForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_VehicleForTT38TransRequestType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>TT38TransRequestType/Vehicle</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_VehicleForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_VehicleForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_VehicleForTT38TransRequestType" style="display:block"><b>NumOfPassengers</b> , <b>ClassCode</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>ClassCode</b>, <b>NumOfPassengers</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_VehicleForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_VehicleForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_VehicleForTT38TransRequestType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"VehicleForTT38TransRequestType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:extension</span><span class="tAN"> base=</span><span class="tAV">"core:TransVehicleType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"NumOfPassengers"</span><span class="tAN"> type=</span><span class="tAV">"xsd:int"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ClassCode"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:maxLength</span><span class="tAN"> value=</span><span class="tAV">"4"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SaleForTT38TransRequestType"></a><div class="componentTitle">Complex Type <span class="qname">SaleForTT38TransRequestType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SaleForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_SaleForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SaleForTT38TransRequestType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_SaleForTT38TransRequestType.png" usemap="#LADMVService_wsdl_Complex_Type_SaleForTT38TransRequestType" /><map name="LADMVService_wsdl_Complex_Type_SaleForTT38TransRequestType" id="LADMVService_wsdl_Complex_Type_SaleForTT38TransRequestType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_SaleForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_SaleForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_SaleForTT38TransRequestType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>TT38TransRequestType/Sale</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SaleForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_SaleForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SaleForTT38TransRequestType" style="display:block"><b>SaleInfo</b> , <b>TaxesAndFees</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>SaleInfo</b>, <b>TaxesAndFees</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SaleForTT38TransRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_SaleForTT38TransRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SaleForTT38TransRequestType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"SaleForTT38TransRequestType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"SaleInfo"</span><span class="tAN"> type=</span><span class="tAV">"SaleInfoForTT38TranRequestType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TaxesAndFees"</span><span class="tAN"> type=</span><span class="tAV">"TaxesAndFeesForTT38TranRequestType"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SaleInfoForTT38TranRequestType"></a><div class="componentTitle">Complex Type <span class="qname">SaleInfoForTT38TranRequestType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SaleInfoForTT38TranRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_SaleInfoForTT38TranRequestType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SaleInfoForTT38TranRequestType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_SaleInfoForTT38TranRequestType.png" usemap="#LADMVService_wsdl_Complex_Type_SaleInfoForTT38TranRequestType" /><map name="LADMVService_wsdl_Complex_Type_SaleInfoForTT38TranRequestType" id="LADMVService_wsdl_Complex_Type_SaleInfoForTT38TranRequestType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="CommonElements.html#SaleInfoType" target="mainFrame" title="http://rts.dt.com/ladmv/services/transaction/CommonElements" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/transaction/CommonElements')">SaleInfoType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>SaleInfoType</b><ul class="internal">
+                                    <li class="internal"><b><a href="TT38Transaction.html#SaleInfoForTT38TranRequestType" target="mainFrame" title="http://rts.dt.com/ladmv/services/transaction/TT38Transaction" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/transaction/TT38Transaction')">SaleInfoForTT38TranRequestType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_SaleInfoForTT38TranRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_SaleInfoForTT38TranRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_SaleInfoForTT38TranRequestType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>SaleForTT38TransRequestType/SaleInfo</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SaleInfoForTT38TranRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_SaleInfoForTT38TranRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SaleInfoForTT38TranRequestType" style="display:block"><b>VendorCompensationIndicator</b> , <b>TaxDate</b> , <b>EffectvDate</b> , <b>PaymentMode</b> , <b>ElecFundTransfCode</b> , <b>TaxExemptionCode</b> , <b>CitationDate</b> , <b>SpecialFeesCode</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>CitationDate</b>, <b>EffectvDate</b>, <b>ElecFundTransfCode</b>, <b>PaymentMode</b>, <b>SpecialFeesCode</b>, <b>TaxDate</b>, <b>TaxExemptionCode</b>, <b>VendorCompensationIndicator</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SaleInfoForTT38TranRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_SaleInfoForTT38TranRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SaleInfoForTT38TranRequestType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"SaleInfoForTT38TranRequestType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:extension</span><span class="tAN"> base=</span><span class="tAV">"common:SaleInfoType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"VendorCompensationIndicator"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"Y"</span><span class="tEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"N"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TaxDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"EffectvDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"PaymentMode"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:int"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"2"</span><span class="tEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:enumeration</span><span class="tAN"> value=</span><span class="tAV">"4"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ElecFundTransfCode"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:maxLength</span><span class="tAN"> value=</span><span class="tAV">"3"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TaxExemptionCode"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CitationDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"SpecialFeesCode"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:restriction</span><span class="tAN"> base=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;xsd:maxLength</span><span class="tAN"> value=</span><span class="tAV">"2"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/xsd:restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TaxesAndFeesForTT38TranRequestType"></a><div class="componentTitle">Complex Type <span class="qname">TaxesAndFeesForTT38TranRequestType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TaxesAndFeesForTT38TranRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TaxesAndFeesForTT38TranRequestType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TaxesAndFeesForTT38TranRequestType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_TaxesAndFeesForTT38TranRequestType.png" usemap="#LADMVService_wsdl_Complex_Type_TaxesAndFeesForTT38TranRequestType" /><map name="LADMVService_wsdl_Complex_Type_TaxesAndFeesForTT38TranRequestType" id="LADMVService_wsdl_Complex_Type_TaxesAndFeesForTT38TranRequestType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="CommonElements.html#TaxesAndFeesType" target="mainFrame" title="http://rts.dt.com/ladmv/services/transaction/CommonElements" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/transaction/CommonElements')">TaxesAndFeesType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>TaxesAndFeesType</b><ul class="internal">
+                                    <li class="internal"><b><a href="TT38Transaction.html#TaxesAndFeesForTT38TranRequestType" target="mainFrame" title="http://rts.dt.com/ladmv/services/transaction/TT38Transaction" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/transaction/TT38Transaction')">TaxesAndFeesForTT38TranRequestType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_TaxesAndFeesForTT38TranRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_TaxesAndFeesForTT38TranRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_TaxesAndFeesForTT38TranRequestType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>SaleForTT38TransRequestType/TaxesAndFees</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_TaxesAndFeesForTT38TranRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_TaxesAndFeesForTT38TranRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_TaxesAndFeesForTT38TranRequestType" style="display:block"><b>TaxableValue</b> , <b>TradeInValue</b> , <b>RemitFee</b> , <b>TitleServiceHandlingFee</b> , <b>MiscFee</b> , <b>RebateAmount</b> , <b>WheelChairLiftFee</b> , <b>TourismFee</b> , <b>TourismVCFee</b> , <b>StateSalesTax</b> , <b>ParishTax</b> , <b>MunicipalityTax</b> , <b>StateTaxPenalty</b> , <b>StateInterest</b> , <b>TitleFee</b> , <b>MortgageFee</b> , <b>LicensePlateFee</b> , <b>PlateTransferFee</b> , <b>PlatePenaltyFee</b> , <b>SpecialPlateFirstIssueFee</b> , <b>RoyaltyFee</b> , <b>ExpeditedTitleFee</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>ExpeditedTitleFee</b>, <b>LicensePlateFee</b>, <b>MiscFee</b>, <b>MortgageFee</b>, <b>MunicipalityTax</b>, <b>ParishTax</b>, <b>PlatePenaltyFee</b>, <b>PlateTransferFee</b>, <b>RebateAmount</b>, <b>RemitFee</b>, <b>RoyaltyFee</b>, <b>SpecialPlateFirstIssueFee</b>, <b>StateInterest</b>, <b>StateSalesTax</b>, <b>StateTaxPenalty</b>, <b>TaxableValue</b>, <b>TitleFee</b>, <b>TitleServiceHandlingFee</b>, <b>TourismFee</b>, <b>TourismVCFee</b>, <b>TradeInValue</b>, <b>WheelChairLiftFee</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TaxesAndFeesForTT38TranRequestType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TaxesAndFeesForTT38TranRequestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TaxesAndFeesForTT38TranRequestType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"TaxesAndFeesForTT38TranRequestType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:extension</span><span class="tAN"> base=</span><span class="tAV">"common:TaxesAndFeesType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TaxableValue"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TradeInValue"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"RemitFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TitleServiceHandlingFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MiscFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"RebateAmount"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"WheelChairLiftFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TourismFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TourismVCFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"StateSalesTax"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ParishTax"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MunicipalityTax"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"StateTaxPenalty"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"StateInterest"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TitleFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MortgageFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"LicensePlateFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"PlateTransferFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"PlatePenaltyFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"SpecialPlateFirstIssueFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"RoyaltyFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ExpeditedTitleFee"</span><span class="tAN"> type=</span><span class="tAV">"xsd:decimal"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TT38TransResponseType"></a><div class="componentTitle">Complex Type <span class="qname">TT38TransResponseType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/transaction/TT38Transaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TT38TransResponseType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TT38TransResponseType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TT38TransResponseType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_TT38TransResponseType.png" usemap="#LADMVService_wsdl_Complex_Type_TT38TransResponseType" /><map name="LADMVService_wsdl_Complex_Type_TT38TransResponseType" id="LADMVService_wsdl_Complex_Type_TT38TransResponseType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_TT38TransResponseType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_TT38TransResponseType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_TT38TransResponseType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>TT38Response/Transaction</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_TT38TransResponseType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_TT38TransResponseType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_TT38TransResponseType" style="display:block"><b>MetaData</b> , <b>Registration</b> , <b>Title</b> , <b>Vehicle</b> , <b>Owners</b> , <b>Sale</b> , <b>LienHolder</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>LienHolder</b>, <b>MetaData</b>, <b>Owners</b>, <b>Registration</b>, <b>Sale</b>, <b>Title</b>, <b>Vehicle</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TT38TransResponseType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TT38TransResponseType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TT38TransResponseType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"TT38TransResponseType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MetaData"</span><span class="tAN"> type=</span><span class="tAV">"common:TransactionAttributesRespType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Registration"</span><span class="tAN"> type=</span><span class="tAV">"common:RegistrationForTitleRegTransResponseType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Title"</span><span class="tAN"> type=</span><span class="tAV">"core:TitleType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Vehicle"</span><span class="tAN"> type=</span><span class="tAV">"common:VehicleForTitleRegTransResponseType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Owners"</span><span class="tAN"> type=</span><span class="tAV">"core:OwnerListType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Sale"</span><span class="tAN"> type=</span><span class="tAV">"common:SaleTitleRegTranResponseType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"LienHolder"</span><span class="tAN"> type=</span><span class="tAV">"common:LienHolderResponseType"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">WSDL documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor Trial Edition.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

@@ -15,7 +15,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="NNSInquiryRequest" type="tns:NNSInquiryReq" />
+				<xsd:element name="InquiryRequest" type="tns:NNSInquiryReq" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -23,13 +23,13 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="NNSInquiryResponse" type="tns:NNSInquiryResp" />
+				<xsd:element name="InquiryResponse" type="tns:NNSInquiryResp" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:complexType name="NNSInquiryReq">
 		<xsd:sequence>
-			<xsd:element name="NNSInquiryType" type="commoninquiry:NNSInquiryTypeEnum" />
+			<xsd:element name="InquiryType" type="commoninquiry:NNSInquiryTypeEnum" />
 			<xsd:element name="IndividualNames" type="commoninquiry:IndividualNamesType" />
 			<xsd:element name="Race" type="xsd:string" />
       <xsd:element name="Gender" type="xsd:string" />
@@ -51,9 +51,9 @@
 	</xsd:complexType>
 	<xsd:complexType name="NNSInquiryResp">
 		<xsd:sequence>
-			<xsd:element name="NNSInquiryType" type="commoninquiry:NNSInquiryTypeEnum" />
+			<xsd:element name="InquiryType" type="commoninquiry:NNSInquiryTypeEnum" />
 			<xsd:element name="IndividualNames" type="commoninquiry:IndividualNamesType" />
-			<xsd:element name="NNSOwners" type="tns:NNSOwnersList" />
+			<xsd:element name="Owners" type="tns:NNSOwnersList" />
 			<xsd:element name="Errors" type="core:ErrorsListType"
 				minOccurs="0" maxOccurs="1" />
 		</xsd:sequence>

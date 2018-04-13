@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	xmlns="http://rts.dt.com/ladmv/services/reinstatement/CancellationTransaction"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:commonReinstatement="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
+	xmlns:insCanc="http://rts.dt.com/ladmv/services/reinstatement/CancellationTransaction"
+	targetNamespace="http://rts.dt.com/ladmv/services/reinstatement/CancellationTransaction">
+	
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/transaction/CommonElements"
+		schemaLocation="../transaction/CommonElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
+		schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
+		schemaLocation="../reinstatement/CommonReinstatement.xsd" />
+
+	<xsd:element name="CancellationResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Action" type="core:ActionEnum"/>
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
+				<xsd:element name="Transaction" type="insCanc:CancellationTrans" />
+				<xsd:element name="StatusMessage" type="xsd:string" />
+				<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="CancellationRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="Action" type="core:ActionEnum"/>
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
+				<xsd:element name="Transaction" type="insCanc:CancellationTrans" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="CancellationTrans">
+		<xsd:sequence>
+			<xsd:element name="RecordType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="DriversLicenseNum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SequenceNum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="DMVRecordNum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PlateNum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="LicYR00" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="VIN" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="DUPVIN" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{2}"></xsd:pattern>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OrigLicPlate" type="xsd:string" minOccurs="0"/>
+			<xsd:element  name="ComplianceCode" type="xsd:string"/>
+			<xsd:element name="ComplianceDate">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{8}" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="UnInsuredDays" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Pending" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Revoked" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Reinstate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="FeeFlag" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Petition" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="InvestigateOrHRG" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="DelelteFees" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="FeeAmount" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="PaymentAmount" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="BalanceAmount" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="DatePaid" type="commonReinstatement:YYYYMMDDDateFormat" minOccurs="0"/>
+			<xsd:element name="MaxLimit" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="MaxClearanceAmount" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="Installment" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ODRLetter1" type="commonReinstatement:YYYYMMDDDateFormat" minOccurs="0"/>
+			<xsd:element name="ODRLetter2" type="commonReinstatement:YYYYMMDDDateFormat" minOccurs="0"/>
+			<xsd:element name="SentToODR" type="commonReinstatement:YYYYMMDDDateFormat" minOccurs="0"/>
+			<xsd:element name="Paragraphs" type="insCanc:ParagraphCodesList" minOccurs="0"/>
+			<xsd:element name="CAPAmount" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="CAPBalance" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="Comment1" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Comment2" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ModelYear" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9]{4}" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:choice>
+				<xsd:element name="Model">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="6"></xsd:maxLength>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Make">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="4"></xsd:maxLength>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="InsuranceCo" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="TypeOfInsRecord" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="InsurancePolicy" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="InsuredPartyName1" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="InsuredPartyName2" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="InsuredPartyAddress" type="core:PartyAddressType" minOccurs="0"/>
+			<xsd:element name="Indicator" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PolicyNum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CancelDate" type="commonReinstatement:YYYYMMDDDateFormat" minOccurs="0"/>
+			<xsd:element name="DateReceived" type="commonReinstatement:YYYYMMDDDateFormat" minOccurs="0"/>
+			<xsd:element name="OwnerName1" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OwnerName2" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="DLN1" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="UserInfo" type="commonReinstatement:UserInfoWithOid" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ParagraphCodesList">
+		<xsd:sequence>
+				<xsd:element name="ParagraphCode" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

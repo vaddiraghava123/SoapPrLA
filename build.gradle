@@ -43,6 +43,8 @@ task genJaxb {
 
             xjc(destdir: sourcesDir, removeOldOutput:'yes') {
                 schema(dir: schemaDir, includes: "**/*.xsd")
+                //schema(dir: schemaDir, includes: "inquiries/*.xsd")
+                //schema(dir: schemaDir, includes: "transaction/*.xsd")
                 produces(dir: sourcesDir, includes: "**/*.java")
             }
 
@@ -68,6 +70,13 @@ task genJaxb {
 
 task afterEclipseImport {
 	dependsOn "genJaxb"
+}
+task report { 
+	description ='Open LA WSDL Documentation'
+	ext.port = "8888"
+	doLast {
+		java.awt.Desktop.desktop.browse "http://localhost:${port}/".toURI()
+	}
 }
 
 // tag::jaxb[]

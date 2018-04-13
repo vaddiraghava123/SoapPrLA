@@ -3,6 +3,7 @@
 	xmlns="http://rts.dt.com/ladmv/services/reinstatement/DLSummaryTransaction"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:dlruCommon="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
 	xmlns:commonReinstatement="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
 	xmlns:clTrans="http://rts.dt.com/ladmv/services/reinstatement/DLSummaryTransaction"
 	targetNamespace="http://rts.dt.com/ladmv/services/reinstatement/DLSummaryTransaction">
@@ -11,6 +12,8 @@
 		schemaLocation="../transaction/CommonElements.xsd" />
 	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
 		schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import namespace="http://rts.dt.com/ladmv/services/dlru/DLRUCommonElements"
+		schemaLocation="../dlru/DLRUCommonElements.xsd" />
 	<xsd:import
 		namespace="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
 		schemaLocation="../reinstatement/CommonReinstatement.xsd" />
@@ -28,70 +31,75 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
 				<xsd:element name="Transaction" type="clTrans:DLSummaryTransRequestType" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
-	
+
 	<xsd:complexType name="DLSummaryTransRequestType">
 		<xsd:sequence>
-			<xsd:element name="Action" type="common:ActionEnum" />
-			<xsd:element name="DLNoAndSkip" type="commonReinstatement:ReinstatementType" />
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="DLSummaryTransResponseType">
-		<xsd:sequence>
-		<xsd:element name="MetaData" type="commonReinstatement:TransIdAndTypeMetaData" />
-			<xsd:element name="Action" type="common:ActionEnum" />
-			<xsd:element name="DLNoAndSkip" type="commonReinstatement:ReinstatementType" />
-			<xsd:element name="MasterAndAssociatedRecords" type="clTrans:MasterAndAssociatedRecordsData" />
+			<xsd:element name="Action" type="core:ActionEnum" />
+			<xsd:element name="DLNo" type="xsd:string" />
+			<xsd:element name="Skip" type="xsd:string" minOccurs="0" />
+			<xsd:element name="OperatorSocialSecurityNum" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">
+						Operators OID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="MasterAndAssociatedRecordsData">
-		<xsd:complexContent>
-			<xsd:extension base="common:NewDriverLicenseMetaData">
-				<xsd:sequence>
-				<xsd:element name="Status" type="xsd:string"/>
-					<xsd:element name="Address" type="core:PartyAddressType"/>
-					<xsd:element name="ExpirationDate" minOccurs="0"
-						maxOccurs="1">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:string">
-								<xsd:pattern value="[0-9]{8}"></xsd:pattern>
-							</xsd:restriction>
-						</xsd:simpleType>
-					</xsd:element>
-					<xsd:element name="Restriction" minOccurs="0"
-						maxOccurs="1">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:string">
-								<xsd:pattern value="[0-9]{2}"></xsd:pattern>
-							</xsd:restriction>
-						</xsd:simpleType>
-					</xsd:element>
-					<xsd:element name="Endorsement" type="xsd:string" />
-					<xsd:element name="Height" type="xsd:string" />
-					<xsd:element name="Weight" type="xsd:string" />
-					<xsd:element name="Eyes" type="xsd:string" />
-					<xsd:element name="IssueDate"
-						type="commonReinstatement:YYYYMMDDDateFormat" />
-					<xsd:element name="DateUpdated"
-						type="commonReinstatement:YYYYMMDDDateFormat" />
-					<xsd:element name="PrivacyActCompliance" type="commonReinstatement:DiscType" />
-					
-					<xsd:element name="TypeOfCancellation" type="xsd:string" />
-					<xsd:element name="Vin">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="17"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
+	<xsd:complexType name="DLSummaryTransResponseType">
+		<xsd:sequence>
+			<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
+			<xsd:element name="Action" type="core:ActionEnum" />
+			<xsd:element name="DLNum" type="xsd:string" />
+			<xsd:element name="MasterAndAssociatedRecords"
+				type="clTrans:NewMasterAndAssociatedRecordsData" />
+			<xsd:element name="AssociatedRecordsList"
+				type="commonReinstatement:AssociatedRecordsList" />
+
+			<xsd:element name="DLNoAndSkip" type="commonReinstatement:ReinstatementType" />
+			<xsd:element name="OperatorSocialSecurityNum" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">
+						Operators OID
+					</xsd:documentation>
+				</xsd:annotation>
 			</xsd:element>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
+			<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="NewMasterAndAssociatedRecordsData">
+		<xsd:sequence>
+			<xsd:element name="Status" type="xsd:string" />
+			<xsd:element name="OwnerInfo" type="clTrans:OwnerInformation" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OwnerInformation">
+		<xsd:sequence>
+			<xsd:element name="OwnerInfo"
+				type="dlruCommon:OwnerMetaDataWithHieghtWeightEyes" />
+			<xsd:element name="Address" type="core:PartyAddressType" />
+			<xsd:element name="ResEndors"
+				type="dlruCommon:RestrictionsAndEndorsmentWithEndorsmentWLF" />
+			<xsd:element name="DLIssueAndUpdateDate" type="clTrans:DLDateInfo" />
+			<xsd:element name="PrivacyActCompliance" type="commonReinstatement:DiscType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DLDateInfo">
+		<xsd:sequence>
+			<xsd:element name="DateIssued"
+				type="commonReinstatement:YYYYMMDDDateFormat" />
+			<xsd:element name="UpdatedDate"
+				type="commonReinstatement:YYYYMMDDDateFormat" />
+		</xsd:sequence>
 	</xsd:complexType>
 
 </xsd:schema>

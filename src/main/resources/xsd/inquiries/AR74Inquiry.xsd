@@ -7,7 +7,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-                <xsd:element name="AR74InquiryRequest" type="AR74InquiryRequest" />
+                <xsd:element name="InquiryRequest" type="AR74InquiryRequest" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -23,7 +23,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-                <xsd:element name="AR74InquiryResponse" type="AR74InquiryResponse" />
+                <xsd:element name="InquiryResponse" type="AR74InquiryResponse" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

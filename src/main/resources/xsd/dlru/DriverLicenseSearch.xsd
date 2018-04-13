@@ -20,7 +20,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
 				<xsd:element name="DriverLicenseSearch" type="dlrucommon:DriverLicenseSearchElement"/>				
 			</xsd:sequence>
 		</xsd:complexType>
@@ -29,7 +29,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
 				<xsd:element name="DriverLicenseSearchResp" type="dlrucommon:DriverLicenseSearchElement"/>
 				<xsd:element name="FeeMessage" type="xsd:string"/>
 				<xsd:element name="Errors" type="core:ErrorsListType"

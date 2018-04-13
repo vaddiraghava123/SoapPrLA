@@ -3,6 +3,7 @@
 	xmlns="http://rts.dt.com/ladmv/services/reinstatement/LicensePlateTransaction"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="http://rts.dt.com/ladmv/services/transaction/CommonElements"
 	xmlns:core="http://rts.dt.com/ladmv/services/CoreElements"
+	xmlns:commonReinstatement="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
 	xmlns:lpTrans="http://rts.dt.com/ladmv/services/reinstatement/LicensePlateTransaction"
 	targetNamespace="http://rts.dt.com/ladmv/services/reinstatement/LicensePlateTransaction">
 	<xsd:import
@@ -10,6 +11,10 @@
 		schemaLocation="../transaction/CommonElements.xsd" />
 	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
 		schemaLocation="../common/CoreElements.xsd" />
+	<xsd:import
+		namespace="http://rts.dt.com/ladmv/services/reinstatement/CommonReinstatement"
+		schemaLocation="CommonReinstatement.xsd" />
+
 	<xsd:element name="LicensePlateResponse">
 		<xsd:complexType>
 			<xsd:sequence>
@@ -17,8 +22,6 @@
 				<xsd:element name="Transaction"
 					type="lpTrans:LicensePlateTransResponseType" minOccurs="0"
 					maxOccurs="1" />
-				<xsd:element name="Errors" type="core:ErrorsListType"
-					minOccurs="0" maxOccurs="1" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -33,28 +36,43 @@
 	</xsd:element>
 	<xsd:complexType name="LicensePlateTransResponseType">
 		<xsd:sequence>
+			<xsd:element name="Action" type="core:ActionEnum" />
 			<xsd:element name="MetaData" type ="common:TransactionAttributesRespType"/>
-			<xsd:element name="Registration" type="core:RegistrationType"/>
-			<xsd:element name="Title" type="lpTrans:TitleForLicensePlateTransResponseType"/>
-			<xsd:element name="Vehicle" type="common:VehicleForTitleRegTransResponseType"/>
-			<xsd:element name="Owners" type="core:OwnerListType" />
-			<xsd:element name="Sale" type="lpTrans:SaleForLicensePlateTransResponseType" />
-			<xsd:element name="LienHolder" type="common:LienHolderResponseType"/>
-			<xsd:element name="Comments" type="common:DealComments" />
+			<xsd:element name="RecordType" type="core:RecordTypeEnum" />
+			<xsd:element name="LicensePlateTransaction" type="lpTrans:LicPlateTrans" />
+			<xsd:element name="OMVRespMessage" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="LicensePlateTransRequestType">
 		<xsd:sequence>
-			<xsd:element name="Action" type="common:ActionEnum" />
-			<xsd:element name="InquiryType" type="common:RecordTypeEnum" />
+			<xsd:element name="Action" type="core:ActionEnum" />
 			<xsd:element name="MetaData" type="common:TransactionAttributesReqType" />
-			<xsd:element name="Registration" type="core:RegistrationType" />
-			<xsd:element name="Vehicle"
-				type="lpTrans:VehicleForLicensePlateTransRequestType" />
+			<xsd:element name="RecordType" type="core:RecordTypeEnum" />
+			<xsd:element name="LicensePlateTransaction" type="lpTrans:LicPlateTrans" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="LicPlateTrans">
+		<xsd:sequence>
+			<xsd:element name="Registration" type="core:RegistrationType"/>
+			<xsd:element name="Title" type="common:TitleTypeWithPrevNonTitleInfo"/>
+			<xsd:element name="Vehicle" type="common:VehicleForTitleRegTransResponseType"/>
+			<xsd:element name="Owners" type="core:OwnerListType" />
+			<xsd:element name="LienHolder" type="common:LienHolderResponseType"/>
+			<xsd:element name="Sale" type="commonReinstatement:SalesInfoWithDAQSPOVSF" />
+			<xsd:element name="Comments" type="core:DealComments" />
+			<xsd:element name="OperatorSocialSecurityNum" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">
+						Operators OID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="TitleForLicensePlateTransResponseType">
+	<!-- <xsd:complexType name="TitleForLicensePlateTransResponseType">
 		<xsd:complexContent>
 			<xsd:extension base="core:TitleType">
 				<xsd:sequence>
@@ -70,19 +88,21 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+	
 	<xsd:complexType name="VehicleForLicensePlateTransRequestType">
-	<xsd:sequence>
-		<xsd:element name="Vin">
-			<xsd:simpleType>
-				<xsd:restriction base="xsd:string">
-					<xsd:maxLength value="17"></xsd:maxLength>
-				</xsd:restriction>
-			</xsd:simpleType>
-		</xsd:element>
-		<xsd:element name="Flags" type="core:FlagListType" />
-		<xsd:element name="DuplicateVin" type="xsd:string" />
-	</xsd:sequence>
-</xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="Vin">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="17"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Flags" type="core:FlagListType" />
+			<xsd:element name="DuplicateVin" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
 	<xsd:complexType name="SaleForLicensePlateTransResponseType">
 		<xsd:sequence>
 			<xsd:element name="SaleInfo"
@@ -109,14 +129,9 @@
 		<xsd:complexContent>
 			<xsd:extension base="common:TaxesAndFeesType">
 				<xsd:sequence>
-					<xsd:element name="PrivacyActCompliance" type="lpTrans:DiscType" />
+					<xsd:element name="PrivacyActCompliance" type="commonReinstatement:DiscType" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
-	</xsd:complexType>
-	<xsd:simpleType name="DiscType">
-		<xsd:restriction base="xsd:int">
-			<xsd:pattern value="[0-9]" />
-		</xsd:restriction>
-	</xsd:simpleType>
+	</xsd:complexType> -->
 </xsd:schema>

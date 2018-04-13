@@ -15,19 +15,6 @@
 	<xsd:import namespace="http://rts.dt.com/ladmv/services/CoreElements"
 		schemaLocation="../common/CoreElements.xsd" />
 
-	<xsd:complexType name="TransIdAndTypeMetaData">
-			<xsd:sequence>
-				<xsd:element name="TranId" type="xsd:long" />
-				<xsd:element name="TranType">
-					<xsd:simpleType>
-						<xsd:restriction base="xsd:string">
-							<xsd:maxLength value="4"></xsd:maxLength>
-						</xsd:restriction>
-					</xsd:simpleType>
-				</xsd:element>
-			</xsd:sequence>
-	</xsd:complexType>
-
 	<xsd:complexType name="ReinstatementType">
 		<xsd:sequence>
 			<xsd:element name="DLNo" type="xsd:string" minOccurs="0"
@@ -49,11 +36,11 @@
 
 	<xsd:complexType name="Paragraph">
 		<xsd:sequence>
-			<xsd:element name="Paragraph_1" type="xsd:string" />
-			<xsd:element name="Paragraph_2" type="xsd:string" />
-			<xsd:element name="Paragraph_3" type="xsd:string" />
-			<xsd:element name="Paragraph_4" type="xsd:string" />
-			<xsd:element name="Paragraph_5" type="xsd:string" />
+			<xsd:element name="Paragraph_1" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Paragraph_2" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Paragraph_3" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Paragraph_4" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Paragraph_5" type="xsd:string" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -63,9 +50,82 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 	
+	<xsd:simpleType name="YYMMDDDateFormat">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9]{6}" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
 	<xsd:simpleType name="DiscType">
 		<xsd:restriction base="xsd:int">
 			<xsd:pattern value="[0-9]" />
 		</xsd:restriction>
 	</xsd:simpleType>
+	
+	<xsd:complexType name="UserInfo">
+		<xsd:sequence>
+			<xsd:element name="DateRecordCreated" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="DateFlagModified" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="UserNum" type="xsd:string" minOccurs="0" />
+			<xsd:element name="OfficeCode" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="UserInfoWithOid">
+		<xsd:complexContent>
+			<xsd:extension base="UserInfo">
+				<xsd:sequence>
+					<xsd:element name="OperatorSocialSecurityNum" type="xsd:string"
+						minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Operators OID
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SalesInfoWithDAQSPOVSF">
+		<xsd:sequence>
+			<xsd:element name="SalePrice" type="common:TaxesAndFeesType" />
+			<xsd:element name="DateAquired" type="common:SaleInfoType" />
+			<xsd:element name="SpecialFeesCode" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="AssociatedRecordsList">
+		<xsd:sequence>
+			<xsd:element name="AssociatedRecords"
+				type="commonReinstatement:AssociatedRecord" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="AssociatedRecord">
+		<xsd:sequence>
+			<xsd:element name="RecordField" type="xsd:string" />
+			<xsd:element name="RecordNum" type="xsd:string" />
+			<xsd:element name="TransactionDate" type="xsd:string" />
+			<xsd:element name="TransactionStatus" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CancellationNum" type="xsd:string" />
+			<xsd:element name="TransactionNum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="TypeOfCancellation" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SequenceNum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="VinNum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="DateRecordCreated" type="xsd:string" />
+			<xsd:element name="DateFlagModified" type="xsd:string" />
+			<xsd:element name="OfficeCode" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
 </xsd:schema>

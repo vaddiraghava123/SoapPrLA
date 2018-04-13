@@ -155,8 +155,14 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         res.add(new ClassPathResource("/xsd/dlru/DriverLicenseVoid.xsd"));
         res.add(new ClassPathResource("/xsd/dlru/OfficeCustomerList.xsd"));
         res.add(new ClassPathResource("/xsd/dlru/DLRU51Transaction.xsd"));
-//        res.add(new ClassPathResource("/xsd/reinstatement/LicensePlateTransaction.xsd"));
-//        res.add(new ClassPathResource("/xsd/reinstatement/ClearanceLetterTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/reinstatement/LicensePlateTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/reinstatement/ClearanceLetterTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/reinstatement/DriverLicenseHistoryTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/reinstatement/DL00Transaction.xsd"));
+        res.add(new ClassPathResource("/xsd/reinstatement/CancellationTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/reinstatement/LS00CancellationRecord.xsd"));
+        res.add(new ClassPathResource("/xsd/reinstatement/DLSummaryTransaction.xsd"));
+        res.add(new ClassPathResource("/xsd/reinstatement/InsuranceInquiry.xsd"));
         
         
 		CommonsXsdSchemaCollection collection = new CommonsXsdSchemaCollection(res.toArray(new ClassPathResource[0]));

@@ -20,7 +20,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="MetaData" type ="dlrucommon:TransIdAndTypeMetaData"/>
+				<xsd:element name="MetaData" type ="core:TransIdAndTypeMetaData"/>
 				<xsd:element name="InitialDriverLicenseResp" type="dlrucommon:DriverLicenseSearchElement"/>
 				<xsd:element name="Message" type="xsd:string"/>
 				<xsd:element name="Errors" type="core:ErrorsListType" minOccurs="0" maxOccurs="1"/>
@@ -32,12 +32,11 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="MetaData" type ="dlrucommon:TransIdAndTypeMetaData"/>
+				<xsd:element name="MetaData" type ="core:TransIdAndTypeMetaData"/>
 				<xsd:element name="ActionAndDL" type ="dlrucommon:ActionAndDLMetaData"/>
-				<xsd:element name="ExistingDLMetaData" type="dlrucommon:ExistingDriverLicesnseMetaData" />
-				<xsd:element name="OOSDLMetaData" type="dlrucommon:OOSDriverLicenseMetaData" />
-				<xsd:element name="NewDLMetaData" type="dlrucommon:OwnerMetaDataWithTCTL" />
-				<xsd:element name="DuplicateCount" type="xsd:string" />
+				<xsd:element name="ExistingDL" type="dlrucommon:ExistingDriverLicesnseMetaData" />
+				<xsd:element name="OOSDL" type="dlrucommon:OOSDriverLicenseMetaData" />
+				<xsd:element name="NewDL" type="dlrucommon:OwnerMetaDataWithTCTL" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>

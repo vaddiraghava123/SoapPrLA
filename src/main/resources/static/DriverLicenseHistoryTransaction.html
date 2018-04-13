@@ -1,0 +1,1416 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Documentation for </title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_reinstatement_DriverLicenseHistoryTransaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl', 
+				'properties_DriverLicenseHistoryResponse', 
+				'properties_DriverLicenseHistoryRequest');
+var usedByBoxes= new Array('usedBy_DriverLicenseHistoryResponse', 
+				'usedBy_DriverLicenseHistoryRequest', 
+				'usedBy_DLHistoryInfoTransactionType', 
+				'usedBy_DLInquiryAdditionalInfoType', 
+				'usedBy_ExistingDriverLicenseMetaDataType', 
+				'usedBy_DLHistoryAdditionalInfoType', 
+				'usedBy_FlagsInfoType', 
+				'usedBy_CommercialDriverLicenseTestInfoType', 
+				'usedBy_CDLMedicalTestInfoType', 
+				'usedBy_DLHistoryTransType');
+var sourceBoxes= new Array('source_DriverLicenseHistoryResponse', 
+				'source_DriverLicenseHistoryRequest', 
+				'source_DLHistoryInfoTransactionType', 
+				'source_DLInquiryAdditionalInfoType', 
+				'source_ExistingDriverLicenseMetaDataType', 
+				'source_DLHistoryAdditionalInfoType', 
+				'source_FlagsInfoType', 
+				'source_CommercialDriverLicenseTestInfoType', 
+				'source_CDLMedicalTestInfoType', 
+				'source_DLHistoryTransType');
+var instanceBoxes= new Array('instance_DriverLicenseHistoryResponse', 
+				'instance_DriverLicenseHistoryRequest');
+var diagramBoxes= new Array('diagram_DriverLicenseHistoryResponse', 
+				'diagram_DriverLicenseHistoryRequest', 
+				'diagram_DLHistoryInfoTransactionType', 
+				'diagram_DLInquiryAdditionalInfoType', 
+				'diagram_ExistingDriverLicenseMetaDataType', 
+				'diagram_DLHistoryAdditionalInfoType', 
+				'diagram_FlagsInfoType', 
+				'diagram_CommercialDriverLicenseTestInfoType', 
+				'diagram_CDLMedicalTestInfoType', 
+				'diagram_DLHistoryTransType');
+var modelBoxes= new Array('model_DriverLicenseHistoryResponse', 
+				'model_DriverLicenseHistoryRequest', 
+				'model_DLHistoryInfoTransactionType', 
+				'model_DLInquiryAdditionalInfoType', 
+				'model_ExistingDriverLicenseMetaDataType', 
+				'model_DLHistoryAdditionalInfoType', 
+				'model_FlagsInfoType', 
+				'model_CommercialDriverLicenseTestInfoType', 
+				'model_CDLMedicalTestInfoType', 
+				'model_DLHistoryTransType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="schema_NAMESPACE_http___rts.dt.com_ladmv_services_reinstatement_DriverLicenseHistoryTransaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl"></a><div class="componentTitle">Inner Schema <span class="qname">LADMVService.wsdl</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_reinstatement_DriverLicenseHistoryTransaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_reinstatement_DriverLicenseHistoryTransaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_reinstatement_DriverLicenseHistoryTransaction_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">attribute form default</td>
+                                    <td><b>unqualified</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">element form default</td>
+                                    <td><b>unqualified</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DriverLicenseHistoryResponse"></a><div class="componentTitle">Element <span class="qname">DriverLicenseHistoryResponse</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DriverLicenseHistoryResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DriverLicenseHistoryResponse');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DriverLicenseHistoryResponse" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Element_DriverLicenseHistoryResponse.png" usemap="#LADMVService_wsdl_Element_DriverLicenseHistoryResponse" /><map name="LADMVService_wsdl_Element_DriverLicenseHistoryResponse" id="LADMVService_wsdl_Element_DriverLicenseHistoryResponse"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DriverLicenseHistoryResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DriverLicenseHistoryResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DriverLicenseHistoryResponse" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DriverLicenseHistoryResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_DriverLicenseHistoryResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DriverLicenseHistoryResponse" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Message </td>
+                                    <td><b><a href="ladmv.html#http___rts.dt.com_ladmv_DriverLicenseHistoryResponse" target="mainFrame" title="http://rts.dt.com/ladmv" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv')">tns:DriverLicenseHistoryResponse</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DriverLicenseHistoryResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DriverLicenseHistoryResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DriverLicenseHistoryResponse" style="display:block"><b>AuthHeader</b> , <b>Transaction</b> , <b>Message</b> , <b>Errors{0,1}</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>AuthHeader</b>, <b>Errors</b>, <b>Message</b>, <b>Transaction</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DriverLicenseHistoryResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DriverLicenseHistoryResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DriverLicenseHistoryResponse" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;DriverLicenseHistoryResponse</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;AuthHeader</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/AuthHeader&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Transaction</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Transaction&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Message</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Message&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Errors</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Errors&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/DriverLicenseHistoryResponse&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DriverLicenseHistoryResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DriverLicenseHistoryResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DriverLicenseHistoryResponse" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DriverLicenseHistoryResponse"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AuthHeader"</span><span class="tAN"> type=</span><span class="tAV">"core:AuthHeaderType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Transaction"</span><span class="tAN"> type=</span><span class="tAV">"DLHistoryInfoTransactionType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Message"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"Errors"</span><span class="tAN"> type=</span><span class="tAV">"core:ErrorsListType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DriverLicenseHistoryRequest"></a><div class="componentTitle">Element <span class="qname">DriverLicenseHistoryRequest</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DriverLicenseHistoryRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DriverLicenseHistoryRequest');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DriverLicenseHistoryRequest" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Element_DriverLicenseHistoryRequest.png" usemap="#LADMVService_wsdl_Element_DriverLicenseHistoryRequest" /><map name="LADMVService_wsdl_Element_DriverLicenseHistoryRequest" id="LADMVService_wsdl_Element_DriverLicenseHistoryRequest"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DriverLicenseHistoryRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DriverLicenseHistoryRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DriverLicenseHistoryRequest" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DriverLicenseHistoryRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_DriverLicenseHistoryRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DriverLicenseHistoryRequest" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Message </td>
+                                    <td><b><a href="ladmv.html#http___rts.dt.com_ladmv_DriverLicenseHistoryRequest" target="mainFrame" title="http://rts.dt.com/ladmv" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv')">tns:DriverLicenseHistoryRequest</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DriverLicenseHistoryRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DriverLicenseHistoryRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DriverLicenseHistoryRequest" style="display:block"><b>AuthHeader</b> , <b>MetaData</b> , <b>DLHistoryInquiryRequest</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>AuthHeader</b>, <b>DLHistoryInquiryRequest</b>, <b>MetaData</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DriverLicenseHistoryRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DriverLicenseHistoryRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DriverLicenseHistoryRequest" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;DriverLicenseHistoryRequest</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;AuthHeader</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/AuthHeader&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;MetaData</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/MetaData&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;DLHistoryInquiryRequest</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/DLHistoryInquiryRequest&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/DriverLicenseHistoryRequest&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DriverLicenseHistoryRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DriverLicenseHistoryRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DriverLicenseHistoryRequest" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DriverLicenseHistoryRequest"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AuthHeader"</span><span class="tAN"> type=</span><span class="tAV">"core:AuthHeaderType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MetaData"</span><span class="tAN"> type=</span><span class="tAV">"core:TransIdAndTypeMetaData"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DLHistoryInquiryRequest"</span><span class="tAN"> type=</span><span class="tAV">"DLHistoryTransType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DLHistoryInfoTransactionType"></a><div class="componentTitle">Complex Type <span class="qname">DLHistoryInfoTransactionType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DLHistoryInfoTransactionType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DLHistoryInfoTransactionType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DLHistoryInfoTransactionType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_DLHistoryInfoTransactionType.png" usemap="#LADMVService_wsdl_Complex_Type_DLHistoryInfoTransactionType" /><map name="LADMVService_wsdl_Complex_Type_DLHistoryInfoTransactionType" id="LADMVService_wsdl_Complex_Type_DLHistoryInfoTransactionType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DLHistoryInfoTransactionType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_DLHistoryInfoTransactionType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DLHistoryInfoTransactionType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>DriverLicenseHistoryResponse/Transaction</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DLHistoryInfoTransactionType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DLHistoryInfoTransactionType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DLHistoryInfoTransactionType" style="display:block"><b>MetaData</b> , <b>Action</b> , <b>DLNo</b> , <b>DLInquiryAdditionalInfo</b> , <b>ExistingDriverLicense</b> , <b>LicenseAddress</b> , <b>MailingAddress</b> , <b>DlHistoryAdditonalInfo</b> , <b>DateRecordCreated</b> , <b>dateFlagModified</b> , <b>UserNu</b> , <b>OfficeCode</b> , <b>OperatorSocialSecurityNum</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>Action</b>, <b>DLInquiryAdditionalInfo</b>, <b>DLNo</b>, <b>DateRecordCreated</b>, <b>DlHistoryAdditonalInfo</b>, <b>ExistingDriverLicense</b>, <b>LicenseAddress</b>, <b>MailingAddress</b>, <b>MetaData</b>, <b>OfficeCode</b>, <b>OperatorSocialSecurityNum</b>, <b>UserNu</b>, <b>dateFlagModified</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DLHistoryInfoTransactionType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DLHistoryInfoTransactionType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DLHistoryInfoTransactionType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"DLHistoryInfoTransactionType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MetaData"</span><span class="tAN"> type=</span><span class="tAV">"core:TransIdAndTypeMetaData"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Action"</span><span class="tAN"> type=</span><span class="tAV">"core:ActionEnum"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DLNo"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DLInquiryAdditionalInfo"</span><span class="tAN"> type=</span><span class="tAV">"DLInquiryAdditionalInfoType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ExistingDriverLicense"</span><span class="tAN"> type=</span><span class="tAV">"ExistingDriverLicenseMetaDataType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"LicenseAddress"</span><span class="tAN"> type=</span><span class="tAV">"dlruCommon:PartyAddressWithDom"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MailingAddress"</span><span class="tAN"> type=</span><span class="tAV">"dlruCommon:PartyAddressWithDom"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DlHistoryAdditonalInfo"</span><span class="tAN"> type=</span><span class="tAV">"DLHistoryAdditionalInfoType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DateRecordCreated"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"dateFlagModified"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"UserNu"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"OfficeCode"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"OperatorSocialSecurityNum"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DLInquiryAdditionalInfoType"></a><div class="componentTitle">Complex Type <span class="qname">DLInquiryAdditionalInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DLInquiryAdditionalInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DLInquiryAdditionalInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DLInquiryAdditionalInfoType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_DLInquiryAdditionalInfoType.png" usemap="#LADMVService_wsdl_Complex_Type_DLInquiryAdditionalInfoType" /><map name="LADMVService_wsdl_Complex_Type_DLInquiryAdditionalInfoType" id="LADMVService_wsdl_Complex_Type_DLInquiryAdditionalInfoType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DLInquiryAdditionalInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_DLInquiryAdditionalInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DLInquiryAdditionalInfoType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>DLHistoryInfoTransactionType/DLInquiryAdditionalInfo</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DLInquiryAdditionalInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DLInquiryAdditionalInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DLInquiryAdditionalInfoType" style="display:block"><b>Pseudo</b> , <b>Delete</b> , <b>CompanyFlag</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>CompanyFlag</b>, <b>Delete</b>, <b>Pseudo</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DLInquiryAdditionalInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DLInquiryAdditionalInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DLInquiryAdditionalInfoType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"DLInquiryAdditionalInfoType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Pseudo"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Delete"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CompanyFlag"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ExistingDriverLicenseMetaDataType"></a><div class="componentTitle">Complex Type <span class="qname">ExistingDriverLicenseMetaDataType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ExistingDriverLicenseMetaDataType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ExistingDriverLicenseMetaDataType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ExistingDriverLicenseMetaDataType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_ExistingDriverLicenseMetaDataType.png" usemap="#LADMVService_wsdl_Complex_Type_ExistingDriverLicenseMetaDataType" /><map name="LADMVService_wsdl_Complex_Type_ExistingDriverLicenseMetaDataType" id="LADMVService_wsdl_Complex_Type_ExistingDriverLicenseMetaDataType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="CommonElements.html#ExistingDriverLicesnseMetaData" target="mainFrame" title="http://rts.dt.com/ladmv/services/transaction/CommonElements" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/transaction/CommonElements')">ExistingDriverLicesnseMetaData</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>ExistingDriverLicesnseMetaData</b><ul class="internal">
+                                    <li class="internal"><b><a href="DriverLicenseHistoryTransaction.html#ExistingDriverLicenseMetaDataType" target="mainFrame" title="http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction')">ExistingDriverLicenseMetaDataType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_ExistingDriverLicenseMetaDataType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_ExistingDriverLicenseMetaDataType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_ExistingDriverLicenseMetaDataType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>DLHistoryInfoTransactionType/ExistingDriverLicense</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_ExistingDriverLicenseMetaDataType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_ExistingDriverLicenseMetaDataType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_ExistingDriverLicenseMetaDataType" style="display:block"><b>Height</b> , <b>Weight</b> , <b>Eyes</b> , <b>IssuedDate</b> , <b>LastKnownAddress</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>Eyes</b>, <b>Height</b>, <b>IssuedDate</b>, <b>LastKnownAddress</b>, <b>Weight</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ExistingDriverLicenseMetaDataType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ExistingDriverLicenseMetaDataType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ExistingDriverLicenseMetaDataType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"ExistingDriverLicenseMetaDataType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:extension</span><span class="tAN"> base=</span><span class="tAV">"dlruCommon:ExistingDriverLicesnseMetaData"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Height"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Weight"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Eyes"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"IssuedDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"LastKnownAddress"</span><span class="tAN"> type=</span><span class="tAV">"dlruCommon:PartyAddressWithDom"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DLHistoryAdditionalInfoType"></a><div class="componentTitle">Complex Type <span class="qname">DLHistoryAdditionalInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DLHistoryAdditionalInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DLHistoryAdditionalInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DLHistoryAdditionalInfoType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_DLHistoryAdditionalInfoType.png" usemap="#LADMVService_wsdl_Complex_Type_DLHistoryAdditionalInfoType" /><map name="LADMVService_wsdl_Complex_Type_DLHistoryAdditionalInfoType" id="LADMVService_wsdl_Complex_Type_DLHistoryAdditionalInfoType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DLHistoryAdditionalInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_DLHistoryAdditionalInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DLHistoryAdditionalInfoType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>DLHistoryInfoTransactionType/DlHistoryAdditonalInfo</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DLHistoryAdditionalInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DLHistoryAdditionalInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DLHistoryAdditionalInfoType" style="display:block"><b>FlagsInformation</b> , <b>CommercialDriverLicenseTestInfo</b> , <b>DriverEducationCompleted</b> , <b>DriverTestCompleted</b> , <b>WritingTest</b> , <b>Military</b> , <b>GPStatus</b> , <b>isStatusActiveOrNot</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>CommercialDriverLicenseTestInfo</b>, <b>DriverEducationCompleted</b>, <b>DriverTestCompleted</b>, <b>FlagsInformation</b>, <b>GPStatus</b>, <b>Military</b>, <b>WritingTest</b>, <b>isStatusActiveOrNot</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DLHistoryAdditionalInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DLHistoryAdditionalInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DLHistoryAdditionalInfoType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"DLHistoryAdditionalInfoType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"FlagsInformation"</span><span class="tAN"> type=</span><span class="tAV">"FlagsInfoType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CommercialDriverLicenseTestInfo"</span><span class="tAN"> type=</span><span class="tAV">"CommercialDriverLicenseTestInfoType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DriverEducationCompleted"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DriverTestCompleted"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"WritingTest"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Military"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"GPStatus"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"isStatusActiveOrNot"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="FlagsInfoType"></a><div class="componentTitle">Complex Type <span class="qname">FlagsInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_FlagsInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_FlagsInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_FlagsInfoType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_FlagsInfoType.png" usemap="#LADMVService_wsdl_Complex_Type_FlagsInfoType" /><map name="LADMVService_wsdl_Complex_Type_FlagsInfoType" id="LADMVService_wsdl_Complex_Type_FlagsInfoType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_FlagsInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_FlagsInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_FlagsInfoType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>DLHistoryAdditionalInfoType/FlagsInformation</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_FlagsInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_FlagsInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_FlagsInfoType" style="display:block"><b>FeeOnly</b> , <b>SuspDI</b> , <b>SuspFR</b> , <b>NIFlag</b> , <b>Aff</b> , <b>Nsf</b> , <b>Temp</b> , <b>Hardship</b> , <b>Pet</b> , <b>NationalDriverRegister</b> , <b>PrivacyActCompliance</b> , <b>DriverLicenseField</b> , <b>IgnitionInterlock</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>Aff</b>, <b>DriverLicenseField</b>, <b>FeeOnly</b>, <b>Hardship</b>, <b>IgnitionInterlock</b>, <b>NIFlag</b>, <b>NationalDriverRegister</b>, <b>Nsf</b>, <b>Pet</b>, <b>PrivacyActCompliance</b>, <b>SuspDI</b>, <b>SuspFR</b>, <b>Temp</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_FlagsInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_FlagsInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_FlagsInfoType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"FlagsInfoType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"FeeOnly"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"SuspDI"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"SuspFR"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"NIFlag"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Aff"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Nsf"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Temp"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Hardship"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Pet"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"NationalDriverRegister"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"PrivacyActCompliance"</span><span class="tAN"> type=</span><span class="tAV">"commonReinstatement:DiscType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DriverLicenseField"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"IgnitionInterlock"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="CommercialDriverLicenseTestInfoType"></a><div class="componentTitle">Complex Type <span class="qname">CommercialDriverLicenseTestInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_CommercialDriverLicenseTestInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_CommercialDriverLicenseTestInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_CommercialDriverLicenseTestInfoType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_CommercialDriverLicenseTestInfoType.png" usemap="#LADMVService_wsdl_Complex_Type_CommercialDriverLicenseTestInfoType" /><map name="LADMVService_wsdl_Complex_Type_CommercialDriverLicenseTestInfoType" id="LADMVService_wsdl_Complex_Type_CommercialDriverLicenseTestInfoType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_CommercialDriverLicenseTestInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_CommercialDriverLicenseTestInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_CommercialDriverLicenseTestInfoType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>DLHistoryAdditionalInfoType/CommercialDriverLicenseTestInfo</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_CommercialDriverLicenseTestInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_CommercialDriverLicenseTestInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_CommercialDriverLicenseTestInfoType" style="display:block"><b>PrivacyDisclosureForCDLLicense</b> , <b>Vwp</b> , <b>Recon</b> , <b>IA</b> , <b>CDLMedicalTestInfo</b> , <b>OfficeIssued</b> , <b>PictureIssued</b> , <b>AuditNum</b> , <b>OutOfStateCDL</b> , <b>AttendClass</b> , <b>IsVaildCDLStatusOrNot</b> , <b>IsValidFromPreviousRenewal</b> , <b>CommercialLearnersPermit</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>AttendClass</b>, <b>AuditNum</b>, <b>CDLMedicalTestInfo</b>, <b>CommercialLearnersPermit</b>, <b>IA</b>, <b>IsVaildCDLStatusOrNot</b>, <b>IsValidFromPreviousRenewal</b>, <b>OfficeIssued</b>, <b>OutOfStateCDL</b>, <b>PictureIssued</b>, <b>PrivacyDisclosureForCDLLicense</b>, <b>Recon</b>, <b>Vwp</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_CommercialDriverLicenseTestInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_CommercialDriverLicenseTestInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_CommercialDriverLicenseTestInfoType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"CommercialDriverLicenseTestInfoType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"PrivacyDisclosureForCDLLicense"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Vwp"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Recon"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"IA"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CDLMedicalTestInfo"</span><span class="tAN"> type=</span><span class="tAV">"CDLMedicalTestInfoType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"OfficeIssued"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"PictureIssued"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AuditNum"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"OutOfStateCDL"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AttendClass"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"IsVaildCDLStatusOrNot"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"IsValidFromPreviousRenewal"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CommercialLearnersPermit"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="CDLMedicalTestInfoType"></a><div class="componentTitle">Complex Type <span class="qname">CDLMedicalTestInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_CDLMedicalTestInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_CDLMedicalTestInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_CDLMedicalTestInfoType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_CDLMedicalTestInfoType.png" usemap="#LADMVService_wsdl_Complex_Type_CDLMedicalTestInfoType" /><map name="LADMVService_wsdl_Complex_Type_CDLMedicalTestInfoType" id="LADMVService_wsdl_Complex_Type_CDLMedicalTestInfoType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_CDLMedicalTestInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_CDLMedicalTestInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_CDLMedicalTestInfoType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>CommercialDriverLicenseTestInfoType/CDLMedicalTestInfo</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_CDLMedicalTestInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_CDLMedicalTestInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_CDLMedicalTestInfoType" style="display:block"><b>MedicalCertification</b> , <b>MedicalVar</b> , <b>EligibleDate</b> , <b>HazMatEndorsement</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>EligibleDate</b>, <b>HazMatEndorsement</b>, <b>MedicalCertification</b>, <b>MedicalVar</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_CDLMedicalTestInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_CDLMedicalTestInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_CDLMedicalTestInfoType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"CDLMedicalTestInfoType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MedicalCertification"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"MedicalVar"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"EligibleDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"HazMatEndorsement"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DLHistoryTransType"></a><div class="componentTitle">Complex Type <span class="qname">DLHistoryTransType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/reinstatement/DriverLicenseHistoryTransaction</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DLHistoryTransType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DLHistoryTransType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DLHistoryTransType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_DLHistoryTransType.png" usemap="#LADMVService_wsdl_Complex_Type_DLHistoryTransType" /><map name="LADMVService_wsdl_Complex_Type_DLHistoryTransType" id="LADMVService_wsdl_Complex_Type_DLHistoryTransType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DLHistoryTransType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_DLHistoryTransType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DLHistoryTransType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>DriverLicenseHistoryRequest/DLHistoryInquiryRequest</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DLHistoryTransType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DLHistoryTransType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DLHistoryTransType" style="display:block"><b>Action</b> , <b>DriverLicenseNum</b> , <b>OperatorSocialSecurityNum</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>Action</b>, <b>DriverLicenseNum</b>, <b>OperatorSocialSecurityNum</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DLHistoryTransType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DLHistoryTransType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DLHistoryTransType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"DLHistoryTransType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Action"</span><span class="tAN"> type=</span><span class="tAV">"core:ActionEnum"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DriverLicenseNum"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"OperatorSocialSecurityNum"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">WSDL documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor Trial Edition.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

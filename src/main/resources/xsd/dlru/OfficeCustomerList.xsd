@@ -20,7 +20,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
 				<xsd:element name="ActionAndDL" type ="dlrucommon:ActionAndDLMetaData"/>
 				<xsd:element name="BeginDate" type="dlrucommon:YYYYMMDDDateFormat"/>
 				<xsd:element name="BeginTime" type="dlrucommon:TimeFormat"/>
@@ -31,7 +31,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="AuthHeader" type="core:AuthHeaderType" />
-				<xsd:element name="MetaData" type="dlrucommon:TransIdAndTypeMetaData" />
+				<xsd:element name="MetaData" type="core:TransIdAndTypeMetaData" />
 				<xsd:element name="CustomersList" type="dlrucommon:CustomerList"/>
 				<xsd:element name="Errors" type="core:ErrorsListType"
 					minOccurs="0" maxOccurs="1" />

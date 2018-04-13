@@ -1,0 +1,995 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Documentation for </title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_inquiries_VehiclesListInquiryByName_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl', 
+				'properties_VehiclesListInquiryByNameRequest', 
+				'properties_VehiclesListInquiryByNameResponse');
+var usedByBoxes= new Array('usedBy_VehiclesListInquiryByNameRequest', 
+				'usedBy_VehiclesListInquiryByNameResponse', 
+				'usedBy_WWSInquiryReq', 
+				'usedBy_WWSInquiryResp', 
+				'usedBy_WWSOwnerVehicleList', 
+				'usedBy_OwnerVehilceType');
+var sourceBoxes= new Array('source_VehiclesListInquiryByNameRequest', 
+				'source_VehiclesListInquiryByNameResponse', 
+				'source_WWSInquiryReq', 
+				'source_WWSInquiryResp', 
+				'source_WWSOwnerVehicleList', 
+				'source_OwnerVehilceType');
+var instanceBoxes= new Array('instance_VehiclesListInquiryByNameRequest', 
+				'instance_VehiclesListInquiryByNameResponse');
+var diagramBoxes= new Array('diagram_VehiclesListInquiryByNameRequest', 
+				'diagram_VehiclesListInquiryByNameResponse', 
+				'diagram_WWSInquiryReq', 
+				'diagram_WWSInquiryResp', 
+				'diagram_WWSOwnerVehicleList', 
+				'diagram_OwnerVehilceType');
+var modelBoxes= new Array('model_VehiclesListInquiryByNameRequest', 
+				'model_VehiclesListInquiryByNameResponse', 
+				'model_WWSInquiryReq', 
+				'model_WWSInquiryResp', 
+				'model_WWSOwnerVehicleList', 
+				'model_OwnerVehilceType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="schema_NAMESPACE_http___rts.dt.com_ladmv_services_inquiries_VehiclesListInquiryByName_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl"></a><div class="componentTitle">Inner Schema <span class="qname">LADMVService.wsdl</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_inquiries_VehiclesListInquiryByName_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_inquiries_VehiclesListInquiryByName_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_schema_NAMESPACE_http___rts.dt.com_ladmv_services_inquiries_VehiclesListInquiryByName_LOCATION_file__C__Users_User_Desktop_Final_20WSDL_20File_LADMVService.wsdl" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">attribute form default</td>
+                                    <td><b>unqualified</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">element form default</td>
+                                    <td><b>unqualified</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="VehiclesListInquiryByNameRequest"></a><div class="componentTitle">Element <span class="qname">VehiclesListInquiryByNameRequest</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_VehiclesListInquiryByNameRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_VehiclesListInquiryByNameRequest');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_VehiclesListInquiryByNameRequest" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Element_VehiclesListInquiryByNameRequest.png" usemap="#LADMVService_wsdl_Element_VehiclesListInquiryByNameRequest" /><map name="LADMVService_wsdl_Element_VehiclesListInquiryByNameRequest" id="LADMVService_wsdl_Element_VehiclesListInquiryByNameRequest"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_VehiclesListInquiryByNameRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_VehiclesListInquiryByNameRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_VehiclesListInquiryByNameRequest" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_VehiclesListInquiryByNameRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_VehiclesListInquiryByNameRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_VehiclesListInquiryByNameRequest" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Message </td>
+                                    <td><b><a href="ladmv.html#http___rts.dt.com_ladmv_VehiclesListInquiryByNameRequest" target="mainFrame" title="http://rts.dt.com/ladmv" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv')">tns:VehiclesListInquiryByNameRequest</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_VehiclesListInquiryByNameRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('model_VehiclesListInquiryByNameRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_VehiclesListInquiryByNameRequest" style="display:block"><b>AuthHeader</b> , <b>InquiryRequest</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>AuthHeader</b>, <b>InquiryRequest</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_VehiclesListInquiryByNameRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_VehiclesListInquiryByNameRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_VehiclesListInquiryByNameRequest" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;VehiclesListInquiryByNameRequest</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;AuthHeader</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/AuthHeader&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;InquiryRequest</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/InquiryRequest&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/VehiclesListInquiryByNameRequest&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_VehiclesListInquiryByNameRequest" type="image" src="img/btM.gif" value="-" onclick="switchState('source_VehiclesListInquiryByNameRequest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_VehiclesListInquiryByNameRequest" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"VehiclesListInquiryByNameRequest"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AuthHeader"</span><span class="tAN"> type=</span><span class="tAV">"core:AuthHeaderType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"InquiryRequest"</span><span class="tAN"> type=</span><span class="tAV">"WWSInquiryReq"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="VehiclesListInquiryByNameResponse"></a><div class="componentTitle">Element <span class="qname">VehiclesListInquiryByNameResponse</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_VehiclesListInquiryByNameResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_VehiclesListInquiryByNameResponse');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_VehiclesListInquiryByNameResponse" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Element_VehiclesListInquiryByNameResponse.png" usemap="#LADMVService_wsdl_Element_VehiclesListInquiryByNameResponse" /><map name="LADMVService_wsdl_Element_VehiclesListInquiryByNameResponse" id="LADMVService_wsdl_Element_VehiclesListInquiryByNameResponse"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_VehiclesListInquiryByNameResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_VehiclesListInquiryByNameResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_VehiclesListInquiryByNameResponse" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_VehiclesListInquiryByNameResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_VehiclesListInquiryByNameResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_VehiclesListInquiryByNameResponse" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Message </td>
+                                    <td><b><a href="ladmv.html#http___rts.dt.com_ladmv_VehiclesListInquiryByNameResponse" target="mainFrame" title="http://rts.dt.com/ladmv" onclick="updatePageTitle('Documentation for namespace http://rts.dt.com/ladmv')">tns:VehiclesListInquiryByNameResponse</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_VehiclesListInquiryByNameResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('model_VehiclesListInquiryByNameResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_VehiclesListInquiryByNameResponse" style="display:block"><b>AuthHeader</b> , <b>InquiryResponse</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>AuthHeader</b>, <b>InquiryResponse</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_VehiclesListInquiryByNameResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_VehiclesListInquiryByNameResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_VehiclesListInquiryByNameResponse" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;VehiclesListInquiryByNameResponse</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;AuthHeader</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/AuthHeader&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;InquiryResponse</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/InquiryResponse&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/VehiclesListInquiryByNameResponse&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_VehiclesListInquiryByNameResponse" type="image" src="img/btM.gif" value="-" onclick="switchState('source_VehiclesListInquiryByNameResponse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_VehiclesListInquiryByNameResponse" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"VehiclesListInquiryByNameResponse"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AuthHeader"</span><span class="tAN"> type=</span><span class="tAV">"core:AuthHeaderType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"InquiryResponse"</span><span class="tAN"> type=</span><span class="tAV">"WWSInquiryResp"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="WWSInquiryReq"></a><div class="componentTitle">Complex Type <span class="qname">WWSInquiryReq</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_WWSInquiryReq" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_WWSInquiryReq');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_WWSInquiryReq" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_WWSInquiryReq.png" usemap="#LADMVService_wsdl_Complex_Type_WWSInquiryReq" /><map name="LADMVService_wsdl_Complex_Type_WWSInquiryReq" id="LADMVService_wsdl_Complex_Type_WWSInquiryReq"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_WWSInquiryReq" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_WWSInquiryReq');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_WWSInquiryReq" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>VehiclesListInquiryByNameRequest/InquiryRequest</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_WWSInquiryReq" type="image" src="img/btM.gif" value="-" onclick="switchState('model_WWSInquiryReq');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_WWSInquiryReq" style="display:block"><b>InquiryType</b> , <b>OwnerType</b> , ((<b>LastName</b> , <b>FirstName</b>) | (<b>CompanyName</b>))
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>CompanyName</b>, <b>FirstName</b>, <b>InquiryType</b>, <b>LastName</b>, <b>OwnerType</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_WWSInquiryReq" type="image" src="img/btM.gif" value="-" onclick="switchState('source_WWSInquiryReq');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_WWSInquiryReq" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"WWSInquiryReq"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"InquiryType"</span><span class="tAN"> type=</span><span class="tAV">"commoninquiry:WWSInquiryTypeEnum"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"OwnerType"</span><span class="tAN"> type=</span><span class="tAV">"commoninquiry:OwnerTypeIndBus"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:choice</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"LastName"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"FirstName"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CompanyName"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:choice&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="WWSInquiryResp"></a><div class="componentTitle">Complex Type <span class="qname">WWSInquiryResp</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_WWSInquiryResp" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_WWSInquiryResp');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_WWSInquiryResp" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_WWSInquiryResp.png" usemap="#LADMVService_wsdl_Complex_Type_WWSInquiryResp" /><map name="LADMVService_wsdl_Complex_Type_WWSInquiryResp" id="LADMVService_wsdl_Complex_Type_WWSInquiryResp"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_WWSInquiryResp" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_WWSInquiryResp');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_WWSInquiryResp" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>VehiclesListInquiryByNameResponse/InquiryResponse</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_WWSInquiryResp" type="image" src="img/btM.gif" value="-" onclick="switchState('model_WWSInquiryResp');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_WWSInquiryResp" style="display:block"><b>InquiryType</b> , <b>OwnerVehicles</b> , <b>Errors{0,1}</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>Errors</b>, <b>InquiryType</b>, <b>OwnerVehicles</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_WWSInquiryResp" type="image" src="img/btM.gif" value="-" onclick="switchState('source_WWSInquiryResp');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_WWSInquiryResp" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"WWSInquiryResp"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"InquiryType"</span><span class="tAN"> type=</span><span class="tAV">"commoninquiry:WWSInquiryTypeEnum"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"OwnerVehicles"</span><span class="tAN"> type=</span><span class="tAV">"WWSOwnerVehicleList"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"Errors"</span><span class="tAN"> type=</span><span class="tAV">"core:ErrorsListType"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="WWSOwnerVehicleList"></a><div class="componentTitle">Complex Type <span class="qname">WWSOwnerVehicleList</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_WWSOwnerVehicleList" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_WWSOwnerVehicleList');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_WWSOwnerVehicleList" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_WWSOwnerVehicleList.png" usemap="#LADMVService_wsdl_Complex_Type_WWSOwnerVehicleList" /><map name="LADMVService_wsdl_Complex_Type_WWSOwnerVehicleList" id="LADMVService_wsdl_Complex_Type_WWSOwnerVehicleList"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_WWSOwnerVehicleList" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_WWSOwnerVehicleList');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_WWSOwnerVehicleList" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>WWSInquiryResp/OwnerVehicles</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_WWSOwnerVehicleList" type="image" src="img/btM.gif" value="-" onclick="switchState('model_WWSOwnerVehicleList');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_WWSOwnerVehicleList" style="display:block"><b>OwnerVehicle*</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>OwnerVehicle</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_WWSOwnerVehicleList" type="image" src="img/btM.gif" value="-" onclick="switchState('source_WWSOwnerVehicleList');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_WWSOwnerVehicleList" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"WWSOwnerVehicleList"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"OwnerVehicle"</span><span class="tAN"> type=</span><span class="tAV">"OwnerVehilceType"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="OwnerVehilceType"></a><div class="componentTitle">Complex Type <span class="qname">OwnerVehilceType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://rts.dt.com/ladmv/services/inquiries/VehiclesListInquiryByName</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_OwnerVehilceType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_OwnerVehilceType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_OwnerVehilceType" style="display:block"><img alt="Diagram" border="0" src="img/LADMVService_wsdl_Complex_Type_OwnerVehilceType.png" usemap="#LADMVService_wsdl_Complex_Type_OwnerVehilceType" /><map name="LADMVService_wsdl_Complex_Type_OwnerVehilceType" id="LADMVService_wsdl_Complex_Type_OwnerVehilceType"></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_OwnerVehilceType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_OwnerVehilceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_OwnerVehilceType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b>WWSOwnerVehicleList/OwnerVehicle</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_OwnerVehilceType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_OwnerVehilceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_OwnerVehilceType" style="display:block"><b>Owner</b> , <b>Vehicle</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b>Owner</b>, <b>Vehicle</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_OwnerVehilceType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_OwnerVehilceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_OwnerVehilceType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"OwnerVehilceType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Owner"</span><span class="tAN"> type=</span><span class="tAV">"core:PrimaryOwnerType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Vehicle"</span><span class="tAN"> type=</span><span class="tAV">"core:TransVehicleType"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Location</b></td>
+                        <td>file:/C:/Users/User/Desktop/Final WSDL File/LADMVService.wsdl</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">WSDL documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor Trial Edition.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
